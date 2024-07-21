@@ -1,3 +1,21 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier"
+  ],
+  "plugins": ["prettier", "@typescript-eslint"],
+  "ignorePatterns": ["dist", "node_modules", "public"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "args": "none" }],
+    "no-unused-vars": ["warn", { "args": "none" }],
+    "prefer-const": "warn",
+    "react/no-unescaped-entities": "warn",
+    "no-mixed-spaces-and-tabs": "warn",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "import/named": "off",
+    "no-empty": "warn"
+  }
 }
