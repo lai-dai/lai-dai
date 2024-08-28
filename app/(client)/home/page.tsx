@@ -1,18 +1,23 @@
-import Link from 'next/link'
-
+import { BackgroundBeams } from '@/components/ui/background-beams'
 import { PageContainer } from '@/components/container'
 
-import { Client } from './_components/client'
+import { ComboboxDemo } from './_components/combobox'
 import { HeroLanding } from './_components/hero-landing'
+import { CardHoverEffectDemo } from './_components/demo'
 
 export default function Home(props: {
   params: {}
   searchParams: Record<string, any>
 }) {
+return (
+  <CardHoverEffectDemo />
+)
   return (
     <>
       <HeroLanding />
-      <PageContainer className="space-y-6"></PageContainer>
+      <PageContainer className="space-y-6">
+        <ComboboxDemo />
+      </PageContainer>
     </>
   )
 }

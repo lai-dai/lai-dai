@@ -1,5 +1,9 @@
-export type FetcherRequestInit = RequestInit & { params?: Record<string, any> }
-export type FetcherOnRequest = (init: FetcherRequestInit) => FetcherRequestInit
+export interface FetcherRequestInit extends RequestInit, Record<string, any> {
+  params?: Record<string, any>
+}
+export type FetcherOnRequest = (
+  init: FetcherRequestInit
+) => FetcherRequestInit | Promise<FetcherRequestInit>
 export type FetcherOnResponse = (response: Response) => Promise<any>
 export type FetcherGet = <T>(
   input: string,
@@ -18,82 +22,104 @@ export type FetcherPost = <T>(
 export type FetcherPut = FetcherPost
 export type FetcherPatch = FetcherPost
 
-export function createFetcher({
-  onRequest: _onRequest = (init) => init,
-  onResponse: _onResponse = (response) => response.json(),
-  logOnDev = process?.env?.NODE_ENV === 'development',
-  ...props
-}: {
-  baseUrl?: string
-  defaultInit?: RequestInit
-  onRequest?: FetcherOnRequest
-  onResponse?: FetcherOnResponse
-  logOnDev?: boolean
-}) {
+export type CreateFetcherOptions = Partial<{
+  baseUrl: string
+  init: RequestInit
+  onRequest: FetcherOnRequest
+  onResponse: FetcherOnResponse
+  logOnDev: boolean
+  paramsStringify?: (params: Record<string, any>) => string | Promise<string>
+}>
+
+export function createFetcher(options: CreateFetcherOptions = {}) {
+  const {
+    baseUrl: dInput,
+    init: defaultInit = {},
+    onRequest: onDefaultRequest = (init) => init,
+    onResponse: onDefaultResponse = (response) => response.json(),
+    logOnDev = process?.env?.NODE_ENV === 'development',
+    paramsStringify = (params) => new URLSearchParams(params).toString(),
+  } = options
+
+  const { headers: dHeaders, ...dInit } = defaultInit
+
   const _get: FetcherGet = async (
-    _input,
-    { params, headers: _headers, body: _body, ..._init } = {},
-    onRequest = _onRequest,
-    onResponse = _onResponse
+    cInput,
+    cInit = {},
+    onRequest = onDefaultRequest,
+    onResponse = onDefaultResponse
   ) => {
-    const input = new URL(`${props.baseUrl || ''}${_input}`)
+    const { headers: cHeaders, body: cBody, ..._cInit } = cInit
 
-    if (typeof params === 'object') {
-      input.search = new URLSearchParams(params).toString()
-    }
-
-    const headers = new Headers(
-      Object.assign({}, { 'Content-Type': 'application/json' }, _headers)
+    const headers = Object.assign(
+      { 'Content-Type': 'application/json' },
+      dHeaders,
+      cHeaders
     )
 
-    const body = _body
-      ? headers.get('Content-Type') === 'multipart/form-data'
-        ? _body
-        : JSON.stringify(_body)
+    const body = cBody
+      ? headers['Content-Type'] === 'application/json'
+        ? JSON.stringify(cBody)
+        : cBody
       : undefined
 
-    const init = Object.assign(
-      {},
-      props.defaultInit,
-      { method: 'GET', headers, body },
-      _init
+    const rInit = Object.assign(
+      { method: 'GET' },
+      dInit,
+      { headers, body },
+      _cInit
     )
 
     try {
+      const { params, ...init } = await onRequest(rInit)
+
+      const url = cInput.startsWith('http')
+        ? cInput
+        : `${dInput || ''}${cInput}`
+
+      const input = new URL(url)
+
+      if (typeof params === 'object') {
+        const str = await paramsStringify(params)
+        if (typeof str === 'string') input.search = str
+      }
+
       if (logOnDev)
         // eslint-disable-next-line no-console
-        console.log(`🚀 [FETCH - ${init.method}]: ${_input} | Request`)
+        console.log(`🚀 FETCH-${init.method} ${input.pathname}`)
 
-      const response = await fetch(input, onRequest(init))
+      const response = await fetch(input, init)
 
       const result = await onResponse(response)
 
-      if (!response.ok) throw result
+      if (!response.ok) {
+        if (logOnDev)
+          // eslint-disable-next-line no-console
+          console.log(
+            `💥 FETCH-${init.method} ${input.pathname} ${response.status}`
+          )
+        throw result
+      }
 
       if (logOnDev)
         // eslint-disable-next-line no-console
         console.log(
-          `👏 [FETCH - ${init.method}]: ${_input} | Response ${response.status}`
+          `👏 FETCH-${init.method} ${input.pathname} ${response.status}`
         )
 
       return result
     } catch (error) {
-      if (logOnDev)
-        // eslint-disable-next-line no-console
-        console.error(
-          `💥 [FETCH - ${init.method}]: ${_input} | Error: ${(error as Error)?.message || '-'}`
-        )
       throw error
     }
   }
 
   const _delete: FetcherDelete = async (
     input,
-    _init,
-    onRequest = _onRequest,
-    onResponse = _onResponse
+    cInit,
+    onRequest = onDefaultRequest,
+    onResponse = onDefaultResponse
   ) => {
-    const init = Object.assign({}, { method: 'DELETE' }, _init)
+    const init = Object.assign({ method: 'DELETE' }, cInit)
 
     return _get(input, init, onRequest, onResponse)
   }
@@ -101,11 +127,11 @@ export function createFetcher({
   const _post: FetcherPost = async (
     input,
     body,
-    _init,
-    onRequest = _onRequest,
-    onResponse = _onResponse
+    cInit,
+    onRequest = onDefaultRequest,
+    onResponse = onDefaultResponse
   ) => {
-    const init = Object.assign({}, { method: 'POST', body }, _init)
+    const init = Object.assign({ method: 'POST', body }, cInit)
 
     return _get(input, init, onRequest, onResponse)
   }
@@ -113,11 +139,11 @@ export function createFetcher({
   const _put: FetcherPut = async (
     input,
     body,
-    _init,
-    onRequest = _onRequest,
-    onResponse = _onResponse
+    cInit,
+    onRequest = onDefaultRequest,
+    onResponse = onDefaultResponse
   ) => {
-    const init = Object.assign({}, { method: 'PUT', body }, _init)
+    const init = Object.assign({ method: 'PUT', body }, cInit)
 
     return _get(input, init, onRequest, onResponse)
   }
@@ -125,11 +151,11 @@ export function createFetcher({
   const _patch: FetcherPatch = async (
     input,
     body,
-    _init,
-    onRequest = _onRequest,
-    onResponse = _onResponse
+    cInit,
+    onRequest = onDefaultRequest,
+    onResponse = onDefaultResponse
   ) => {
-    const init = Object.assign({}, { method: 'PATCH', body }, _init)
+    const init = Object.assign({ method: 'PATCH', body }, cInit)
 
     return _get(input, init, onRequest, onResponse)
   }

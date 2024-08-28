@@ -1,10 +1,10 @@
 'use client'
 
-import { createContext, ReactNode, useContext } from 'react'
+import { ReactNode } from 'react'
 
-export const DeviceContext = createContext<boolean | undefined>(undefined)
+import { createContext } from '@/lib/utils/context'
 
-export const useMobile = () => useContext(DeviceContext)
+const [DeviceContext, useMobile] = createContext<boolean>()
 
 export let isMobile: boolean
 
@@ -13,11 +13,7 @@ export function DeviceContextProvider(props: {
   isMobile: boolean
 }) {
   isMobile = props.isMobile
-  return (
-    <DeviceContext.Provider value={props.isMobile}>
-      {props.children}
-    </DeviceContext.Provider>
-  )
+  return <DeviceContext value={props.isMobile}>{props.children}</DeviceContext>
 }
 
 export function MobileView({ children }: { children?: ReactNode }) {

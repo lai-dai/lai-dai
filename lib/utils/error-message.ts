@@ -16,6 +16,7 @@ export const getErrorMessage = (error?: any, defaultValue = 'Error') => {
       }
       break
 
+    case 'number':
     case 'string':
       result = error
       break

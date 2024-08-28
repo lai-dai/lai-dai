@@ -79,15 +79,16 @@ export function delve<
  * @return Returns the resolved value.
  */
 export function delve<TObject extends Record<string, any>, TKey extends string>(
-  obj?: TObject,
-  key?: TKey,
+  obj: TObject,
+  key: TKey,
   def?: any
 ): any {
-  if (!obj || !key) return def
-  return (
-    (key?.replace(/\[|\]/g, '.').split(/\.+/g) || key)?.reduce(
-      (a, c) => a?.[c],
-      obj
-    ) || def
-  )
+  let arr
+  if (typeof key === 'string') {
+    arr = key.replace(/\[|\]/g, '.').split(/\.+/g)
+  } else if (Array.isArray(key)) {
+    arr = key
+  }
+  if (!arr || !obj) return def
+  return arr.reduce((o, k) => o?.[k], obj) || def
 }

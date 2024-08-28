@@ -1,6 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 
-import { useIsomorphicLayoutEffect } from './use-isomorphic-layout-effect'
+const isSSR =
+  typeof window === 'undefined' ||
+  /ServerSideRendering/.test(navigator && navigator.userAgent)
+
+export const useIsomorphicLayoutEffect = isSSR ? useEffect : useLayoutEffect
 
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
@@ -8,7 +12,7 @@ const canUseDOM = !!(
   window.document.createElement
 )
 
-export const mediaQuerySizeMap = {
+export const sizeMap = {
   xs: '(max-width: 639px)',
   sm: '(min-width: 640px)',
   md: '(min-width: 768px)',
@@ -40,17 +44,16 @@ export function useMediaQuery(
    * xl: "(min-width: 1280px)" |
    * "2xl": "(min-width: 1536px)" |
    */
-  query: string | (keyof typeof mediaQuerySizeMap)[]
+  query: string | (keyof typeof sizeMap)[]
 ): any
-export function useMediaQuery(
-  query: keyof typeof mediaQuerySizeMap | string[]
-): any
+export function useMediaQuery(query: keyof typeof sizeMap | string[]): any
 export function useMediaQuery(query: string | string[]): boolean | boolean[] {
-  const queries = Array.isArray(query) ? query : [query]
-  const mediaQueries = queries.map(
-    (query) =>
-      mediaQuerySizeMap?.[query as keyof typeof mediaQuerySizeMap] || query
-  )
+  const mediaQueries = useMemo(() => {
+    const queries = Array.isArray(query) ? query : [query]
+    return queries.map(
+      (query) => sizeMap?.[query as keyof typeof sizeMap] || query
+    )
+  }, [query])
 
   const [mediaQueryArray, setMediaQueryArray] = useState(() =>
     mediaQueries.map((query) => matchMedia(query).matches)

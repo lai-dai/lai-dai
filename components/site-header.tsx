@@ -1,5 +1,3 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-
 import { LocaleToggle } from './locale-toggle'
 import { MainNav } from './main-nav'
 import { MobileNav } from './mobile-nav'

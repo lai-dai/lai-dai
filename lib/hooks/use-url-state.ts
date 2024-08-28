@@ -7,32 +7,33 @@ import {
   useReducer,
   useRef,
 } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
-type SetStateAction<S> = Partial<S> | ((prevState: S) => Partial<S>)
-type Primitive = string | number
-type State = Record<string, Primitive | Primitive[]>
-export type UseUrlStateOptions<S extends Record<string, any>> = {
+type SetStateAction<S> =
+  | Partial<S | typeof URL_STATE_RESET>
+  | ((prevState: S) => Partial<S>)
+type State = Record<string, any>
+export interface UseUrlStateOptions<S extends Record<string, any>> {
   setByInit?: boolean
   skipNulls?: boolean
+  override?: boolean
   navigateMode?: 'push' | 'replace'
   queryString?: {
-    stringify: (value: S) => string
+    stringify: (value: Record<string, any>) => string
     parse: (value: string) => S
   }
 }
 
-const isSSR =
-  typeof window === 'undefined' ||
-  /ServerSideRendering/.test(navigator && navigator.userAgent)
-
-const useIsomorphicLayoutEffect = isSSR ? useEffect : useLayoutEffect
+export const URL_STATE_RESET = Symbol(
+  process.env.NODE_ENV !== 'production' ? 'RESET' : ''
+)
 
 export function useUrlState<S extends State>(
   initialState: S,
   {
     setByInit = true,
     skipNulls = false,
+    override = false,
     navigateMode = 'push',
     queryString,
   }: UseUrlStateOptions<S> = {}
@@ -41,7 +42,6 @@ export function useUrlState<S extends State>(
     throw new Error('initialState must be defined with an object')
 
   const searchParams = useSearchParams()
-  const router = useRouter()
   const previousSearch = useRef<string>(searchParams.toString())
 
   const qs = useMemo(
@@ -51,64 +51,77 @@ export function useUrlState<S extends State>(
         initialState,
         setByInit,
         skipNulls,
+        override,
       }),
-    [queryString]
+    [queryString, initialState, setByInit, skipNulls, override]
   )
 
   const initializer = useCallback(
-    (init: S) => {
+    (value: S) => {
       const search = searchParams.toString()
 
-      if (search === '') return init
+      if (search === '') return value
 
       return qs.parse(search)
     },
-    [searchParams]
+    [qs, searchParams]
   )
 
   const navigator = useCallback(
-    (search: string) => {
+    (value: Record<string, any>) => {
       if (isSSR) return
 
       const url = new URL(window.location.href)
+      const search = qs.stringify(value)
+
       url.search = search
+      previousSearch.current = search
 
       if (navigateMode === 'push') window.history.pushState(null, '', url)
       else window.history.replaceState(null, '', url)
-
-      return url
     },
-    [navigateMode]
+    [navigateMode, qs]
   )
 
   const reducerReturns = useReducer<Reducer<S, SetStateAction<S>>, S>(
     (state, action) => {
+      if (action === URL_STATE_RESET) {
+        const undefinedInit = Object.fromEntries(
+          Object.keys(initialState).map((key) => [key, undefined])
+        )
+        navigator(undefinedInit)
+
+        return initialState
+      }
+
       const payload = action instanceof Function ? action(state) : action
-      const value = Object.assign({}, state, payload)
+      navigator(payload)
 
-      const search = qs.stringify(value)
-      const url = navigator(search)
-      previousSearch.current = url?.search || ''
-
-      return value
+      return Object.assign({}, state, payload)
     },
     initialState,
     initializer
   )
 
   useIsomorphicLayoutEffect(() => {
-    if (window.location.search.slice(1) !== previousSearch.current) {
-      window.history.scrollRestoration = 'manual'
-
+    if (window.location.search.slice(1) !== previousSearch.current)
       reducerReturns[1](initializer(initialState))
-    }
+
+    window.history.scrollRestoration = 'manual'
     return () => {
       window.history.scrollRestoration = 'auto'
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
 
   return reducerReturns
 }
+
+const isSSR =
+  typeof window === 'undefined' ||
+  /ServerSideRendering/.test(navigator && navigator.userAgent)
+
+const useIsomorphicLayoutEffect = isSSR ? useEffect : useLayoutEffect
 
 function isNumber(num: any) {
   if (typeof num === 'number') return num - num === 0
@@ -123,21 +136,39 @@ function createQueryString<S extends Record<string, any>>(options: {
   initialState: S
   skipNulls?: boolean
   setByInit?: boolean
+  override?: boolean
 }) {
-  function stringify(value: State): string {
-    const urlSearchParams = new URLSearchParams(window.location.search)
+  function stringify(value: Record<string, any>): string {
+    const urlSearchParams = new URLSearchParams(
+      options.override ? undefined : window.location.search
+    )
 
     Object.keys(value).forEach((name) => {
-      if (
+      if (Array.isArray(value[name])) {
+        urlSearchParams.delete(name)
+
+        value[name].forEach((item) => {
+          if (item === undefined || (options?.skipNulls && item === null))
+            return
+          switch (typeof item) {
+            case 'string':
+            case 'number':
+              urlSearchParams.append(name, String(item))
+              break
+          }
+        })
+      } else if (
         value[name] === undefined ||
         (options?.skipNulls && value[name] === null)
       )
         urlSearchParams.delete(name)
-      else if (Array.isArray(value[name]))
-        value[name].map((item) => {
-          urlSearchParams.set(name, item.toString())
-        })
-      else urlSearchParams.set(name, value[name].toString())
+      else
+        switch (typeof value[name]) {
+          case 'string':
+          case 'number':
+            urlSearchParams.set(name, String(value[name]))
+            break
+        }
     })
 
     return urlSearchParams.toString()
@@ -148,24 +179,32 @@ function createQueryString<S extends Record<string, any>>(options: {
 
     let searchParamsKeys = Array.from(urlSearchParams.keys())
 
-    if (options?.setByInit)
+    if (options?.setByInit) {
       searchParamsKeys = searchParamsKeys.filter(
         (key) => key in options.initialState
       )
+    }
 
     const uniQueParamsKeys = new Set(searchParamsKeys)
 
-    const paramsObj: State = {}
+    const paramsObj: Record<string, any> = {}
 
     uniQueParamsKeys.forEach((key) => {
       const valueArr = urlSearchParams.getAll(key)
 
-      if (valueArr.length > 1) Object.assign(paramsObj, { [key]: valueArr })
-      else if (isNumber(options.initialState[key]))
+      if (valueArr.length > 1) {
+        if (isNumber(options.initialState[key][0])) {
+          Object.assign(paramsObj, { [key]: valueArr.map(Number) })
+        } else {
+          Object.assign(paramsObj, { [key]: valueArr })
+        }
+      } else if (isNumber(options.initialState[key])) {
         Object.assign(paramsObj, {
           [key]: Number(urlSearchParams.get(key)),
         })
-      else Object.assign(paramsObj, { [key]: urlSearchParams.get(key) })
+      } else {
+        Object.assign(paramsObj, { [key]: urlSearchParams.get(key) })
+      }
     })
 
     return Object.assign({}, options.initialState, paramsObj)

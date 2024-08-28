@@ -1,7 +1,7 @@
 import svgToDataUri from 'mini-svg-data-uri'
 import type { Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
-import { default as flattenColorPalette } from 'tailwindcss/lib/util/flattenColorPalette'
+import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
 
 const config = {
   darkMode: ['class'],
@@ -17,9 +17,6 @@ const config = {
       center: true,
       padding: {
         DEFAULT: '1rem',
-        sm: '2rem',
-        lg: '4rem',
-        xl: '5rem',
         '2xl': '6rem',
       },
       screens: {
