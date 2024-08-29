@@ -21,11 +21,14 @@ export interface CreateContextOptions {
  *
  * @param opts create context options
  */
-export function createContext<TContext>({
-  strict = true,
-  errorMessage = 'useContext must be within a Provider with a value',
-}: CreateContextOptions = {}) {
-  const context = React.createContext<TContext | undefined>(undefined)
+export function createContext<TContext>(
+  defaultValue?: TContext,
+  {
+    strict = true,
+    errorMessage = 'useContext must be within a Provider with a value',
+  }: CreateContextOptions = {}
+) {
+  const context = React.createContext<TContext | undefined>(defaultValue)
 
   function useContext() {
     const c = React.useContext(context)

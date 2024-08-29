@@ -5,7 +5,7 @@ import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
 
 import { cn } from '@/lib/utils'
 
-export const HeroHighlight = ({
+export const BackgroundHighlight = ({
   children,
   className,
   classNames,

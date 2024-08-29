@@ -3,7 +3,7 @@ import path from 'path'
 import Link from 'next/link'
 import matter from 'gray-matter'
 
-import { PageContainer } from '@/components/container'
+import { MarketingPageContainer } from '@/components/page-container'
 
 export default function Home() {
   // 1) Set blogs directory
@@ -28,7 +28,7 @@ export default function Home() {
   })
 
   return (
-    <PageContainer>
+    <MarketingPageContainer>
       <h1 className="text-3xl font-bold">My Blogging Site</h1>
 
       <section className="py-10">
@@ -53,6 +53,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-    </PageContainer>
+    </MarketingPageContainer>
   )
 }

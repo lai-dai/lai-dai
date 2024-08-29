@@ -22,10 +22,10 @@ export function useUncontrolled<T>({
   (value: T, ...payload: any[]) => void,
   boolean,
 ] {
-  const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue)
+  const [_value, setValue] = useState(defaultValue)
 
-  const handleUncontrolledChange = useCallback((val: T, ...payload: any[]) => {
-    setUncontrolledValue(val)
+  const handleChange = useCallback((val: T, ...payload: any[]) => {
+    setValue(val)
     onValueChange?.(val, ...payload)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -34,5 +34,5 @@ export function useUncontrolled<T>({
     return [value as T, onValueChange || noop, true]
   }
 
-  return [uncontrolledValue as T, handleUncontrolledChange, false]
+  return [_value as T, handleChange, false]
 }

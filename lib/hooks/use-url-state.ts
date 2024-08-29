@@ -17,7 +17,7 @@ export interface UseUrlStateOptions<S extends Record<string, any>> {
   setByInit?: boolean
   skipNulls?: boolean
   override?: boolean
-  navigateMode?: 'push' | 'replace'
+  navigateMode?: 'push' | 'replace' | 'none'
   queryString?: {
     stringify: (value: Record<string, any>) => string
     parse: (value: string) => S
@@ -77,8 +77,18 @@ export function useUrlState<S extends State>(
       url.search = search
       previousSearch.current = search
 
-      if (navigateMode === 'push') window.history.pushState(null, '', url)
-      else window.history.replaceState(null, '', url)
+      switch (navigateMode) {
+        case 'push':
+          window.history.pushState(null, '', url)
+          break
+
+        case 'replace':
+          window.history.replaceState(null, '', url)
+          break
+
+        case 'none':
+          break
+      }
     },
     [navigateMode, qs]
   )
@@ -97,7 +107,14 @@ export function useUrlState<S extends State>(
       const payload = action instanceof Function ? action(state) : action
       navigator(payload)
 
-      return Object.assign({}, state, payload)
+      const newState = Object.entries(payload).map(([key, value]) => {
+        if (value === undefined || (skipNulls && value === null)) {
+          return [key, initialState[key]]
+        }
+        return [key, value]
+      })
+
+      return Object.assign({}, state, Object.fromEntries(newState))
     },
     initialState,
     initializer

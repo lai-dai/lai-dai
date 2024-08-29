@@ -7,10 +7,10 @@ import remarkGfm from 'remark-gfm'
 
 import { cn } from '@/lib/utils'
 import { remarkSourceRedirect } from '@/lib/utils/remark-source-redirect'
+import { PhotoItem } from '@/components/ui/photo'
 
 import { Image } from './image'
 import { Link } from './mdx/link'
-import { PhotoItem } from './photo'
 
 const options: ComponentPropsWithoutRef<typeof MDXRemote>['options'] = {
   mdxOptions: {
@@ -66,7 +66,7 @@ const components: ComponentPropsWithoutRef<typeof MDXRemote>['components'] = {
   img: (props) => {
     return (
       <PhotoItem>
-        <Image {...props} alt={props?.alt || ''} src={props?.src || ''} />
+        <Image alt={props?.alt || ''} src={props?.src || ''} {...props} />
       </PhotoItem>
     )
   },

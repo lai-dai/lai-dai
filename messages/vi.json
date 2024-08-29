@@ -1,5 +1,21 @@
 {
   "Hello": "Xin chào",
   "I am": "Mình là",
-  "Content Creator": "Người tạo nội dung"
+  "Content Creator": "Người tạo nội dung",
+  "Login": "Đăng nhập",
+  "Welcome to": "Chào mừng đến với",
+  "Register": "Đăng ký",
+  "Login to": "Đăng nhập vào",
+  "personalize your dictionary": "cá nhân hóa từ điển của bạn",
+  "At least 6 characters long": "Ít nhất 6 ký tự",
+  "Password": "Mật khẩu",
+  "Confirm password": "Nhập lại mật khẩu",
+  "Name": "Tên",
+  "Success": "Thành công",
+  "Join": "Gia nhập",
+  "Don't have an account": "Bạn chưa có tài khoản?",
+  "Do have an account": "Bạn đã có tài khoản?",
+  "Home": "Trang chủ",
+  "Back": "Quay lại",
+  "You are not authorized to access this page": "Bạn không được cấp quyền truy cập trang này!"
 }

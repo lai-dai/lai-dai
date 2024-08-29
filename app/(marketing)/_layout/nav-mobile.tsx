@@ -3,15 +3,12 @@
 import * as React from 'react'
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ViewVerticalIcon } from '@radix-ui/react-icons'
 
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
-import { Icons } from '@/components/icons'
-
-import { Logo } from './logo'
-import { Button } from './ui/button'
-import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Logo } from '@/components/logo'
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false)

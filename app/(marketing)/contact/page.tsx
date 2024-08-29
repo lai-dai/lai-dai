@@ -4,7 +4,7 @@ import React from 'react'
 
 import { URL_STATE_RESET, useUrlState } from '@/lib/hooks/use-url-state'
 import { Button } from '@/components/ui/button'
-import { PageContainer } from '@/components/container'
+import { MarketingPageContainer } from '@/components/page-container'
 
 export default function Page() {
   const [s, setUrl] = useUrlState({
@@ -20,7 +20,7 @@ export default function Page() {
   })
 
   return (
-    <PageContainer className="space-y-6">
+    <MarketingPageContainer className="space-y-6">
       CONTACT
       <div className="space-x-3">
         <Button
@@ -84,6 +84,6 @@ export default function Page() {
         </Button>
       </div>
       <div className="whitespace-pre">{JSON.stringify(s, null, 4)}</div>
-    </PageContainer>
+    </MarketingPageContainer>
   )
 }

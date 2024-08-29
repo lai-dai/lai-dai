@@ -12,6 +12,7 @@ export const siteConfig = {
   description: 'Trang cá nhân',
   url: 'https://laidai.xyz',
   links: {
+    website: 'https://laidai.xyz',
     twitter: 'https://x.com/laidai9966',
     github: 'https://github.com/lai-dai/laidai',
   },

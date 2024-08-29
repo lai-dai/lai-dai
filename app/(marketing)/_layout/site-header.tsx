@@ -1,6 +1,7 @@
-import { LocaleToggle } from './locale-toggle'
-import { MainNav } from './main-nav'
-import { MobileNav } from './mobile-nav'
+import { LocaleToggle } from '@/components/locale-toggle'
+
+import { MainNav } from './nav-main'
+import { MobileNav } from './nav-mobile'
 
 export function SiteHeader() {
   return (

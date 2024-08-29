@@ -2,7 +2,7 @@ import React from 'react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 import { TooltipProvider } from '@/components/ui/tooltip'
-import { DeviceProvider } from '@/components/device/server'
+import { DeviceDetectProvider } from '@/components/device-detect/server'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 
 export async function Providers({ children }: { children: React.ReactNode }) {
@@ -18,7 +18,7 @@ export async function Providers({ children }: { children: React.ReactNode }) {
         delayDuration={200}
         skipDelayDuration={100}
       >
-        <DeviceProvider>{children}</DeviceProvider>
+        <DeviceDetectProvider>{children}</DeviceDetectProvider>
       </TooltipProvider>
       <TailwindIndicator />
     </NextThemesProvider>

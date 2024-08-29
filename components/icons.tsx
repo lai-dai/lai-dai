@@ -1,5 +1,4 @@
 import { cva } from 'class-variance-authority'
-import * as LR from 'lucide-react'
 import type { LucideProps } from 'lucide-react'
 
 export type Icon = LucideProps
@@ -62,19 +61,6 @@ const Spin = (props: Icon) => (
 const Icons = {
   Menu,
   Spin,
-  ArrowLeft: LR.ArrowLeft,
-  ArrowRight: LR.ArrowRight,
-  ChevronUp: LR.ChevronUp,
-  ChevronDown: LR.ChevronDown,
-  ChevronLeft: LR.ChevronLeft,
-  ChevronRight: LR.ChevronRight,
-  EyeOff: LR.EyeOff,
-  Eye: LR.Eye,
-  Search: LR.Search,
-  Copy: LR.Copy,
-  Delete: LR.Trash2,
-  Edit: LR.Pencil,
-  Reset: LR.RotateCcw,
 }
 
 const iconVariants = cva('', {

@@ -14,8 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-
-import { Logo } from './logo'
+import { Logo } from '@/components/logo'
 
 export function MainNav() {
   return (
