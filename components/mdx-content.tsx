@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 import { remarkSourceRedirect } from '@/lib/utils/remark-source-redirect'
 import { PhotoItem } from '@/components/ui/photo'
 
-import { Image } from './image'
+import { Image } from './ui/image'
 import { Link } from './mdx/link'
 
 const options: ComponentPropsWithoutRef<typeof MDXRemote>['options'] = {
