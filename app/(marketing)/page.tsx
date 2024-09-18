@@ -29,7 +29,7 @@ export default function Home(props: {
           duration: 0.5,
           ease: [0.4, 0.0, 0.2, 1],
         }}
-        className="text-3xl font-medium leading-relaxed text-neutral-700 dark:text-white md:text-4xl md:leading-relaxed lg:text-5xl lg:leading-snug"
+        className="text-2xl font-medium leading-relaxed text-neutral-700 dark:text-white sm:text-3xl md:text-4xl md:leading-relaxed lg:text-5xl lg:leading-snug"
       >
         {t('Hello')}, {t('I am')} {siteConfig.author} 👋
         <br /> Dev{' '}
@@ -39,7 +39,7 @@ export default function Home(props: {
         & {t('Content Creator')}
       </motion.h1>
 
-      <HoverEffectCard items={projects} />
+      {/* <HoverEffectCard items={projects} /> */}
     </MarketingPageContainer>
   )
 }

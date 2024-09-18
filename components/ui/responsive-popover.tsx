@@ -20,7 +20,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { VisuallyHidden } from '@/components/ui/visually-hidden'
-import { DesktopView, MobileView } from '@/components/device'
+import { DesktopView, MobileView } from '@/components/device-detect'
 
 export function ResponsivePopover(props: {
   align?: ComponentPropsWithoutRef<typeof PopoverContent>['align']

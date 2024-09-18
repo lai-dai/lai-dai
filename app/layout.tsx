@@ -7,6 +7,9 @@ import { getLocale, getMessages } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
 import { fontMono, fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
+import { Toaster } from '@/components/ui/sonner'
+import { DeviceDetectProvider } from '@/components/device-detect/server'
+import { TailwindIndicator } from '@/components/tailwind-indicator'
 
 import { Providers } from './providers'
 
@@ -69,9 +72,13 @@ export default async function RootLayout({
       >
         <div vaul-drawer-wrapper="">
           <NextIntlClientProvider messages={messages}>
-            <Providers>{children}</Providers>
+            <DeviceDetectProvider>
+              <Providers>{children}</Providers>
+            </DeviceDetectProvider>
           </NextIntlClientProvider>
         </div>
+        <TailwindIndicator />
+        <Toaster />
       </body>
     </html>
   )

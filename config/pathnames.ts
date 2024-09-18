@@ -1,3 +1,1 @@
-export const PATHNAMES = {
-  '/home': '/',
-}
+export const PATHNAMES = {}

@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig
 export type Locale = (typeof locales)[number]
 
 const locales = ['en', 'vi'] as const
-const defaultLocale: Locale = 'vi'
+const defaultLocale: Locale = 'en'
 
 export const siteConfig = {
   locales,

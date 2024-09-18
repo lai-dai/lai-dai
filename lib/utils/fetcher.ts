@@ -1,4 +1,5 @@
-export interface FetcherRequestInit extends RequestInit, Record<string, any> {
+export interface FetcherRequestInit
+  extends Partial<Record<keyof RequestInit, any>> {
   params?: Record<string, any>
 }
 export type FetcherOnRequest = (
@@ -36,7 +37,7 @@ export function createFetcher(options: CreateFetcherOptions = {}) {
     baseUrl: dInput,
     init: defaultInit = {},
     onRequest: onDefaultRequest = (init) => init,
-    onResponse: onDefaultResponse = (response) => response.json(),
+    onResponse: onDefaultResponse = async (response) => await response.json(),
     logOnDev = process?.env?.NODE_ENV === 'development',
     paramsStringify = (params) => new URLSearchParams(params).toString(),
   } = options
