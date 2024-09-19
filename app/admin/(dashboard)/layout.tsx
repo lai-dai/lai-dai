@@ -18,7 +18,7 @@ export default async function LayoutAdmin({
   if (!session) redirect('/admin/login')
 
   return (
-    <div className="grid min-h-screen w-screen md:grid-cols-[256px_1fr]">
+    <div className="grid min-h-screen md:grid-cols-[256px_1fr]">
       <SiteAside />
 
       <main className="flex min-h-screen flex-col">

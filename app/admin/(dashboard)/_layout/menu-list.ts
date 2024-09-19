@@ -1,4 +1,11 @@
-import { LayoutGrid, LucideIcon, SquarePen } from 'lucide-react'
+import {
+  Captions,
+  Clapperboard,
+  LayoutGrid,
+  LucideIcon,
+  Settings2,
+  SquarePen,
+} from 'lucide-react'
 
 type Submenu = {
   href: string
@@ -37,10 +44,45 @@ export function getMenuList(pathname: string): Group[] {
       groupLabel: 'Dictionary',
       menus: [
         {
-          href: '/admin/sentence/create',
-          label: 'Create New Sentence',
+          href: '',
+          label: 'Movie',
           active: false,
-          icon: SquarePen,
+          icon: Clapperboard,
+          submenus: [
+            {
+              href: '/admin/movie/now-playing',
+              label: 'Now Playing',
+              active: pathname === '/admin/movie/now-playing',
+            },
+            {
+              href: '/admin/movie/populate',
+              label: 'Populate',
+              active: pathname === '/admin/movie/populate',
+            },
+            {
+              href: '/admin/movie/top-rated',
+              label: 'Top Rated',
+              active: pathname === '/admin/movie/top-rated',
+            },
+          ],
+        },
+        {
+          href: '/admin/subtitle',
+          label: 'Subtitle',
+          active: pathname === '/admin/subtitle',
+          icon: Captions,
+          submenus: [],
+        },
+      ],
+    },
+    {
+      groupLabel: '',
+      menus: [
+        {
+          href: '/admin/setting',
+          label: 'Setting',
+          active: pathname === '/admin/setting',
+          icon: Settings2,
           submenus: [],
         },
       ],

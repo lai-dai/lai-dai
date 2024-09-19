@@ -3,7 +3,7 @@ import * as React from 'react'
 import { SentenceForm } from './form'
 
 export const metadata = {
-  title: 'Sentence',
+  title: 'Subtitle',
 }
 
 export default function Page() {

@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown, Trash } from 'lucide-react'
@@ -9,7 +10,7 @@ import { toast } from 'sonner'
 import srtParser2 from 'srt-parser-2'
 
 import { ResFindOne } from '@/lib/types/common'
-import { api, apiAdmin, apiNext } from '@/lib/api'
+import { apiNext } from '@/lib/api'
 import { QUERY_KEYS } from '@/lib/constants/query-key'
 import { useListState } from '@/lib/hooks/use-list-state'
 import { cn } from '@/lib/utils'
@@ -63,6 +64,7 @@ type SrtAttr = {
 }
 
 export function SentenceForm() {
+  const searchParams = useSearchParams()
   const parser = React.useRef(new srtParser2())
   const [open, setOpen] = React.useState(false)
 
@@ -164,6 +166,7 @@ export function SentenceForm() {
       text,
       translate,
       start_time: propsEn?.startTime || '',
+      movie: searchParams.get('movie'),
     }
   }
 
@@ -660,7 +663,20 @@ export function SentenceForm() {
       </CardHeader>
 
       <CardContent>
-        <DataTable data={listEnData} columns={columns}>
+        <DataTable
+          data={listEnData}
+          columns={columns}
+          options={{
+            state: {
+              columnVisibility: {
+                id: false,
+                endTime: false,
+                id_vi: false,
+                endTime_vi: false,
+              },
+            },
+          }}
+        >
           <div className="flex h-[85vh] flex-col gap-6">
             <Virtualizer
               options={{
