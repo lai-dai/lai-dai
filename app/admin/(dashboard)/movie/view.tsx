@@ -61,6 +61,10 @@ type MovieAttr = {
   video: boolean
   vote_average: number
   vote_count: number
+  genres: {
+    id: number
+    name: string
+  }[]
 }
 
 export function MovieList({
@@ -101,6 +105,13 @@ export function MovieList({
         params: {
           _q,
         },
+      }),
+  })
+
+  const searchGenre = useMutation({
+    mutationFn: (params: any) =>
+      apiAdmin.get<any>(QUERY_KEYS.genreAdmin, {
+        params,
       }),
   })
 
@@ -154,7 +165,20 @@ export function MovieList({
                     router.push('/admin/subtitle?movie=' + data.results[0].id)
                   } else {
                     findOneMovie.mutate(item.id, {
-                      onSuccess(data, variables, context) {
+                      async onSuccess(data, variables, context) {
+                        const params: Record<string, any> = {}
+
+                        data.genres.forEach((item, index) => {
+                          params[`filters[$or][${index}][tmdb_id][$eq]`] =
+                            item.id
+                        })
+                        const res = await searchGenre.mutateAsync(params)
+
+                        const genres = {
+                          connect: res.results.map((item: any) => item.id),
+                          disconnect: [],
+                        }
+
                         createMovie.mutate(
                           {
                             title: data.title,
@@ -176,6 +200,7 @@ export function MovieList({
                             slug: slugify(data.title),
                             original_slug: slugify(data.original_title),
                             seo: null,
+                            genres,
                           },
                           {
                             onSuccess(data, variables, context) {

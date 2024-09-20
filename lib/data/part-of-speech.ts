@@ -1,0 +1,80 @@
+export const PART_OF_SPEECH = [
+  {
+    name: 'Noun',
+    abbreviation: 'n',
+    translate: 'Danh từ',
+    order: 1,
+  },
+  {
+    name: 'Verb',
+    abbreviation: 'v',
+    translate: 'Động từ',
+    order: 2,
+  },
+  {
+    name: 'Adjective',
+    abbreviation: 'adj',
+    translate: 'Tính từ',
+    order: 3,
+  },
+  {
+    name: 'Adverb',
+    abbreviation: 'adv',
+    translate: 'Trạng từ',
+    order: 4,
+  },
+  {
+    name: 'Preposition',
+    abbreviation: 'prep',
+    translate: 'Giới từ',
+    order: 5,
+  },
+  {
+    name: 'Pronoun',
+    abbreviation: 'pron',
+    translate: 'Đại từ',
+    order: 6,
+  },
+  {
+    name: 'Article',
+    abbreviation: null,
+    translate: 'Mạo từ',
+    order: 7,
+  },
+  {
+    name: 'Interjection',
+    abbreviation: null,
+    translate: 'Thán từ',
+    order: 8,
+  },
+  {
+    name: 'Conjunction',
+    abbreviation: null,
+    translate: 'Liên từ',
+    order: 9,
+  },
+  {
+    name: 'Transitive Verb',
+    abbreviation: null,
+    translate: 'Ngoại động từ',
+    order: 10,
+  },
+  {
+    name: 'Intransitive Verb',
+    abbreviation: null,
+    translate: 'Nội động từ',
+    order: 11,
+  },
+  {
+    name: 'Possessive Adjective',
+    abbreviation: null,
+    translate: 'Tính từ sở hữu',
+    order: 12,
+  },
+  {
+    name: 'Possessive Pronouns',
+    abbreviation: null,
+    translate: 'Đại từ sở hữu',
+    order: 13,
+  },
+]

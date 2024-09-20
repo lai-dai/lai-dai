@@ -5,9 +5,10 @@ export const QUERY_KEYS = {
   movieAdmin: '/content-manager/collection-types/api::movie.movie',
   genreAdmin: '/content-manager/collection-types/api::genre.genre',
 
-  //
+  // next
   createManySentence: '/api/common/createManySentence',
   createManyGenre: '/api/common/createManyGenre',
+  createManyPartOfSpeech: '/api/common/createManyPartOfSpeech',
 
   // tmdb
   movieNowPlaying: '/movie/now_playing',
