@@ -147,7 +147,7 @@ export function MovieList({
           defaultValue={query || ''}
           onSearchChange={(value) => {
             if (value) router.push('/admin/movie/search?query=' + value)
-            else router.push('/admin/movie')
+            else router.push('/admin/movie/now-playing')
           }}
           placeholder="Search"
         />

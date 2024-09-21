@@ -16,6 +16,6 @@ export const siteConfig = {
     twitter: 'https://x.com/laidai9966',
     github: 'https://github.com/lai-dai/laidai',
   },
-  author: 'laidai',
+  author: 'LaiDai',
   robots: 'noindex',
 }

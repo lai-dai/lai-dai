@@ -96,6 +96,7 @@ const config = {
       },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
+        'header-san': ['var(--font-header)', ...fontFamily.sans],
         mono: ['var(--font-mono)', ...fontFamily.mono],
       },
     },

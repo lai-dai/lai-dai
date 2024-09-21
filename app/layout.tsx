@@ -5,7 +5,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 
 import { siteConfig } from '@/config/site'
-import { fontMono, fontSans } from '@/lib/fonts'
+import { fontMono, fontSans, headerFontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 import { Toaster } from '@/components/ui/sonner'
 import { DeviceDetectProvider } from '@/components/device-detect/server'
@@ -67,7 +67,8 @@ export default async function RootLayout({
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
-          fontMono.variable
+          fontMono.variable,
+          headerFontSans.variable
         )}
       >
         <div vaul-drawer-wrapper="">

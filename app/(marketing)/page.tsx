@@ -9,10 +9,7 @@ import { HoverEffectCard } from '@/components/ui/card-hover-effect.tsx'
 import { Highlight } from '@/components/ui/hero-highlight'
 import { MarketingPageContainer } from '@/components/page-container'
 
-export default function Home(props: {
-  params: {}
-  searchParams: Record<string, any>
-}) {
+export default function Home() {
   const t = useTranslations()
   return (
     <MarketingPageContainer>
@@ -29,9 +26,9 @@ export default function Home(props: {
           duration: 0.5,
           ease: [0.4, 0.0, 0.2, 1],
         }}
-        className="text-2xl font-medium leading-relaxed text-neutral-700 dark:text-white sm:text-3xl md:text-4xl md:leading-relaxed lg:text-5xl lg:leading-snug"
+        className="font-header-san text-2xl font-bold leading-relaxed text-neutral-700 dark:text-white sm:text-3xl md:text-4xl md:leading-relaxed lg:text-5xl lg:leading-snug"
       >
-        {t('Hello')}, {t('I am')} {siteConfig.author} 👋
+        {t('Hi')}, {t('I am')} {siteConfig.author} 👋
         <br /> Dev{' '}
         <Highlight className="inline-block text-black dark:text-white">
           Front-end

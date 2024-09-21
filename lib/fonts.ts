@@ -2,6 +2,7 @@
 import {
   JetBrains_Mono as FontMono,
   Be_Vietnam_Pro as FontSans,
+  Manrope as HeaderFontSans,
 } from 'next/font/google'
 
 // export const fontSans = FontSans({
@@ -17,4 +18,9 @@ export const fontSans = FontSans({
 export const fontMono = FontMono({
   subsets: ['latin'],
   variable: '--font-mono',
+})
+
+export const headerFontSans = HeaderFontSans({
+  subsets: ['latin'],
+  variable: '--font-header',
 })

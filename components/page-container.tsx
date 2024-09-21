@@ -1,6 +1,7 @@
-import { cn } from '@/lib/utils'
-import { Slot } from '@radix-ui/react-slot'
 import React, { forwardRef, HTMLAttributes } from 'react'
+import { Slot } from '@radix-ui/react-slot'
+
+import { cn } from '@/lib/utils'
 
 export const MarketingPageContainer = forwardRef<
   HTMLDivElement,
@@ -12,7 +13,7 @@ export const MarketingPageContainer = forwardRef<
   return (
     <Comp
       ref={ref}
-      className={cn('container max-w-5xl py-14 flex-1', className)}
+      className={cn('container max-w-5xl flex-1 py-6 md:py-9', className)}
       {...props}
     />
   )
@@ -28,7 +29,7 @@ export const DashboardPageContainer = forwardRef<
   return (
     <Comp
       ref={ref}
-      className={cn('container py-4 flex-1', className)}
+      className={cn('container flex-1 py-4', className)}
       {...props}
     />
   )

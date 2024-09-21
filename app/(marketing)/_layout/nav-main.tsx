@@ -18,9 +18,9 @@ import { Logo } from '@/components/logo'
 
 export function MainNav() {
   return (
-    <div className="mr-3 hidden w-full justify-between gap-3 md:flex">
-      <Link href="/" className="flex items-center space-x-2 lg:mr-6">
-        <Logo className="h-6 w-6" />
+    <div className="mr-3 hidden w-full items-center justify-between gap-3 md:flex">
+      <Link href="/" className="flex items-center lg:mr-6">
+        <Logo className="mr-6 size-16" />
         <span className="hidden font-bold lg:inline-block">
           {siteConfig.name}
         </span>
@@ -81,10 +81,10 @@ export function NavigationMenuDemo() {
                 <Link href="/" legacyBehavior passHref>
                   <NavigationMenuLink asChild>
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      className="flex size-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                       href="/"
                     >
-                      <Logo className="h-6 w-6" />
+                      <Logo className="size-6" />
                       <div className="mb-2 mt-4 text-lg font-medium">
                         {siteConfig.author}
                       </div>
