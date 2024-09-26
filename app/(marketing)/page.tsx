@@ -40,7 +40,7 @@ export default function Home() {
           & {t('Content Creator')}
         </motion.h1>
 
-        {/* <HoverEffectCard items={projects} /> */}
+        <HoverEffectCard items={projects} />
       </MarketingPageContainer>
     </BackgroundHighlight>
   )

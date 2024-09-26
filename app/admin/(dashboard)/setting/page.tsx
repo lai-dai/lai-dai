@@ -64,7 +64,8 @@ export default function Page() {
         }}
         disabled={genreSync.isPending}
       >
-        {genreSync.isPending && <Spinner className="mr-3" />} Sync Genre
+        {genreSync.isPending && <Spinner size={'xs'} className="mr-3" />} Sync
+        Genre
       </Button>
 
       <Button
@@ -85,7 +86,7 @@ export default function Page() {
           })
         }}
       >
-        {partOfSpeechSync.isPending && <Spinner className="mr-3" />}
+        {partOfSpeechSync.isPending && <Spinner size={'xs'} className="mr-3" />}
         Sync Part Of Speech
       </Button>
     </div>
