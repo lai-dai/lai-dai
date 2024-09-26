@@ -6,38 +6,43 @@ import { useTranslations } from 'next-intl'
 
 import { siteConfig } from '@/config/site'
 import { HoverEffectCard } from '@/components/ui/card-hover-effect.tsx'
-import { Highlight } from '@/components/ui/hero-highlight'
+import { BackgroundHighlight, Highlight } from '@/components/ui/hero-highlight'
 import { MarketingPageContainer } from '@/components/page-container'
 
 export default function Home() {
   const t = useTranslations()
   return (
-    <MarketingPageContainer>
-      <motion.h1
-        initial={{
-          opacity: 0,
-          y: 20,
-        }}
-        animate={{
-          opacity: 1,
-          y: [20, -5, 0],
-        }}
-        transition={{
-          duration: 0.5,
-          ease: [0.4, 0.0, 0.2, 1],
-        }}
-        className="font-header-san text-2xl font-bold leading-relaxed text-neutral-700 dark:text-white sm:text-3xl md:text-4xl md:leading-relaxed lg:text-5xl lg:leading-snug"
-      >
-        {t('Hi')}, {t('I am')} {siteConfig.author} 👋
-        <br /> Dev{' '}
-        <Highlight className="inline-block text-black dark:text-white">
-          Front-end
-        </Highlight>{' '}
-        & {t('Content Creator')}
-      </motion.h1>
+    <BackgroundHighlight
+      classNames={{ container: 'flex flex-1 flex-col' }}
+      className="flex flex-1 flex-col overflow-y-auto"
+    >
+      <MarketingPageContainer>
+        <motion.h1
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: [20, -5, 0],
+          }}
+          transition={{
+            duration: 0.5,
+            ease: [0.4, 0.0, 0.2, 1],
+          }}
+          className="font-header-san text-2xl font-bold leading-relaxed text-neutral-700 dark:text-white sm:text-3xl md:text-4xl md:leading-relaxed lg:text-5xl lg:leading-snug"
+        >
+          {t('Hi')}, {t('I am')} {siteConfig.author} 👋
+          <br /> Dev{' '}
+          <Highlight className="inline-block text-black dark:text-white">
+            Front-end
+          </Highlight>{' '}
+          & {t('Content Creator')}
+        </motion.h1>
 
-      {/* <HoverEffectCard items={projects} /> */}
-    </MarketingPageContainer>
+        {/* <HoverEffectCard items={projects} /> */}
+      </MarketingPageContainer>
+    </BackgroundHighlight>
   )
 }
 

@@ -19,7 +19,7 @@ import { Logo } from '@/components/logo'
 export function MainNav() {
   return (
     <div className="mr-3 hidden w-full items-center justify-between gap-3 md:flex">
-      <Link href="/" className="flex items-center lg:mr-6">
+      <Link href="/" className="flex items-center py-3 lg:mr-6">
         <Logo className="mr-6 size-16" />
         <span className="hidden font-bold lg:inline-block">
           {siteConfig.name}
