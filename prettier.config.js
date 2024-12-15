@@ -1,30 +1,15 @@
-/** @type {import('prettier').Config} */
-module.exports = {
-  endOfLine: 'lf',
-  semi: false,
-  singleQuote: true,
+/** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
+export default {
+  plugins: ["prettier-plugin-tailwindcss"],
+  printWidth: 80,
   tabWidth: 2,
-  trailingComma: 'es5',
-  importOrder: [
-    '^(react/(.*)$)|^(react$)',
-    '^(next/(.*)$)|^(next$)',
-    '<THIRD_PARTY_MODULES>',
-    '',
-    '^@/styles/(.*)$',
-    '^types$',
-    '^@/lib/types/(.*)$',
-    '^@/config/(.*)$',
-    '^@/lib/(.*)$',
-    '^@/components/ui/(.*)$',
-    '^@/components/(.*)$',
-    '^@/app/(.*)$',
-    '',
-    '^[./]',
-  ],
-  importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
-  tailwindFunctions: ['cva'],
-  plugins: [
-    '@ianvs/prettier-plugin-sort-imports',
-    'prettier-plugin-tailwindcss',
-  ],
-}
+  useTabs: false,
+  singleQuote: false,
+  trailingComma: "all",
+  semi: false,
+  jsxSingleQuote: false,
+  bracketSameLine: true,
+  arrowParens: "avoid",
+  endOfLine: "lf",
+  bracketSpacing: true,
+};

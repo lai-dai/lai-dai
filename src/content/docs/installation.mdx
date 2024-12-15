@@ -1,0 +1,284 @@
+---
+title: Next MDX remote
+summary: Install and configure Next.js.
+publish: 2024-01-01
+lastUpdate: 2024-01-01
+---
+
+<Steps>
+
+### Installation
+
+To scaffold an app using create-t3-app, run any of the following commands and answer the command prompt questions:
+
+```bash
+npm create t3-app@latest
+```
+
+### Create project
+
+Run the `init` command to create a new Next.js project or to setup an existing one:
+
+```bash
+npx shadcn@latest init
+```
+
+<Callout className="mt-4">
+
+You can use the `-d` flag for defaults i.e `new-york`, `zinc` and `yes` for the css variables.
+
+```bash
+npx shadcn@latest init -d
+```
+
+</Callout>
+
+### Configure components.json
+
+You will be asked a few questions to configure `components.json`:
+
+```txt showLineNumbers
+Which style would you like to use? › New York
+Which color would you like to use as base color? › Zinc
+Do you want to use CSS variables for colors? › no / yes
+```
+
+```console
+✔ Preflight checks.
+✔ Verifying framework. Found Next.js.
+✔ Validating Tailwind CSS.
+✔ Validating import alias.
+✔ Writing components.json.
+✔ Checking registry.
+✔ Updating tailwind.config.ts
+✔ Updating src\styles\globals.css
+✔ Installing dependencies.
+✔ Created 1 file:
+  - src\lib\utils.ts
+
+Success! Project initialization completed.
+You may now add components.
+```
+
+### That's it
+
+Installation next-mdx-remote
+
+```sh
+npm install next-mdx-remote
+```
+
+If using with Turbopack, you'll need to add the following to your `next.config.js` until [this issue](https://github.com/vercel/next.js/issues/64525) is resolved:
+
+```diff
+const nextConfig = {
++  transpilePackages: ['next-mdx-remote'],
+}
+```
+
+Examples
+
+```tsx
+// src\components\mdx-components.tsx
+import { type MDXComponents } from "mdx/types"
+import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc"
+
+const components: MDXComponents = {}
+
+const options: MDXRemoteProps["options"] = {}
+
+interface MdxProps {
+  content: string
+  className?: string
+}
+
+export function Mdx({ content, className }: MdxProps) {
+  return (
+    <div className={cn("mdx", className)}>
+      <MDXRemote
+        components={components}
+        options={options}
+        source={content} />
+    </div>
+  )
+}
+
+
+export async function getStaticProps() {
+  // MDX text - can be from a local file, database, anywhere
+  const source = 'Some **mdx** text, with a component <Test />'
+  const mdxSource = await serialize(source)
+  return { props: { source: mdxSource } }
+}
+```
+
+
+
+```bash
+npm i -D npm i next-mdx-remote next-themes
+```
+
+```ts
+// src\components\mdx-components.tsx
+const options: MDXRemoteProps["options"] = {
+  mdxOptions: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [
+      rehypeSlug,
+      rehypeComponent,
+      () => tree => {
+        visit(tree, node => {
+          if (node?.type === "element" && node?.tagName === "pre") {
+            const [codeEl] = node.children
+            if (codeEl.tagName !== "code") {
+              return
+            }
+            node.__rawString__ = codeEl.children?.[0].value
+          }
+        })
+      },
+      [
+        rehypePrettyCode,
+        {
+          keepBackground: false,
+          theme: "github-dark-dimmed",
+          onVisitLine(node) {
+            // Prevent lines from collapsing in `display: grid` mode, and allow empty
+            // lines to be copy/pasted
+            if (node.children.length === 0) {
+              node.children = [{ type: "text", value: " " }]
+            }
+          },
+          onVisitHighlightedLine(node) {
+            node.properties.className = ["line--highlighted"]
+          },
+          onVisitHighlightedChars(node) {
+            node.properties.className = ["chars--highlighted"]
+          },
+        } satisfies RehypePrettyCodeOptions,
+      ],
+      () => tree => {
+        visit(tree, node => {
+          if (node?.type === "element" && node?.tagName === "figure") {
+            if (!("data-rehype-pretty-code-figure" in node.properties)) {
+              return
+            }
+
+            const preElement = node.children.at(-1)
+            if (preElement.tagName !== "pre") {
+              return
+            }
+
+            preElement.properties.__rawString__ = node.__rawString__
+          }
+        })
+      },
+      [
+        rehypeAutolinkHeadings,
+        {
+          properties: {
+            className: ["subheading-anchor"],
+            ariaLabel: "Link to section",
+          },
+        },
+      ],
+    ],
+  },
+}
+
+interface MdxProps {
+  content: string
+  className?: string
+}
+
+export function Mdx({ content, className }: MdxProps) {
+  return (
+    <div className={cn("mdx", className)}>
+      <MDXRemote
+        components={components}
+        options={options}
+        source={content} />
+    </div>
+  )
+}
+
+```
+
+```bash
+npm i -D gray-matter remark remark-gfm mdast-util-toc rehype-pretty-code rehype-slug rehype-autolink-headings unist-builder unist-util-visit
+```
+
+### Rehype Component
+
+```bash
+npm i -D unist-builder unist-util-visit
+```
+
+👇 create file and copy
+
+```ts
+// src\lib\rehype-component.ts
+import fs from "fs"
+import { u } from "unist-builder"
+import { visit } from "unist-util-visit"
+
+import { Index } from "~/__demo__"
+import { type UnistNode, type UnistTree } from "~/types/unist"
+
+export function rehypeComponent() {
+  return async (tree: UnistTree) => {
+    visit(tree, (node: UnistNode) => {
+      // src prop overrides both name and fileName.
+      if (node.name === "ComponentPreview") {
+        const name = getNodeAttributeByName(node, "name")?.value as string
+
+        if (!name) {
+          return null
+        }
+
+        try {
+          const component = Index[name as keyof typeof Index]
+          const filePath = component.files[0]?.path
+
+          // Read the source file.
+          const source = fs.readFileSync(filePath, "utf8")
+
+          // Add code as children so that rehype can take over at build time.
+          node.children?.push(
+            u("element", {
+              tagName: "pre",
+              properties: {
+                __src__: filePath,
+              },
+              children: [
+                u("element", {
+                  tagName: "code",
+                  properties: {
+                    className: ["language-tsx"],
+                  },
+                  children: [
+                    {
+                      type: "text",
+                      value: source,
+                    },
+                  ],
+                }),
+              ],
+            }),
+          )
+        } catch (error) {
+          console.error(error)
+        }
+      }
+    })
+  }
+}
+
+function getNodeAttributeByName(node: UnistNode, name: string) {
+  return node.attributes?.find(attribute => attribute.name === name)
+}
+```
+
+</Steps>
+
+<BuyMeACoffee />
