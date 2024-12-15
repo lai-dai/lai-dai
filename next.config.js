@@ -7,7 +7,6 @@ import { createContentlayerPlugin } from "next-contentlayer2"
 
 /** @type {import("next").NextConfig} */
 const config = {
-  transpilePackages: ["next-mdx-remote"],
 }
 
 const withContentlayer = createContentlayerPlugin({
