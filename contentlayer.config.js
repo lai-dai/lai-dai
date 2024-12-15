@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { getHighlighter } from "@shikijs/compat"
 import {
   defineDocumentType,
   defineNestedType,
@@ -102,8 +103,8 @@ export default makeSource({
       [
         rehypePrettyCode,
         {
-          keepBackground: false,
           theme: "github-dark-dimmed",
+          getHighlighter,
           onVisitLine(node) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty
             // lines to be copy/pasted
