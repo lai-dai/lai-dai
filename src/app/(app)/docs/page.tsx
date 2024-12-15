@@ -1,8 +1,7 @@
-import { allDocs } from "contentlayer/generated"
 import Link from "next/link"
+import { allDocs } from "~/contentlayer/generated"
 
 export default function PostPage() {
-
   return (
     <div className={"mx-auto py-6"}>
       <div className={"flex flex-col gap-3"}>

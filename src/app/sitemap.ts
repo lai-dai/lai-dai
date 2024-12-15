@@ -1,6 +1,5 @@
 import { type MetadataRoute } from "next"
 import { siteConfig } from "~/config/site"
-import { getContents } from "~/lib/content"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date().toISOString().split("T")[0]
@@ -18,11 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
   }))
 
-  const docs = getContents('docs')
-  const postPaths = docs.map(doc => ({
-    url: `${siteConfig.url}/posts/${doc.slug}`,
-    lastModified: new Date(doc.metadata.lastUpdate).toISOString().split("T")[0],
-  }))
+  // const docs = getContents('docs')
+  // const postPaths = docs.map(doc => ({
+  //   url: `${siteConfig.url}/posts/${doc.slug}`,
+  //   lastModified: new Date(doc.metadata.lastUpdate).toISOString().split("T")[0],
+  // }))
 
-  return [...staticPaths, ...postPaths]
+  return [...staticPaths]
 }

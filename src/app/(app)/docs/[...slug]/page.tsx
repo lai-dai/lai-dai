@@ -1,9 +1,9 @@
-import { allDocs } from "contentlayer/generated"
 import { type Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Mdx } from "~/components/mdx-components"
 import { DashboardTableOfContents } from "~/components/toc"
 import { siteConfig } from "~/config/site"
+import { allDocs } from "~/contentlayer/generated"
 import { getTableOfContents } from "~/lib/toc"
 import { absoluteUrl } from "~/utils/url"
 
@@ -16,7 +16,7 @@ interface DocPageProps {
 async function getDocFromParams({ params }: DocPageProps) {
   const { slug } = await params
   const pathname = slug?.join("/") || ""
-  const doc = allDocs.find((doc) => doc.slugAsParams === pathname)
+  const doc = allDocs.find(doc => doc.slugAsParams === pathname)
 
   if (!doc) {
     return null
@@ -83,7 +83,7 @@ export default async function PostPage({ params }: DocPageProps) {
         "container relative mx-auto py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]"
       }>
       <div className={"mx-auto w-full min-w-0 max-w-3xl"}>
-      <Mdx code={doc.body.code} />
+        <Mdx code={doc.body.code} />
       </div>
 
       <div className={"hidden text-sm xl:block"}>

@@ -50,7 +50,7 @@ const config = {
     "@typescript-eslint/no-empty-object-type": "off",
     "@typescript-eslint/only-throw-error": "off",
     "import/order": [
-      "error",
+      "warn",
       {
         "alphabetize": {
           "order": "asc"

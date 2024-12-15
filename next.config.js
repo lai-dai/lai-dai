@@ -8,8 +8,6 @@ import { createContentlayerPlugin } from "next-contentlayer2"
 /** @type {import("next").NextConfig} */
 const config = {
   transpilePackages: ["next-mdx-remote"],
-  reactStrictMode: true,
-  swcMinify: true,
 }
 
 const withContentlayer = createContentlayerPlugin({
