@@ -1,14 +1,14 @@
 # Welcome to LaiDai
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Đây là các repo mà mình có 😁.
 
-## Nhưng thứ mình làm
+## Những gì tôi có
 
-Mình tổng hợp & chia sẻ những thứ hay ho mà mình tìm được trên internet.
+Tổng hợp & chia sẻ những thứ hay ho mà mình tìm được trên internet 🚀.
 
-Hy vọng sẽ có ích cho mọi người cần tới nó.
+Hy vọng sẽ có ích cho mọi người 🙏.
 
-## App làm với những thứ bên dưới
+## App: Những package được sử dụng
 
 - [Next.js](https://nextjs.org)
 - [NextAuth.js](https://next-auth.js.org)

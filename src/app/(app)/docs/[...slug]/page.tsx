@@ -1,39 +1,44 @@
+import { allDocs } from "contentlayer/generated"
 import { type Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Mdx } from "~/components/mdx-components"
 import { DashboardTableOfContents } from "~/components/toc"
-import { getContents } from "~/lib/content"
-import { mdxSerialize } from "~/lib/mdx-serialize"
+import { siteConfig } from "~/config/site"
 import { getTableOfContents } from "~/lib/toc"
 import { absoluteUrl } from "~/utils/url"
 
-interface PostPageProps {
+interface DocPageProps {
   params: Promise<{
     slug: string[]
   }>
 }
 
+async function getDocFromParams({ params }: DocPageProps) {
+  const { slug } = await params
+  const pathname = slug?.join("/") || ""
+  const doc = allDocs.find((doc) => doc.slugAsParams === pathname)
+
+  if (!doc) {
+    return null
+  }
+
+  return doc
+}
+
 export function generateStaticParams() {
-  const docs = getContents("docs")
-  return docs.map(doc => ({ params: { slug: doc.slug.toLowerCase() } }))
+  return allDocs.map(doc => ({ params: { slug: doc.slug.toLowerCase() } }))
 }
 
 export async function generateMetadata({
   params,
-}: PostPageProps): Promise<Metadata> {
-  const { slug } = await params
-  const doc = getContents("docs").find(
-    project => project.slug.toLowerCase() === slug[0]?.toLowerCase(),
-  )
+}: DocPageProps): Promise<Metadata> {
+  const doc = await getDocFromParams({ params })
 
   if (!doc) {
     return {}
   }
 
-  const { title, summary: description, image } = doc.metadata
-  const ogImage = image
-    ? absoluteUrl(image)
-    : absoluteUrl(`/api/og?title=${title}`)
+  const { title, description, slug } = doc
 
   return {
     title,
@@ -41,11 +46,14 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: absoluteUrl(`/${slug[0]}`),
+      url: absoluteUrl(`/${slug}`),
       siteName: "Next.js with next-mdx-remote Blog",
       images: [
         {
-          url: ogImage,
+          url: siteConfig.ogImage,
+          width: 1200,
+          height: 630,
+          alt: siteConfig.name,
         },
       ],
       locale: "vi_VN",
@@ -55,26 +63,19 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      images: [siteConfig.ogImage],
     },
   }
 }
 
-export default async function PostPage({ params }: PostPageProps) {
-  const { slug } = await params
+export default async function PostPage({ params }: DocPageProps) {
+  const doc = await getDocFromParams({ params })
 
-  const doc = getContents("docs").find(
-    project => project.slug.toLowerCase() === slug[0]?.toLowerCase(),
-  )
-
-  if (!slug.length || !doc) {
+  if (!doc) {
     notFound()
   }
 
-  const [mdxSource, toc] = await Promise.all([
-    mdxSerialize(doc.content),
-    getTableOfContents(doc.content),
-  ])
+  const toc = await getTableOfContents(doc.body.raw)
 
   return (
     <div
@@ -82,7 +83,7 @@ export default async function PostPage({ params }: PostPageProps) {
         "container relative mx-auto py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]"
       }>
       <div className={"mx-auto w-full min-w-0 max-w-3xl"}>
-        <Mdx mdxSource={mdxSource} />
+      <Mdx code={doc.body.code} />
       </div>
 
       <div className={"hidden text-sm xl:block"}>

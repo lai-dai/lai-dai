@@ -14,7 +14,7 @@ export function GithubLink() {
       <Tooltip>
         <TooltipTrigger asChild={true}>
           <Link
-            className={"flex items-center text-sm"}
+            className={"flex items-center text-sm font-mono"}
             href={siteConfig.links.github}
             referrerPolicy={"no-referrer"}
             target={"_blank"}>

@@ -22,7 +22,7 @@ export default function HomePage() {
         </PageHeaderHeading>
 
         <PageHeaderDescription>
-          {"Mình chia sẻ nhưng thứ hay ho tìm được trên Internet 🐋."}
+          {"Mình thích chia sẻ nhưng thứ hay ho trên Internet 🐋."}
         </PageHeaderDescription>
 
         <PageActions>

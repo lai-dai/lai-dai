@@ -3,7 +3,7 @@
 import { type MDXComponents } from "mdx/types"
 import Image from "next/image"
 import Link from "next/link"
-import { useMDXComponent } from "next-contentlayer2/hooks"
+import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote"
 import {BuyMeACoffee} from "~/components/buy-me-a-coffee"
 import { Callout } from "~/components/callout"
 import { ComponentPreview } from "~/components/component-preview"
@@ -243,16 +243,16 @@ const components: MDXComponents = {
 }
 
 interface MdxProps {
-  code: string
+  mdxSource: MDXRemoteSerializeResult
   className?: string
 }
 
-export function Mdx({ code, className }: MdxProps) {
-  const Component = useMDXComponent(code)
-
+export function Mdx({ mdxSource, className }: MdxProps) {
   return (
     <div className={cn("mdx", className)}>
-      <Component components={components} />
+      <MDXRemote
+        components={components}
+        {...mdxSource} />
     </div>
   )
 }
