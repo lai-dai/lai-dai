@@ -71,7 +71,7 @@ export default async function PostPage({ params }: DocPageProps) {
   const { slug } = await params
 
   const doc = getContents("docs").find(
-    project => project.slug.toLowerCase() === slug[0]?.toLowerCase(),
+    project => project.slug === slug.join('/'),
   )
 
   if (!slug.length || !doc) {

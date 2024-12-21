@@ -27,7 +27,6 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"],
-      "~/contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
   "include": [
@@ -38,7 +37,6 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    ".contentlayer/generated"
   ],
   "exclude": ["node_modules"]
 }
