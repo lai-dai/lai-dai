@@ -2,48 +2,55 @@ import "~/styles/globals.css"
 
 import { CircleAlert, CircleCheck, CircleX, Info, Loader } from "lucide-react"
 import { type Viewport, type Metadata } from "next"
-import localFont from "next/font/local"
+// import localFont from "next/font/local"
 import Script from "next/script"
 import { SessionProvider } from "next-auth/react"
 import { ThemeProvider } from "next-themes"
 import { Toaster } from "~/components/ui/sonner"
 import { META_THEME_COLORS, siteConfig } from "~/config/site"
+import { plus_jakarta_sans, roboto_mono } from "~/lib/fonts"
 import { cn } from "~/lib/utils"
 
-const geistSans = localFont({
-  src: [
-    {
-      path: "./fonts/GeistVF-Thin-vi.woff",
-      weight: "100",
-    },
-    {
-      path: "./fonts/GeistVF-Regular-vi.woff",
-      weight: "400",
-    },
-    {
-      path: "./fonts/GeistVF-UltraBlack-vi.woff",
-      weight: "900",
-    },
-  ],
-  variable: "--font-geist-sans",
-})
-const geistMono = localFont({
-  src: [
-    {
-      path: "./fonts/GeistMonoVF-Thin-vi.woff",
-      weight: "100",
-    },
-    {
-      path: "./fonts/GeistMonoVF-Regular-vi.woff",
-      weight: "400",
-    },
-    {
-      path: "./fonts/GeistMonoVF-UltraBlack-vi.woff",
-      weight: "900",
-    },
-  ],
-  variable: "--font-geist-mono",
-})
+// const robotoMono = Roboto_Mono({
+//   subsets: ['latin'],
+//   display: 'swap',
+//   variable: '--font-roboto-mono',
+// })
+
+// const geistSans = localFont({
+//   src: [
+//     {
+//       path: "./fonts/GeistVF-Thin-vi.woff",
+//       weight: "100",
+//     },
+//     {
+//       path: "./fonts/GeistVF-Regular-vi.woff",
+//       weight: "400",
+//     },
+//     {
+//       path: "./fonts/GeistVF-UltraBlack-vi.woff",
+//       weight: "900",
+//     },
+//   ],
+//   variable: "--font-geist-sans",
+// })
+// const geistMono = localFont({
+//   src: [
+//     {
+//       path: "./fonts/GeistMonoVF-Thin-vi.woff",
+//       weight: "100",
+//     },
+//     {
+//       path: "./fonts/GeistMonoVF-Regular-vi.woff",
+//       weight: "400",
+//     },
+//     {
+//       path: "./fonts/GeistMonoVF-UltraBlack-vi.woff",
+//       weight: "900",
+//     },
+//   ],
+//   variable: "--font-geist-mono",
+// })
 
 export const metadata: Metadata = {
   title: {
@@ -136,8 +143,8 @@ try {
       <body
         className={cn(
           "font-sans antialiased",
-          geistSans.variable,
-          geistMono.variable,
+          plus_jakarta_sans.variable,
+          roboto_mono.variable,
         )}>
         <ThemeProvider
           attribute={"class"}

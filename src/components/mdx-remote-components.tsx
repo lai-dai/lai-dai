@@ -1,13 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import { type MDXComponents } from "mdx/types"
 import Image from "next/image"
 import Link from "next/link"
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote"
-import {BuyMeACoffee} from "~/components/buy-me-a-coffee"
+import { BuyMeACoffee } from "~/components/buy-me-a-coffee"
 import { Callout } from "~/components/callout"
 import { ComponentPreview } from "~/components/component-preview"
 import { CopyButton } from "~/components/copy-button"
+import { Photo, PhotoView } from "~/components/photo-view"
 import {
   Accordion,
   AccordionContent,
@@ -17,6 +19,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs"
 import { cn } from "~/lib/utils"
+import { absoluteUrl } from "~/utils/url"
 
 const components: MDXComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -95,13 +98,16 @@ const components: MDXComponents = {
   img: ({
     className,
     alt,
+    src,
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      alt={alt}
-      className={cn("rounded-md", className)}
-      {...props} />
+    <Photo>
+      <img
+        alt={alt}
+        className={cn("rounded-md", className)}
+        src={absoluteUrl(src)}
+        {...props}/>
+    </Photo>
   ),
   hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
     <hr
@@ -249,10 +255,12 @@ interface MdxProps {
 
 export function Mdx({ mdxSource, className }: MdxProps) {
   return (
-    <div className={cn("mdx", className)}>
-      <MDXRemote
-        components={components}
-        {...mdxSource} />
-    </div>
+    <PhotoView>
+      <div className={cn("mdx", className)}>
+        <MDXRemote
+          components={components}
+          {...mdxSource} />
+      </div>
+    </PhotoView>
   )
 }

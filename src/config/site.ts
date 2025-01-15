@@ -1,7 +1,7 @@
 import { env } from "~/env"
 
 export const siteConfig = {
-  name: "laidai",
+  name: "LaiDai",
   url: env.NEXT_PUBLIC_WEBSITE_URL,
   ogImage: "https://ui.shadcn.com/og.jpg",
   description:

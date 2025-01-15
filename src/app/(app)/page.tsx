@@ -7,7 +7,7 @@ import {
 } from "~/components/page-header"
 import { Button } from "~/components/ui/button"
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <>
       <PageHeader>
@@ -22,7 +22,7 @@ export default function HomePage() {
         </PageHeaderHeading>
 
         <PageHeaderDescription>
-          {"Mình thích chia sẻ nhưng thứ hay ho trên Internet 🐋."}
+          {"Mình thường chia sẻ nhưng thứ hay ho trên Internet 🐋."}
         </PageHeaderDescription>
 
         <PageActions>
@@ -44,7 +44,9 @@ export default function HomePage() {
       <div className={"border-grid border-b"}>
         <div className={"container-wrapper"}>
           <div className={"container py-4"}>
-            <h3 className={"text-lg"}>{"My Project"}</h3>
+            <h3 className={"text-lg"}>
+              {"My Project"}
+            </h3>
           </div>
         </div>
       </div>

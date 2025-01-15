@@ -1,0 +1,30 @@
+---
+title: TLDR; gcTime & staleTime in react-query
+description: Here is a simple understanding of two very important concepts in react-query caching.
+---
+
+TLDR; gcTime & staleTime in react-query
+
+Here is a simple understanding of two very important concepts in react-query caching.
+
+Prerequisites: Will be good if you have a very basic idea of what react-query is..
+
+In React Query v5, the cacheTime option in React Query has been renamed to gcTime.
+
+The gcTime and staleTime options in React Query serve different purposes in managing and controlling the cached data lifecycle.
+
+TLDR; In summary, gcTime manages how long data can remain in the cache after it becomes unused before being garbage collected to free up memory, while staleTime determines how long data can be considered fresh before triggering a refetch to ensure data currency and accuracy. Both options play crucial roles in optimizing data caching, memory management, and data freshness in React Query applications.
+
+gcTime:
+gcTime (Garbage Collect Time) is used to determine how long data will remain in the cache after a query becomes unused.
+
+By setting gcTime to a specific duration (in milliseconds), you control how long data stays in the cache after it is no longer actively used. Once the gcTime duration has passed, the data is considered eligible for garbage collection, effectively managing the cache size and memory consumption.
+
+Once the specified gcTime duration elapses, the data is marked for garbage collection to prevent the cache from growing indefinitely. gcTime focuses on managing memory and ensuring that outdated or unused data is eventually removed from the cache to maintain optimal performance and memory usage.
+
+staleTime:
+staleTime is used to specify the duration for which data is considered fresh before it becomes stale and triggers a refetch. When a query result is accessed, React Query checks if the data is stale based on the staleTime value.
+
+If the data is stale (i.e., the specified time has passed since the data was fetched), React Query initiates a background refetch to update the data (isFetching can be used to detect when the background refresh). staleTime is primarily used to control how often React Query should automatically refetch data to ensure it remains up to date. By default, if no staleTime is provided (or set to 0), the query will immediately refetch when it mounts.
+
+If you provide a staleTime value (in milliseconds), the data will be considered fresh for that duration before a refetch is triggered. If you also want to handle scenarios where the initialData might not be totally fresh, you can use the initialDataUpdatedAt option. This option allows you to pass a JS timestamp indicating when the initialData was last updated. This allows React Query to make a decision on whether the data needs to be refetched based on both the staleTime and the timestamp of when the initialData was last updated.

@@ -49,6 +49,8 @@ const config = {
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/no-empty-object-type": "off",
     "@typescript-eslint/only-throw-error": "off",
+    "@typescript-eslint/consistent-indexed-object-style": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "import/order": [
       "warn",
       {
