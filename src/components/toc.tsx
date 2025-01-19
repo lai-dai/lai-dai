@@ -33,7 +33,8 @@ export function DashboardTableOfContents({ toc }: TocProps) {
 
       <Tree
         activeItem={activeHeading}
-        tree={toc} />
+        tree={toc}
+      />
     </div>
   )
 }
@@ -86,7 +87,8 @@ function Tree({ tree, level = 1, activeItem }: TreeProps) {
         return (
           <li
             className={cn("mt-0 pt-2")}
-            key={index}>
+            key={index}
+          >
             <a
               className={cn(
                 "inline-block no-underline transition-colors hover:text-foreground",
@@ -94,7 +96,8 @@ function Tree({ tree, level = 1, activeItem }: TreeProps) {
                   ? "font-medium text-foreground"
                   : "text-muted-foreground",
               )}
-              href={item.url}>
+              href={item.url}
+            >
               {item.title}
             </a>
 
@@ -102,7 +105,8 @@ function Tree({ tree, level = 1, activeItem }: TreeProps) {
               <Tree
                 activeItem={activeItem}
                 level={level + 1}
-                tree={item} />
+                tree={item}
+              />
             ) : null}
           </li>
         )

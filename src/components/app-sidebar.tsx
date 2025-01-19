@@ -66,13 +66,15 @@ export function AppSidebar() {
       className={
         "fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-full shrink-0 border-r border-border/40 bg-background dark:border-border md:sticky md:block"
       }
-      collapsible={isMobile ? "offcanvas" : "none"}>
+      collapsible={isMobile ? "offcanvas" : "none"}
+    >
       <SidebarHeader className={"h-16 justify-center px-4 md:hidden"}>
         <div className={"flex items-center gap-2"}>
           <Link
             className={"flex items-center gap-2 font-bold"}
             href={"https://ui.shadcn.com/"}
-            referrerPolicy={"no-referrer"}>
+            referrerPolicy={"no-referrer"}
+          >
             <Icons.logo className={"h-6 w-6"} />
 
             {"Shadcn"}
@@ -80,7 +82,8 @@ export function AppSidebar() {
 
           <Link
             className={"text-sm text-muted-foreground"}
-            href={"/"}>
+            href={"/"}
+          >
             {siteConfig.name}
           </Link>
         </div>
@@ -94,7 +97,8 @@ export function AppSidebar() {
                 {Menu.map((it, idx) => (
                   <Tree
                     key={idx}
-                    {...it} />
+                    {...it}
+                  />
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
@@ -137,7 +141,8 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
         isActive={activeDD}
         onClick={() => setOpenMobile(false)}
         title={props.title}
-        tooltip={props.title}>
+        tooltip={props.title}
+      >
         <Link href={props.url ?? "#"}>
           {!isSubMenu && (props.icon ? <props.icon /> : null)}
 
@@ -155,7 +160,8 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
         className={
           "group/collapsible [&[data-state=open]>button>svg:last-child]:rotate-90"
         }
-        defaultOpen={true}>
+        defaultOpen={true}
+      >
         <CollapsibleTrigger asChild={true}>
           <SidebarMenuButton title={props?.title}>
             {!isSubMenu && (props?.icon ? <props.icon /> : null)}
@@ -163,7 +169,8 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
             <span className={"grow truncate leading-5"}>{props?.title}</span>
 
             <ChevronDown
-              className={"ml-auto transition-transform duration-200"}/>
+              className={"ml-auto transition-transform duration-200"}
+            />
           </SidebarMenuButton>
         </CollapsibleTrigger>
 
@@ -174,7 +181,8 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
                 <Tree
                   isSubMenu={true}
                   key={idx}
-                  {...child} />
+                  {...child}
+                />
               ))}
             </SidebarMenuSub>
           </CollapsibleContent>

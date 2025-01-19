@@ -8,14 +8,16 @@ export function SiteFooter() {
           <p
             className={
               "text-balance text-center text-sm leading-loose text-muted-foreground md:text-left"
-            }>
+            }
+          >
             {"Built by"}{" "}
 
             <a
               className={"font-medium underline underline-offset-4"}
               href={siteConfig.links.site}
               rel={"noreferrer"}
-              target={"_blank"}>
+              target={"_blank"}
+            >
               {"laidai"}
             </a>
 
@@ -25,7 +27,8 @@ export function SiteFooter() {
               className={"font-medium underline underline-offset-4"}
               href={siteConfig.links.github}
               rel={"noreferrer"}
-              target={"_blank"}>
+              target={"_blank"}
+            >
               {"GitHub"}
             </a>
 

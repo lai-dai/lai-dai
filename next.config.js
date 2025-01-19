@@ -7,6 +7,13 @@ import "./src/env.js"
 /** @type {import("next").NextConfig} */
 const config = {
   transpilePackages: ["next-mdx-remote"],
-};
+  images: {
+    remotePatterns: [
+      {
+        hostname: "**",
+      },
+    ],
+  },
+}
 
-export default config;
+export default config

@@ -40,7 +40,8 @@ export function CopyButton({
       }}
       size={"icon"}
       variant={variant}
-      {...props}>
+      {...props}
+    >
       {hasCopied ? <CheckIcon /> : <ClipboardIcon />}
 
       <span className={"sr-only"}>{"Copy"}</span>

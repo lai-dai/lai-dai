@@ -83,13 +83,22 @@ const components: MDXComponents = {
     />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+    <ul
+      className={cn("my-6 ml-6 list-disc", className)}
+      {...props}
+    />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
+    <ol
+      className={cn("my-6 ml-6 list-decimal", className)}
+      {...props}
+    />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <li className={cn("mt-2", className)} {...props} />
+    <li
+      className={cn("mt-2", className)}
+      {...props}
+    />
   ),
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
@@ -113,7 +122,10 @@ const components: MDXComponents = {
     </PhotoView>
   ),
   hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-    <hr className={"my-4 md:my-8"} {...props} />
+    <hr
+      className={"my-4 md:my-8"}
+      {...props}
+    />
   ),
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
     <div className={"my-6 w-full overflow-y-auto"}>
@@ -209,7 +221,10 @@ const components: MDXComponents = {
     />
   ),
   Tabs: ({ className, ...props }: React.ComponentProps<typeof Tabs>) => (
-    <Tabs className={cn("relative mt-6 w-full", className)} {...props} />
+    <Tabs
+      className={cn("relative mt-6 w-full", className)}
+      {...props}
+    />
   ),
   TabsList: ({
     className,
@@ -269,7 +284,10 @@ export function Mdx({ mdxSource, className }: MdxProps) {
   return (
     <PhotoProvider>
       <div className={cn("mdx", className)}>
-        <MDXRemote components={components} {...mdxSource} />
+        <MDXRemote
+          components={components}
+          {...mdxSource}
+        />
       </div>
     </PhotoProvider>
   )

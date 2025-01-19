@@ -1,14 +1,15 @@
-import React from "react"
 import parse, {
   attributesToProps,
-  DOMNode,
+  type DOMNode,
   domToReact,
   type HTMLReactParserOptions,
 } from "html-react-parser"
+import Image from "next/image"
+import React from "react"
+import { CopyButton } from "~/components/copy-button"
 import { PhotoView } from "~/components/photo-view"
 import { cn } from "~/lib/utils"
 import { absoluteUrl } from "~/utils/url"
-import { CopyButton } from "~/components/copy-button"
 
 const options = {
   replace(domNode) {
@@ -92,14 +93,23 @@ const options = {
         )
       case "ul":
         return (
-          <ul {...props} className={cn("my-6 ml-6 list-disc", className)} />
+          <ul
+            {...props}
+            className={cn("my-6 ml-6 list-disc", className)}
+          />
         )
       case "ol":
         return (
-          <ol {...props} className={cn("my-6 ml-6 list-decimal", className)} />
+          <ol
+            {...props}
+            className={cn("my-6 ml-6 list-decimal", className)}
+          />
         )
       case "li":
-        return <li {...props} className={cn("mt-2", className)} />
+        return <li
+          {...props}
+          className={cn("mt-2", className)}
+        />
       case "blockquote":
         return (
           <blockquote
@@ -112,15 +122,21 @@ const options = {
         delete props.children
         return (
           <PhotoView>
-            <img
+            <Image
+              alt={""}
+              height={500}
+              width={500}
               {...props}
-              src={absoluteUrl(props.src as string)}
               className={cn("rounded-md", className)}
+              src={absoluteUrl(props.src as string)}
             />
           </PhotoView>
         )
       case "hr":
-        return <hr {...props} className={cn("my-4 md:my-8", className)} />
+        return <hr
+          {...props}
+          className={cn("my-4 md:my-8", className)}
+        />
       case "table":
         return (
           <div className={"my-6 w-full overflow-y-auto"}>
@@ -207,7 +223,11 @@ export const HtmlParser = React.forwardRef<HTMLDivElement, HtmlParserProps>(
     const reactComponent = parse(html ?? "", options)
 
     return (
-      <div ref={ref} aria-label="html-react-parser" {...props}>
+      <div
+        aria-label={"html-react-parser"}
+        ref={ref}
+        {...props}
+      >
         {reactComponent}
       </div>
     )

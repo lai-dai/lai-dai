@@ -125,7 +125,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang={"vi"}
-      suppressHydrationWarning={true}>
+      suppressHydrationWarning={true}
+    >
       <Script id={"theme"}>
         {`
 try {
@@ -145,17 +146,20 @@ try {
           "font-sans antialiased",
           plus_jakarta_sans.variable,
           roboto_mono.variable,
-        )}>
+        )}
+      >
         <ThemeProvider
           attribute={"class"}
           defaultTheme={"dark"}
           disableTransitionOnChange={false}
           enableColorScheme={true}
-          enableSystem={false}>
+          enableSystem={false}
+        >
           <SessionProvider>
             <div vaul-drawer-wrapper={""}>
               <div
-                className={"relative flex min-h-screen flex-col bg-background"}>
+                className={"relative flex min-h-screen flex-col bg-background"}
+              >
                 {children}
               </div>
             </div>
@@ -168,7 +172,8 @@ try {
               loading: <Loader className={"size-4 animate-spin"} />,
               success: <CircleCheck className={"size-4 text-success"} />,
               warning: <CircleAlert className={"size-4 text-warning"} />,
-            }}/>
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>

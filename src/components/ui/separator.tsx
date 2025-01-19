@@ -22,7 +22,8 @@ const Separator = React.forwardRef<
       decorative={decorative}
       orientation={orientation}
       ref={ref}
-      {...props}/>
+      {...props}
+    />
   )
 )
 Separator.displayName = SeparatorPrimitive.Root.displayName

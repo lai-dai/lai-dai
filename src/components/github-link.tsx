@@ -17,7 +17,8 @@ export function GithubLink() {
             className={"flex items-center text-sm font-mono"}
             href={siteConfig.links.github}
             referrerPolicy={"no-referrer"}
-            target={"_blank"}>
+            target={"_blank"}
+          >
             <GitBranch className={"mr-1 size-3"} />
 
             {"main*"}

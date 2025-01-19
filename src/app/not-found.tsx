@@ -3,7 +3,8 @@ export default function NotFoundPage() {
     <pre
       className={
         "flex h-full flex-col items-center justify-center space-y-5 whitespace-pre-wrap"
-      }>
+      }
+    >
       <code className={"text-[1.4dvh] leading-[0.9] tracking-[-0.1em]"}>
         {ascii}
       </code>

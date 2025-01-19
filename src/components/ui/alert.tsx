@@ -27,7 +27,8 @@ const Alert = React.forwardRef<
     className={cn(alertVariants({ variant }), className)}
     ref={ref}
     role={"alert"}
-    {...props}/>
+    {...props}
+  />
 ))
 Alert.displayName = "Alert"
 
@@ -38,7 +39,8 @@ const AlertTitle = React.forwardRef<
   <h5
     className={cn("mb-1 font-medium leading-none tracking-tight", className)}
     ref={ref}
-    {...props}/>
+    {...props}
+  />
 ))
 AlertTitle.displayName = "AlertTitle"
 
@@ -49,7 +51,8 @@ const AlertDescription = React.forwardRef<
   <div
     className={cn("text-sm [&_p]:leading-relaxed", className)}
     ref={ref}
-    {...props}/>
+    {...props}
+  />
 ))
 AlertDescription.displayName = "AlertDescription"
 

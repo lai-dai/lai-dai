@@ -26,11 +26,18 @@ export default async function HomePage() {
         </PageHeaderDescription>
 
         <PageActions>
-          <Button asChild={true} size={"sm"}>
+          <Button
+            asChild={true}
+            size={"sm"}
+          >
             <Link href={"/docs"}>{"Bắt đầu thôi"}</Link>
           </Button>
 
-          <Button asChild={true} size={"sm"} variant={"ghost"}>
+          <Button
+            asChild={true}
+            size={"sm"}
+            variant={"ghost"}
+          >
             <Link href={"/blocks"}>{"My Components"}</Link>
           </Button>
         </PageActions>
@@ -41,7 +48,7 @@ export default async function HomePage() {
           <div className={"container py-4"}>
             <h3 className={"text-lg"}>{"My Project"}</h3>
 
-            <Link href={"/grammar"}>Grammar</Link>
+            <Link href={"/grammar"}>{"Grammar"}</Link>
           </div>
         </div>
       </div>

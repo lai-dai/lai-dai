@@ -15,7 +15,8 @@ const NavigationMenu = React.forwardRef<
       className,
     )}
     ref={ref}
-    {...props}>
+    {...props}
+  >
     {children}
 
     <NavigationMenuViewport />
@@ -33,7 +34,8 @@ const NavigationMenuList = React.forwardRef<
       className,
     )}
     ref={ref}
-    {...props}/>
+    {...props}
+  />
 ))
 NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName
 
@@ -50,14 +52,16 @@ const NavigationMenuTrigger = React.forwardRef<
   <NavigationMenuPrimitive.Trigger
     className={cn(navigationMenuTriggerStyle(), "group", className)}
     ref={ref}
-    {...props}>
+    {...props}
+  >
     {children}{" "}
 
     <ChevronDown
       className={
         "relative top-[1px] ml-1 h-3 w-3 transition duration-300 group-data-[state=open]:rotate-180"
       }
-      aria-hidden={"true"}/>
+      aria-hidden={"true"}
+    />
   </NavigationMenuPrimitive.Trigger>
 ))
 NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName
@@ -72,7 +76,8 @@ const NavigationMenuContent = React.forwardRef<
       className,
     )}
     ref={ref}
-    {...props}/>
+    {...props}
+  />
 ))
 NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName
 
@@ -89,7 +94,8 @@ const NavigationMenuViewport = React.forwardRef<
         className,
       )}
       ref={ref}
-      {...props}/>
+      {...props}
+    />
   </div>
 ))
 NavigationMenuViewport.displayName =
@@ -105,11 +111,13 @@ const NavigationMenuIndicator = React.forwardRef<
       className,
     )}
     ref={ref}
-    {...props}>
+    {...props}
+  >
     <div
       className={
         "relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md"
-      }/>
+      }
+    />
   </NavigationMenuPrimitive.Indicator>
 ))
 NavigationMenuIndicator.displayName =

@@ -32,7 +32,8 @@ export function SiteHeader() {
       className={
         "border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
       }
-      data-sticky={isSticky}>
+      data-sticky={isSticky}
+    >
       <div className={"container-wrapper"}>
         <div className={"container flex h-16"}>
           <div className={"mr-4 flex flex-1 items-center gap-2 lg:mr-6"}>
@@ -41,11 +42,15 @@ export function SiteHeader() {
             <Link
               className={"hidden md:flex"}
               href={"https://ui.shadcn.com/"}
-              referrerPolicy={"no-referrer"}>
+              referrerPolicy={"no-referrer"}
+            >
               <Icons.logo className={"size-5"} />
             </Link>
 
-            <Link href={"/"} className="font-bold">
+            <Link
+              className={"font-bold"}
+              href={"/"}
+            >
               {siteConfig.name}
             </Link>
           </div>

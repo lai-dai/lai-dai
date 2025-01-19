@@ -11,7 +11,8 @@ export default function PostPage() {
           <Link
             className={"hover:underline"}
             href={`/posts/${doc.slug}`}
-            key={key}>
+            key={key}
+          >
             {doc.metadata.title}
           </Link>
         ))}

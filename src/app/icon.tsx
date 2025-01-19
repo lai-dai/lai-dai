@@ -20,7 +20,8 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           color: "black",
-        }}>
+        }}
+      >
         <Icons.logo style={{...size}} />
       </div>
     ),

@@ -5,11 +5,13 @@ export const Icons = {
     <svg
       viewBox={"0 0 256 256"}
       xmlns={"http://www.w3.org/2000/svg"}
-      {...props}>
+      {...props}
+    >
       <rect
         fill={"none"}
         height={"256"}
-        width={"256"} />
+        width={"256"}
+      />
 
       <line
         fill={"none"}
@@ -20,7 +22,8 @@ export const Icons = {
         x1={"90"}
         x2={"40"}
         y1={"40"}
-        y2={"90"}/>
+        y2={"90"}
+      />
 
       <line
         fill={"none"}
@@ -31,7 +34,8 @@ export const Icons = {
         x1={"208"}
         x2={"128"}
         y1={"128"}
-        y2={"208"}/>
+        y2={"208"}
+      />
 
       <line
         fill={"none"}
@@ -42,7 +46,8 @@ export const Icons = {
         x1={"192"}
         x2={"40"}
         y1={"40"}
-        y2={"192"}/>
+        y2={"192"}
+      />
     </svg>
   ),
 }

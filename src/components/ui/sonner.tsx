@@ -23,7 +23,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
       }}
       className={"toaster group"}
       theme={theme as ToasterProps["theme"]}
-      {...props}/>
+      {...props}
+    />
   )
 }
 

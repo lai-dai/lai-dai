@@ -16,7 +16,8 @@ export function Callout({
   return (
     <Alert
       className={cn("bg-muted/50", className)}
-      {...props}>
+      {...props}
+    >
       {icon && <span className={"mr-4 text-2xl"}>{icon}</span>}
 
       {title && <AlertTitle>{title}</AlertTitle>}

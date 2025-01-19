@@ -49,6 +49,7 @@ const config = {
     "@typescript-eslint/only-throw-error": "off",
     "@typescript-eslint/consistent-indexed-object-style": "off",
     "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-unsafe-enum-comparison": "off",
     "import/order": [
       "warn",
       {
@@ -89,7 +90,7 @@ const config = {
         multiline: "first",
       },
     ],
-    "react/jsx-closing-bracket-location": [1, "tag-aligned", 1, "line-aligned"],
+    "react/jsx-closing-bracket-location": [1, "line-aligned"],
     "react/jsx-curly-brace-presence": ["error", "always"],
     "react/jsx-boolean-value": ["error", "always"],
   },
