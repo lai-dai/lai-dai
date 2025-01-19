@@ -1,6 +1,6 @@
 import { type Metadata } from "next"
 import { notFound } from "next/navigation"
-import { Mdx } from "~/components/mdx-remote-components"
+import { Mdx } from "~/components/mdx-remote"
 import { DashboardTableOfContents } from "~/components/toc"
 import { siteConfig } from "~/config/site"
 import { getContents } from "~/lib/content"
@@ -34,7 +34,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: absoluteUrl(`/${slug.join('/')}`),
+      url: absoluteUrl(`/${slug.join("/")}`),
       siteName: "Next.js with next-mdx-remote Blog",
       images: [
         {
@@ -56,10 +56,9 @@ export async function generateMetadata({
   }
 }
 
-
 export function generateStaticParams() {
   const docs = getContents("docs")
-  return docs.map(doc => ({ slug: doc.slug.split('/') }))
+  return docs.map(doc => ({ slug: doc.slug.split("/") }))
 }
 // export async function generateStaticParams() {
 //   return allDocs.map((doc) => ({
@@ -71,7 +70,7 @@ export default async function PostPage({ params }: DocPageProps) {
   const { slug } = await params
 
   const doc = getContents("docs").find(
-    project => project.slug === slug.join('/'),
+    project => project.slug === slug.join("/"),
   )
 
   if (!slug.length || !doc) {

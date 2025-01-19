@@ -1,31 +1,30 @@
-'use client'
+"use client"
 
-import 'react-photo-view/dist/react-photo-view.css'
+import "react-photo-view/dist/react-photo-view.css"
 
-import * as ReactPhotoView from 'react-photo-view'
-import { type PhotoProviderProps } from 'react-photo-view/dist/PhotoProvider'
-import { type PhotoViewProps } from 'react-photo-view/dist/PhotoView'
+import * as ReactPhotoView from "react-photo-view"
+import { type PhotoProviderProps } from "react-photo-view/dist/PhotoProvider"
+import { type PhotoViewProps } from "react-photo-view/dist/PhotoView"
 
-import { Loader } from '~/components/loader'
-import { delve } from '~/utils/delve'
+import { cn } from "~/lib/utils"
 
-
-export function PhotoView(props: PhotoProviderProps) {
+function PhotoProvider({ className, ...props }: PhotoProviderProps) {
   return (
     <ReactPhotoView.PhotoProvider
-      className={"pointer-events-auto"}
-      loadingElement={<Loader className={"size-12"} />}
+      className={cn("pointer-events-auto", className)}
+      loadingElement={
+        <div className="size-24 animate-spin rounded-full border-y-2 border-gray-900" />
+      }
       maskOpacity={0.9}
-      {...props}/>
+      {...props}
+    />
   )
 }
 
-export function Photo(props: PhotoViewProps) {
-  const src = props.children
-    ? delve(props.children?.props, 'src')
-    : undefined
+function PhotoView(props: PhotoViewProps) {
+  const src = props.children ? props.children?.props?.src : undefined
 
-  return <ReactPhotoView.PhotoView
-    src={src}
-    {...props} />
+  return <ReactPhotoView.PhotoView src={src} {...props} />
 }
+
+export { PhotoProvider, PhotoView }

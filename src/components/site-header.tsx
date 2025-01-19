@@ -35,15 +35,17 @@ export function SiteHeader() {
       data-sticky={isSticky}>
       <div className={"container-wrapper"}>
         <div className={"container flex h-16"}>
-          <div className={"flex-1 mr-4 flex items-center gap-2 lg:mr-6"}>
+          <div className={"mr-4 flex flex-1 items-center gap-2 lg:mr-6"}>
             <Button className={"mr-1 md:hidden"}>{"Menu"}</Button>
 
             <Link
-              className={"hidden items-center gap-2 font-bold md:flex"}
+              className={"hidden md:flex"}
               href={"https://ui.shadcn.com/"}
               referrerPolicy={"no-referrer"}>
               <Icons.logo className={"size-5"} />
+            </Link>
 
+            <Link href={"/"} className="font-bold">
               {siteConfig.name}
             </Link>
           </div>

@@ -3,12 +3,10 @@
  * Do not make direct changes to the file.
  */
 
-import { type StrapiQuery } from "~/lib/api/strapi-parameters";
-
 export interface paths {
     "/articles": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -24,7 +22,7 @@ export interface paths {
     };
     "/articles/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -40,7 +38,7 @@ export interface paths {
     };
     "/categories": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -56,7 +54,7 @@ export interface paths {
     };
     "/categories/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -70,9 +68,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/events"];
+        put?: never;
+        post: operations["post/events"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/events/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/events/{id}"];
+        put: operations["put/events/{id}"];
+        post?: never;
+        delete: operations["delete/events/{id}"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/global": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -86,9 +116,73 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/grammar-lessons": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/grammar-lessons"];
+        put?: never;
+        post: operations["post/grammar-lessons"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/grammar-lessons/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/grammar-lessons/{id}"];
+        put: operations["put/grammar-lessons/{id}"];
+        post?: never;
+        delete: operations["delete/grammar-lessons/{id}"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/grammar-levels": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/grammar-levels"];
+        put?: never;
+        post: operations["post/grammar-levels"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/grammar-levels/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/grammar-levels/{id}"];
+        put: operations["put/grammar-levels/{id}"];
+        post?: never;
+        delete: operations["delete/grammar-levels/{id}"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/tags": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -104,7 +198,7 @@ export interface paths {
     };
     "/tags/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -120,7 +214,7 @@ export interface paths {
     };
     "/upload": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -130,7 +224,7 @@ export interface paths {
         /** @description Upload files */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -171,7 +265,7 @@ export interface paths {
     };
     "/upload?id={id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -223,14 +317,14 @@ export interface paths {
     };
     "/upload/files": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -258,14 +352,14 @@ export interface paths {
     };
     "/upload/files/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     id: string;
@@ -289,7 +383,7 @@ export interface paths {
         post?: never;
         delete: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     id: string;
@@ -316,7 +410,7 @@ export interface paths {
     };
     "/connect/{provider}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -327,7 +421,7 @@ export interface paths {
          */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     /** @description Provider name */
@@ -365,7 +459,7 @@ export interface paths {
     };
     "/auth/local": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -378,7 +472,7 @@ export interface paths {
          */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -424,7 +518,7 @@ export interface paths {
     };
     "/auth/local/register": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -437,7 +531,7 @@ export interface paths {
          */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -485,7 +579,7 @@ export interface paths {
     };
     "/auth/{provider}/callback": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -493,7 +587,7 @@ export interface paths {
         /** Default Callback from provider auth */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     /** @description Provider name */
@@ -533,7 +627,7 @@ export interface paths {
     };
     "/auth/forgot-password": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -543,7 +637,7 @@ export interface paths {
         /** Send rest password email */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -590,7 +684,7 @@ export interface paths {
     };
     "/auth/reset-password": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -600,7 +694,7 @@ export interface paths {
         /** Rest user password */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -648,7 +742,7 @@ export interface paths {
     };
     "/auth/change-password": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -658,7 +752,7 @@ export interface paths {
         /** Update user's own password */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -701,7 +795,7 @@ export interface paths {
     };
     "/auth/email-confirmation": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -747,7 +841,7 @@ export interface paths {
     };
     "/auth/send-email-confirmation": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -757,7 +851,7 @@ export interface paths {
         /** Send confirmation email */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -802,7 +896,7 @@ export interface paths {
     };
     "/users-permissions/permissions": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -810,7 +904,7 @@ export interface paths {
         /** Get default generated permissions */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -849,7 +943,7 @@ export interface paths {
     };
     "/users-permissions/roles": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -857,7 +951,7 @@ export interface paths {
         /** List roles */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -892,7 +986,7 @@ export interface paths {
         /** Create a role */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -930,7 +1024,7 @@ export interface paths {
     };
     "/users-permissions/roles/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -938,7 +1032,7 @@ export interface paths {
         /** Get a role */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     /** @description role Id */
@@ -980,7 +1074,7 @@ export interface paths {
     };
     "/users-permissions/roles/{role}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -989,7 +1083,7 @@ export interface paths {
         /** Update a role */
         put: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     /** @description role Id */
@@ -1026,7 +1120,7 @@ export interface paths {
         /** Delete a role */
         delete: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     /** @description role Id */
@@ -1066,7 +1160,7 @@ export interface paths {
     };
     "/users": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1074,7 +1168,7 @@ export interface paths {
         /** Get list of users */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -1105,7 +1199,7 @@ export interface paths {
         /** Create a user */
         post: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -1155,7 +1249,7 @@ export interface paths {
     };
     "/users/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1163,7 +1257,7 @@ export interface paths {
         /** Get a user */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     /** @description user Id */
@@ -1196,7 +1290,7 @@ export interface paths {
         /** Update a user */
         put: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     /** @description user Id */
@@ -1245,7 +1339,7 @@ export interface paths {
         /** Delete a user */
         delete: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path: {
                     /** @description user Id */
@@ -1282,7 +1376,7 @@ export interface paths {
     };
     "/users/me": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1290,7 +1384,7 @@ export interface paths {
         /** Get authenticated user info */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -1327,7 +1421,7 @@ export interface paths {
     };
     "/users/count": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -1335,7 +1429,7 @@ export interface paths {
         /** Get user count */
         get: {
             parameters: {
-                query?: unknown;
+                query?: never;
                 header?: never;
                 path?: never;
                 cookie?: never;
@@ -1388,12 +1482,12 @@ export interface components {
                 title?: string;
                 slug?: string;
                 description?: string;
-                content?: string;
                 seo?: components["schemas"]["SharedSeoComponent"];
                 tags?: (number | string)[];
                 categories?: (number | string)[];
                 /** @example string or id */
                 cover_image?: number | string;
+                content?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -1415,7 +1509,6 @@ export interface components {
             title?: string;
             slug?: string;
             description?: string;
-            content?: string;
             seo?: components["schemas"]["SharedSeoComponent"];
             tags?: {
                 id?: number;
@@ -1429,6 +1522,8 @@ export interface components {
                     name?: string;
                     slug?: string;
                     description?: string;
+                    color?: string;
+                    order?: number;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -1449,6 +1544,8 @@ export interface components {
                         documentId?: string;
                     }[];
                 }[];
+                color?: string;
+                order?: number;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -1520,6 +1617,7 @@ export interface components {
                     documentId?: string;
                 }[];
             };
+            content?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1541,7 +1639,6 @@ export interface components {
                 title?: string;
                 slug?: string;
                 description?: string;
-                content?: string;
                 seo?: components["schemas"]["SharedSeoComponent"];
                 tags?: {
                     id?: number;
@@ -1598,6 +1695,7 @@ export interface components {
                         documentId?: string;
                     }[];
                 };
+                content?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -1740,6 +1838,8 @@ export interface components {
                 name?: string;
                 slug?: string;
                 description?: string;
+                color?: string;
+                order?: number;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -1761,6 +1861,8 @@ export interface components {
             name?: string;
             slug?: string;
             description?: string;
+            color?: string;
+            order?: number;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1873,6 +1975,8 @@ export interface components {
                 name?: string;
                 slug?: string;
                 description?: string;
+                color?: string;
+                order?: number;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -1896,6 +2000,178 @@ export interface components {
         };
         CategoryResponse: {
             data?: components["schemas"]["Category"];
+            meta?: Record<string, never>;
+        };
+        EventRequest: {
+            data: {
+                title?: string;
+                /** Format: date-time */
+                start?: string;
+                /** Format: date-time */
+                end?: string;
+                description?: string;
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        EventListResponse: {
+            data?: components["schemas"]["Event"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        Event: {
+            id?: number;
+            documentId?: string;
+            title?: string;
+            /** Format: date-time */
+            start?: string;
+            /** Format: date-time */
+            end?: string;
+            description?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+                firstname?: string;
+                lastname?: string;
+                username?: string;
+                /** Format: email */
+                email?: string;
+                resetPasswordToken?: string;
+                registrationToken?: string;
+                isActive?: boolean;
+                roles?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    code?: string;
+                    description?: string;
+                    users?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    permissions?: {
+                        id?: number;
+                        documentId?: string;
+                        action?: string;
+                        actionParameters?: unknown;
+                        subject?: string;
+                        properties?: unknown;
+                        conditions?: unknown;
+                        role?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    }[];
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                }[];
+                blocked?: boolean;
+                preferedLanguage?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+                title?: string;
+                /** Format: date-time */
+                start?: string;
+                /** Format: date-time */
+                end?: string;
+                description?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            }[];
+        };
+        EventResponse: {
+            data?: components["schemas"]["Event"];
             meta?: Record<string, never>;
         };
         GlobalRequest: {
@@ -2234,12 +2510,679 @@ export interface components {
             data?: components["schemas"]["Global"];
             meta?: Record<string, never>;
         };
+        GrammarLessonRequest: {
+            data: {
+                title?: string;
+                slug?: string;
+                description?: string;
+                order?: number;
+                /** @example string or id */
+                level?: number | string;
+                content?: string;
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        GrammarLessonListResponse: {
+            data?: components["schemas"]["GrammarLesson"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        GrammarLesson: {
+            id?: number;
+            documentId?: string;
+            title?: string;
+            slug?: string;
+            description?: string;
+            order?: number;
+            level?: {
+                id?: number;
+                documentId?: string;
+                title?: string;
+                slug?: string;
+                description?: string;
+                image?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    alternativeText?: string;
+                    caption?: string;
+                    width?: number;
+                    height?: number;
+                    formats?: unknown;
+                    hash?: string;
+                    ext?: string;
+                    mime?: string;
+                    /** Format: float */
+                    size?: number;
+                    url?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    folder?: {
+                        id?: number;
+                        documentId?: string;
+                        name?: string;
+                        pathId?: number;
+                        parent?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        children?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                        files?: {
+                            id?: number;
+                            documentId?: string;
+                            name?: string;
+                            alternativeText?: string;
+                            caption?: string;
+                            width?: number;
+                            height?: number;
+                            formats?: unknown;
+                            hash?: string;
+                            ext?: string;
+                            mime?: string;
+                            /** Format: float */
+                            size?: number;
+                            url?: string;
+                            previewUrl?: string;
+                            provider?: string;
+                            provider_metadata?: unknown;
+                            related?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                            folder?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            folderPath?: string;
+                            /** Format: date-time */
+                            createdAt?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            /** Format: date-time */
+                            publishedAt?: string;
+                            createdBy?: {
+                                id?: number;
+                                documentId?: string;
+                                firstname?: string;
+                                lastname?: string;
+                                username?: string;
+                                /** Format: email */
+                                email?: string;
+                                resetPasswordToken?: string;
+                                registrationToken?: string;
+                                isActive?: boolean;
+                                roles?: {
+                                    id?: number;
+                                    documentId?: string;
+                                    name?: string;
+                                    code?: string;
+                                    description?: string;
+                                    users?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    }[];
+                                    permissions?: {
+                                        id?: number;
+                                        documentId?: string;
+                                        action?: string;
+                                        actionParameters?: unknown;
+                                        subject?: string;
+                                        properties?: unknown;
+                                        conditions?: unknown;
+                                        role?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        /** Format: date-time */
+                                        createdAt?: string;
+                                        /** Format: date-time */
+                                        updatedAt?: string;
+                                        /** Format: date-time */
+                                        publishedAt?: string;
+                                        createdBy?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        updatedBy?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        locale?: string;
+                                        localizations?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        }[];
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt?: string;
+                                    /** Format: date-time */
+                                    updatedAt?: string;
+                                    /** Format: date-time */
+                                    publishedAt?: string;
+                                    createdBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    updatedBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    locale?: string;
+                                    localizations?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    }[];
+                                }[];
+                                blocked?: boolean;
+                                preferedLanguage?: string;
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            };
+                            updatedBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            locale?: string;
+                            localizations?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                        }[];
+                        path?: string;
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    };
+                    folderPath?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
+                order?: number;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            };
+            content?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+                title?: string;
+                slug?: string;
+                description?: string;
+                order?: number;
+                level?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                content?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            }[];
+        };
+        GrammarLessonResponse: {
+            data?: components["schemas"]["GrammarLesson"];
+            meta?: Record<string, never>;
+        };
+        GrammarLevelRequest: {
+            data: {
+                title?: string;
+                slug?: string;
+                description?: string;
+                /** @example string or id */
+                image?: number | string;
+                order?: number;
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        GrammarLevelListResponse: {
+            data?: components["schemas"]["GrammarLevel"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        GrammarLevel: {
+            id?: number;
+            documentId?: string;
+            title?: string;
+            slug?: string;
+            description?: string;
+            image?: {
+                id?: number;
+                documentId?: string;
+                name?: string;
+                alternativeText?: string;
+                caption?: string;
+                width?: number;
+                height?: number;
+                formats?: unknown;
+                hash?: string;
+                ext?: string;
+                mime?: string;
+                /** Format: float */
+                size?: number;
+                url?: string;
+                previewUrl?: string;
+                provider?: string;
+                provider_metadata?: unknown;
+                related?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+                folder?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    pathId?: number;
+                    parent?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    children?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    files?: {
+                        id?: number;
+                        documentId?: string;
+                        name?: string;
+                        alternativeText?: string;
+                        caption?: string;
+                        width?: number;
+                        height?: number;
+                        formats?: unknown;
+                        hash?: string;
+                        ext?: string;
+                        mime?: string;
+                        /** Format: float */
+                        size?: number;
+                        url?: string;
+                        previewUrl?: string;
+                        provider?: string;
+                        provider_metadata?: unknown;
+                        related?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                        folder?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        folderPath?: string;
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                            firstname?: string;
+                            lastname?: string;
+                            username?: string;
+                            /** Format: email */
+                            email?: string;
+                            resetPasswordToken?: string;
+                            registrationToken?: string;
+                            isActive?: boolean;
+                            roles?: {
+                                id?: number;
+                                documentId?: string;
+                                name?: string;
+                                code?: string;
+                                description?: string;
+                                users?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                                permissions?: {
+                                    id?: number;
+                                    documentId?: string;
+                                    action?: string;
+                                    actionParameters?: unknown;
+                                    subject?: string;
+                                    properties?: unknown;
+                                    conditions?: unknown;
+                                    role?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    /** Format: date-time */
+                                    createdAt?: string;
+                                    /** Format: date-time */
+                                    updatedAt?: string;
+                                    /** Format: date-time */
+                                    publishedAt?: string;
+                                    createdBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    updatedBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    locale?: string;
+                                    localizations?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    }[];
+                                }[];
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            }[];
+                            blocked?: boolean;
+                            preferedLanguage?: string;
+                            /** Format: date-time */
+                            createdAt?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            /** Format: date-time */
+                            publishedAt?: string;
+                            createdBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            updatedBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            locale?: string;
+                            localizations?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    }[];
+                    path?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
+                folderPath?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            };
+            order?: number;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+                title?: string;
+                slug?: string;
+                description?: string;
+                image?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    alternativeText?: string;
+                    caption?: string;
+                    width?: number;
+                    height?: number;
+                    formats?: unknown;
+                    hash?: string;
+                    ext?: string;
+                    mime?: string;
+                    /** Format: float */
+                    size?: number;
+                    url?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    folder?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    folderPath?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
+                order?: number;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            }[];
+        };
+        GrammarLevelResponse: {
+            data?: components["schemas"]["GrammarLevel"];
+            meta?: Record<string, never>;
+        };
         TagRequest: {
             data: {
                 name?: string;
                 slug?: string;
                 description?: string;
                 categories?: (number | string)[];
+                color?: string;
+                order?: number;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -2267,6 +3210,8 @@ export interface components {
                 name?: string;
                 slug?: string;
                 description?: string;
+                color?: string;
+                order?: number;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2378,6 +3323,8 @@ export interface components {
                     documentId?: string;
                 }[];
             }[];
+            color?: string;
+            order?: number;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -2403,6 +3350,8 @@ export interface components {
                     id?: number;
                     documentId?: string;
                 }[];
+                color?: string;
+                order?: number;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2629,7 +3578,7 @@ export interface operations {
     };
     "post/articles": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -2698,10 +3647,10 @@ export interface operations {
     };
     "get/articles/{id}": {
         parameters: {
-            query?: StrapiQuery<components["schemas"]["Article"]>;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
             };
             cookie?: never;
         };
@@ -2765,10 +3714,10 @@ export interface operations {
     };
     "put/articles/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
             };
             cookie?: never;
         };
@@ -2836,10 +3785,10 @@ export interface operations {
     };
     "delete/articles/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
             };
             cookie?: never;
         };
@@ -2991,7 +3940,7 @@ export interface operations {
     };
     "post/categories": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -3060,10 +4009,10 @@ export interface operations {
     };
     "get/categories/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
             };
             cookie?: never;
         };
@@ -3127,10 +4076,10 @@ export interface operations {
     };
     "put/categories/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
             };
             cookie?: never;
         };
@@ -3198,10 +4147,372 @@ export interface operations {
     };
     "delete/categories/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/events": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EventRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/events/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "put/events/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EventRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EventResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "delete/events/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
             };
             cookie?: never;
         };
@@ -3353,7 +4664,7 @@ export interface operations {
     };
     "put/global": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -3422,9 +4733,733 @@ export interface operations {
     };
     "delete/global": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/grammar-lessons": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarLessonListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/grammar-lessons": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GrammarLessonRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarLessonResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/grammar-lessons/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarLessonResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "put/grammar-lessons/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GrammarLessonRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarLessonResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "delete/grammar-lessons/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/grammar-levels": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarLevelListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/grammar-levels": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GrammarLevelRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarLevelResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/grammar-levels/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarLevelResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "put/grammar-levels/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GrammarLevelRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrammarLevelResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "delete/grammar-levels/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
             cookie?: never;
         };
         requestBody?: never;
@@ -3575,7 +5610,7 @@ export interface operations {
     };
     "post/tags": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
@@ -3644,10 +5679,10 @@ export interface operations {
     };
     "get/tags/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
             };
             cookie?: never;
         };
@@ -3711,10 +5746,10 @@ export interface operations {
     };
     "put/tags/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
             };
             cookie?: never;
         };
@@ -3782,10 +5817,10 @@ export interface operations {
     };
     "delete/tags/{id}": {
         parameters: {
-            query?: unknown;
+            query?: never;
             header?: never;
             path: {
-                id: number | string;
+                id: number;
             };
             cookie?: never;
         };
