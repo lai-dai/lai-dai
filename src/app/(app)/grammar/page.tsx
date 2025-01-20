@@ -9,7 +9,7 @@ export default async function GrammarPage() {
     const response = await client.GET("/grammar-levels", {
       params: {
         query: {
-          fields: "title,slug,description",
+          fields: "title,slug,desc",
           sort: "order:asc",
         },
       },
@@ -29,7 +29,7 @@ export default async function GrammarPage() {
             >
               <h5 className={"font-semibold"}>{it.title}</h5>
 
-              <p className={"text-xs text-muted-foreground"}>{it.description}</p>
+              <p className={"text-xs text-muted-foreground"}>{it.desc}</p>
 
               <div className={"text-end"}>
                 <Button asChild={true}>

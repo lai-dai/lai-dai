@@ -8,29 +8,36 @@ import {
 import {
   env,
 } from "~/env"
+import { md5 } from "~/lib/crypto"
 import {
   CustomFetch,
 } from "~/lib/custom-fetch"
 
-export const apiPublic = new CustomFetch({
+const getDefaultToken = (data?: string) => {
+  const today = new Date().toISOString().split("T")[0]
+
+  return md5(`${data ?? ""}${today}`)
+}
+
+export const publicApi = new CustomFetch({
   baseUrl: env.NEXT_PUBLIC_API_ENDPOINT_URL,
 })
 
 export const api = new CustomFetch({
   baseUrl: env.NEXT_PUBLIC_API_ENDPOINT_URL,
   headers: {
-    Authorization: `Bearer ${env.NEXT_PUBLIC_DEFAULT_ACCESS_TOKEN}`,
+    Authorization: `Bearer ${getDefaultToken(env.SUFFIX_DEFAULT_K)}`,
   },
 })
 
-export const apiAuth = new CustomFetch({
+export const authApi = new CustomFetch({
   baseUrl: env.NEXT_PUBLIC_API_ENDPOINT_URL,
 })
 
 let sessionCache: Session | null = null
 
 // Add Interceptors:
-apiAuth.addRequestInterceptor(async (config) => {
+authApi.addRequestInterceptor(async (config) => {
   if (!sessionCache) {
     sessionCache = await getSession()
   }

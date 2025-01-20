@@ -1,5 +1,5 @@
 import {
-  apiPublic,
+  publicApi,
 } from "~/lib/api"
 
 import {
@@ -10,7 +10,7 @@ import {
 } from "~/types/auth"
 
 export const login = async (data: LoginInput) => {
-  const response = await apiPublic.post<AuthResponse<LoginUser>>(
+  const response = await publicApi.post<AuthResponse<LoginUser>>(
     "/api/auth/local",
     data,
   )

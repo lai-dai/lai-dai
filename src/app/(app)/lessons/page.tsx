@@ -13,10 +13,11 @@ interface LessonsPageProps {
 export default async function LessonsPage({ searchParams }: LessonsPageProps) {
   try {
     const { level_slug } = await searchParams
+
     const response = await client.GET("/grammar-lessons", {
       params: {
         query: {
-          fields: "title,slug,description",
+          fields: "title,slug,desc",
           sort: "order:asc",
           filters: level_slug
             ? {
@@ -31,6 +32,14 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
       },
     })
 
+    if (response.error) {
+      return (
+        <pre className={"whitespace-pre-wrap"}>
+          {JSON.stringify(response.error)}
+        </pre>
+      )
+    }
+
     return (
       <div className={"container mx-auto py-6"}>
         <div className={"space-y-3"}>
@@ -41,9 +50,7 @@ export default async function LessonsPage({ searchParams }: LessonsPageProps) {
             >
               <h5 className={"font-semibold"}>{it.title}</h5>
 
-              <p className={"text-xs text-muted-foreground"}>
-                {it.description}
-              </p>
+              <p className={"text-xs text-muted-foreground"}>{it.desc}</p>
 
               <div className={"text-end"}>
                 <Button asChild={true}>

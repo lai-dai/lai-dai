@@ -68,33 +68,49 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/events": {
+    "/config": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: operations["get/events"];
+        get: operations["get/config"];
+        put: operations["put/config"];
+        post?: never;
+        delete: operations["delete/config"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/en-vi-dictionaries": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/en-vi-dictionaries"];
         put?: never;
-        post: operations["post/events"];
+        post: operations["post/en-vi-dictionaries"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/events/{id}": {
+    "/en-vi-dictionaries/{id}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get: operations["get/events/{id}"];
-        put: operations["put/events/{id}"];
+        get: operations["get/en-vi-dictionaries/{id}"];
+        put: operations["put/en-vi-dictionaries/{id}"];
         post?: never;
-        delete: operations["delete/events/{id}"];
+        delete: operations["delete/en-vi-dictionaries/{id}"];
         options?: never;
         head?: never;
         patch?: never;
@@ -175,6 +191,38 @@ export interface paths {
         put: operations["put/grammar-levels/{id}"];
         post?: never;
         delete: operations["delete/grammar-levels/{id}"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/part-of-speeches": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/part-of-speeches"];
+        put?: never;
+        post: operations["post/part-of-speeches"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/part-of-speeches/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/part-of-speeches/{id}"];
+        put: operations["put/part-of-speeches/{id}"];
+        post?: never;
+        delete: operations["delete/part-of-speeches/{id}"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1481,13 +1529,13 @@ export interface components {
             data: {
                 title?: string;
                 slug?: string;
-                description?: string;
                 seo?: components["schemas"]["SharedSeoComponent"];
                 tags?: (number | string)[];
                 categories?: (number | string)[];
                 /** @example string or id */
                 cover_image?: number | string;
                 content?: string;
+                desc?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -1508,22 +1556,19 @@ export interface components {
             documentId?: string;
             title?: string;
             slug?: string;
-            description?: string;
             seo?: components["schemas"]["SharedSeoComponent"];
             tags?: {
                 id?: number;
                 documentId?: string;
-                name?: string;
                 slug?: string;
-                description?: string;
                 categories?: {
                     id?: number;
                     documentId?: string;
-                    name?: string;
                     slug?: string;
-                    description?: string;
                     color?: string;
                     order?: number;
+                    title?: string;
+                    desc?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -1546,6 +1591,8 @@ export interface components {
                 }[];
                 color?: string;
                 order?: number;
+                title?: string;
+                desc?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -1618,6 +1665,7 @@ export interface components {
                 }[];
             };
             content?: string;
+            desc?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1638,7 +1686,6 @@ export interface components {
                 documentId?: string;
                 title?: string;
                 slug?: string;
-                description?: string;
                 seo?: components["schemas"]["SharedSeoComponent"];
                 tags?: {
                     id?: number;
@@ -1696,6 +1743,7 @@ export interface components {
                     }[];
                 };
                 content?: string;
+                desc?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -1835,11 +1883,11 @@ export interface components {
         };
         CategoryRequest: {
             data: {
-                name?: string;
                 slug?: string;
-                description?: string;
                 color?: string;
                 order?: number;
+                title?: string;
+                desc?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -1858,11 +1906,11 @@ export interface components {
         Category: {
             id?: number;
             documentId?: string;
-            name?: string;
             slug?: string;
-            description?: string;
             color?: string;
             order?: number;
+            title?: string;
+            desc?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1972,11 +2020,11 @@ export interface components {
             localizations?: {
                 id?: number;
                 documentId?: string;
-                name?: string;
                 slug?: string;
-                description?: string;
                 color?: string;
                 order?: number;
+                title?: string;
+                desc?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2002,20 +2050,18 @@ export interface components {
             data?: components["schemas"]["Category"];
             meta?: Record<string, never>;
         };
-        EventRequest: {
+        ConfigRequest: {
             data: {
-                title?: string;
-                /** Format: date-time */
-                start?: string;
-                /** Format: date-time */
-                end?: string;
-                description?: string;
+                image_height?: number;
+                image_width?: number;
+                /** @example string or id */
+                default_image?: number | string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
         };
-        EventListResponse: {
-            data?: components["schemas"]["Event"][];
+        ConfigListResponse: {
+            data?: components["schemas"]["Config"][];
             meta?: {
                 pagination?: {
                     page?: number;
@@ -2025,54 +2071,73 @@ export interface components {
                 };
             };
         };
-        Event: {
+        Config: {
             id?: number;
             documentId?: string;
-            title?: string;
-            /** Format: date-time */
-            start?: string;
-            /** Format: date-time */
-            end?: string;
-            description?: string;
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string;
-            /** Format: date-time */
-            publishedAt?: string;
-            createdBy?: {
+            image_height?: number;
+            image_width?: number;
+            default_image?: {
                 id?: number;
                 documentId?: string;
-                firstname?: string;
-                lastname?: string;
-                username?: string;
-                /** Format: email */
-                email?: string;
-                resetPasswordToken?: string;
-                registrationToken?: string;
-                isActive?: boolean;
-                roles?: {
+                name?: string;
+                alternativeText?: string;
+                caption?: string;
+                width?: number;
+                height?: number;
+                formats?: unknown;
+                hash?: string;
+                ext?: string;
+                mime?: string;
+                /** Format: float */
+                size?: number;
+                url?: string;
+                previewUrl?: string;
+                provider?: string;
+                provider_metadata?: unknown;
+                related?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+                folder?: {
                     id?: number;
                     documentId?: string;
                     name?: string;
-                    code?: string;
-                    description?: string;
-                    users?: {
+                    pathId?: number;
+                    parent?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    children?: {
                         id?: number;
                         documentId?: string;
                     }[];
-                    permissions?: {
+                    files?: {
                         id?: number;
                         documentId?: string;
-                        action?: string;
-                        actionParameters?: unknown;
-                        subject?: string;
-                        properties?: unknown;
-                        conditions?: unknown;
-                        role?: {
+                        name?: string;
+                        alternativeText?: string;
+                        caption?: string;
+                        width?: number;
+                        height?: number;
+                        formats?: unknown;
+                        hash?: string;
+                        ext?: string;
+                        mime?: string;
+                        /** Format: float */
+                        size?: number;
+                        url?: string;
+                        previewUrl?: string;
+                        provider?: string;
+                        provider_metadata?: unknown;
+                        related?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                        folder?: {
                             id?: number;
                             documentId?: string;
                         };
+                        folderPath?: string;
                         /** Format: date-time */
                         createdAt?: string;
                         /** Format: date-time */
@@ -2082,6 +2147,97 @@ export interface components {
                         createdBy?: {
                             id?: number;
                             documentId?: string;
+                            firstname?: string;
+                            lastname?: string;
+                            username?: string;
+                            /** Format: email */
+                            email?: string;
+                            resetPasswordToken?: string;
+                            registrationToken?: string;
+                            isActive?: boolean;
+                            roles?: {
+                                id?: number;
+                                documentId?: string;
+                                name?: string;
+                                code?: string;
+                                description?: string;
+                                users?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                                permissions?: {
+                                    id?: number;
+                                    documentId?: string;
+                                    action?: string;
+                                    actionParameters?: unknown;
+                                    subject?: string;
+                                    properties?: unknown;
+                                    conditions?: unknown;
+                                    role?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    /** Format: date-time */
+                                    createdAt?: string;
+                                    /** Format: date-time */
+                                    updatedAt?: string;
+                                    /** Format: date-time */
+                                    publishedAt?: string;
+                                    createdBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    updatedBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    locale?: string;
+                                    localizations?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    }[];
+                                }[];
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            }[];
+                            blocked?: boolean;
+                            preferedLanguage?: string;
+                            /** Format: date-time */
+                            createdAt?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            /** Format: date-time */
+                            publishedAt?: string;
+                            createdBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            updatedBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            locale?: string;
+                            localizations?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
                         };
                         updatedBy?: {
                             id?: number;
@@ -2093,6 +2249,7 @@ export interface components {
                             documentId?: string;
                         }[];
                     }[];
+                    path?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -2112,9 +2269,8 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     }[];
-                }[];
-                blocked?: boolean;
-                preferedLanguage?: string;
+                };
+                folderPath?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2135,6 +2291,16 @@ export interface components {
                     documentId?: string;
                 }[];
             };
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+            };
             updatedBy?: {
                 id?: number;
                 documentId?: string;
@@ -2143,12 +2309,55 @@ export interface components {
             localizations?: {
                 id?: number;
                 documentId?: string;
-                title?: string;
-                /** Format: date-time */
-                start?: string;
-                /** Format: date-time */
-                end?: string;
-                description?: string;
+                image_height?: number;
+                image_width?: number;
+                default_image?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    alternativeText?: string;
+                    caption?: string;
+                    width?: number;
+                    height?: number;
+                    formats?: unknown;
+                    hash?: string;
+                    ext?: string;
+                    mime?: string;
+                    /** Format: float */
+                    size?: number;
+                    url?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    folder?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    folderPath?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2170,9 +2379,127 @@ export interface components {
                 }[];
             }[];
         };
-        EventResponse: {
-            data?: components["schemas"]["Event"];
+        ConfigResponse: {
+            data?: components["schemas"]["Config"];
             meta?: Record<string, never>;
+        };
+        EnViDictionaryRequest: {
+            data: {
+                title?: string;
+                slug?: string;
+                desc?: string;
+                abbr?: string;
+                meanings?: components["schemas"]["DictionaryMeaningComponent"][];
+                idioms?: components["schemas"]["DictionaryIdiomComponent"][];
+                phonetics?: components["schemas"]["DictionaryPhoneticComponent"][];
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        EnViDictionaryListResponse: {
+            data?: components["schemas"]["EnViDictionary"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        EnViDictionary: {
+            id?: number;
+            documentId?: string;
+            title?: string;
+            slug?: string;
+            desc?: string;
+            abbr?: string;
+            meanings?: components["schemas"]["DictionaryMeaningComponent"][];
+            idioms?: components["schemas"]["DictionaryIdiomComponent"][];
+            phonetics?: components["schemas"]["DictionaryPhoneticComponent"][];
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+                title?: string;
+                slug?: string;
+                desc?: string;
+                abbr?: string;
+                meanings?: components["schemas"]["DictionaryMeaningComponent"][];
+                idioms?: components["schemas"]["DictionaryIdiomComponent"][];
+                phonetics?: components["schemas"]["DictionaryPhoneticComponent"][];
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            }[];
+        };
+        EnViDictionaryResponse: {
+            data?: components["schemas"]["EnViDictionary"];
+            meta?: Record<string, never>;
+        };
+        DictionaryExampleComponent: {
+            id?: number;
+            eg?: string;
+            vi?: string;
+        };
+        DictionaryDefinitionComponent: {
+            id?: number;
+            vi?: string;
+            desc?: string;
+            egs?: components["schemas"]["DictionaryExampleComponent"][];
+            image_path?: string;
+        };
+        DictionaryMeaningComponent: {
+            id?: number;
+            title?: string;
+            desc?: string;
+            pos?: {
+                id?: number;
+                documentId?: string;
+            };
+            definitions?: components["schemas"]["DictionaryDefinitionComponent"][];
+        };
+        DictionaryIdiomComponent: {
+            id?: number;
+            title?: string;
+            desc?: string;
+            definitions?: components["schemas"]["DictionaryDefinitionComponent"][];
+        };
+        DictionaryPhoneticComponent: {
+            id?: number;
+            title?: string;
+            audio_path?: string;
+            desc?: string;
         };
         GlobalRequest: {
             data: {
@@ -2514,11 +2841,11 @@ export interface components {
             data: {
                 title?: string;
                 slug?: string;
-                description?: string;
                 order?: number;
                 /** @example string or id */
                 level?: number | string;
                 content?: string;
+                desc?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -2539,14 +2866,12 @@ export interface components {
             documentId?: string;
             title?: string;
             slug?: string;
-            description?: string;
             order?: number;
             level?: {
                 id?: number;
                 documentId?: string;
                 title?: string;
                 slug?: string;
-                description?: string;
                 image?: {
                     id?: number;
                     documentId?: string;
@@ -2763,6 +3088,7 @@ export interface components {
                     }[];
                 };
                 order?: number;
+                desc?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2784,6 +3110,7 @@ export interface components {
                 }[];
             };
             content?: string;
+            desc?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -2804,13 +3131,13 @@ export interface components {
                 documentId?: string;
                 title?: string;
                 slug?: string;
-                description?: string;
                 order?: number;
                 level?: {
                     id?: number;
                     documentId?: string;
                 };
                 content?: string;
+                desc?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2840,10 +3167,10 @@ export interface components {
             data: {
                 title?: string;
                 slug?: string;
-                description?: string;
                 /** @example string or id */
                 image?: number | string;
                 order?: number;
+                desc?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -2864,7 +3191,6 @@ export interface components {
             documentId?: string;
             title?: string;
             slug?: string;
-            description?: string;
             image?: {
                 id?: number;
                 documentId?: string;
@@ -3081,6 +3407,7 @@ export interface components {
                 }[];
             };
             order?: number;
+            desc?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -3101,7 +3428,6 @@ export interface components {
                 documentId?: string;
                 title?: string;
                 slug?: string;
-                description?: string;
                 image?: {
                     id?: number;
                     documentId?: string;
@@ -3150,6 +3476,7 @@ export interface components {
                     }[];
                 };
                 order?: number;
+                desc?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -3175,14 +3502,186 @@ export interface components {
             data?: components["schemas"]["GrammarLevel"];
             meta?: Record<string, never>;
         };
+        PartOfSpeechRequest: {
+            data: {
+                title?: string;
+                abbr?: string;
+                order?: number;
+                desc?: string;
+                color?: string;
+                vi?: string;
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        PartOfSpeechListResponse: {
+            data?: components["schemas"]["PartOfSpeech"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        PartOfSpeech: {
+            id?: number;
+            documentId?: string;
+            title?: string;
+            abbr?: string;
+            order?: number;
+            desc?: string;
+            color?: string;
+            vi?: string;
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+                firstname?: string;
+                lastname?: string;
+                username?: string;
+                /** Format: email */
+                email?: string;
+                resetPasswordToken?: string;
+                registrationToken?: string;
+                isActive?: boolean;
+                roles?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    code?: string;
+                    description?: string;
+                    users?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    permissions?: {
+                        id?: number;
+                        documentId?: string;
+                        action?: string;
+                        actionParameters?: unknown;
+                        subject?: string;
+                        properties?: unknown;
+                        conditions?: unknown;
+                        role?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    }[];
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                }[];
+                blocked?: boolean;
+                preferedLanguage?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+                title?: string;
+                abbr?: string;
+                order?: number;
+                desc?: string;
+                color?: string;
+                vi?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            }[];
+        };
+        PartOfSpeechResponse: {
+            data?: components["schemas"]["PartOfSpeech"];
+            meta?: Record<string, never>;
+        };
         TagRequest: {
             data: {
-                name?: string;
                 slug?: string;
-                description?: string;
                 categories?: (number | string)[];
                 color?: string;
                 order?: number;
+                title?: string;
+                desc?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -3201,17 +3700,15 @@ export interface components {
         Tag: {
             id?: number;
             documentId?: string;
-            name?: string;
             slug?: string;
-            description?: string;
             categories?: {
                 id?: number;
                 documentId?: string;
-                name?: string;
                 slug?: string;
-                description?: string;
                 color?: string;
                 order?: number;
+                title?: string;
+                desc?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -3325,6 +3822,8 @@ export interface components {
             }[];
             color?: string;
             order?: number;
+            title?: string;
+            desc?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -3343,15 +3842,15 @@ export interface components {
             localizations?: {
                 id?: number;
                 documentId?: string;
-                name?: string;
                 slug?: string;
-                description?: string;
                 categories?: {
                     id?: number;
                     documentId?: string;
                 }[];
                 color?: string;
                 order?: number;
+                title?: string;
+                desc?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -4212,7 +4711,7 @@ export interface operations {
             };
         };
     };
-    "get/events": {
+    "get/config": {
         parameters: {
             query?: {
                 /** @description Sort by attributes ascending (asc) or descending (desc) */
@@ -4250,7 +4749,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["EventListResponse"];
+                    "application/json": components["schemas"]["ConfigResponse"];
                 };
             };
             /** @description Bad Request */
@@ -4300,7 +4799,7 @@ export interface operations {
             };
         };
     };
-    "post/events": {
+    "put/config": {
         parameters: {
             query?: never;
             header?: never;
@@ -4309,7 +4808,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["EventRequest"];
+                "application/json": components["schemas"]["ConfigRequest"];
             };
         };
         responses: {
@@ -4319,7 +4818,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["EventResponse"];
+                    "application/json": components["schemas"]["ConfigResponse"];
                 };
             };
             /** @description Bad Request */
@@ -4369,7 +4868,229 @@ export interface operations {
             };
         };
     };
-    "get/events/{id}": {
+    "delete/config": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/en-vi-dictionaries": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnViDictionaryListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/en-vi-dictionaries": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EnViDictionaryRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EnViDictionaryResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/en-vi-dictionaries/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -4386,7 +5107,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["EventResponse"];
+                    "application/json": components["schemas"]["EnViDictionaryResponse"];
                 };
             };
             /** @description Bad Request */
@@ -4436,7 +5157,7 @@ export interface operations {
             };
         };
     };
-    "put/events/{id}": {
+    "put/en-vi-dictionaries/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -4447,7 +5168,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["EventRequest"];
+                "application/json": components["schemas"]["EnViDictionaryRequest"];
             };
         };
         responses: {
@@ -4457,7 +5178,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["EventResponse"];
+                    "application/json": components["schemas"]["EnViDictionaryResponse"];
                 };
             };
             /** @description Bad Request */
@@ -4507,7 +5228,7 @@ export interface operations {
             };
         };
     };
-    "delete/events/{id}": {
+    "delete/en-vi-dictionaries/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -5454,6 +6175,368 @@ export interface operations {
         };
     };
     "delete/grammar-levels/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/part-of-speeches": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PartOfSpeechListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/part-of-speeches": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PartOfSpeechRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PartOfSpeechResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/part-of-speeches/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PartOfSpeechResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "put/part-of-speeches/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PartOfSpeechRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PartOfSpeechResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "delete/part-of-speeches/{id}": {
         parameters: {
             query?: never;
             header?: never;
