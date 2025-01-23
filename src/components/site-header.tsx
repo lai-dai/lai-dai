@@ -55,7 +55,7 @@ export function SiteHeader() {
             </Link>
           </div>
 
-          <div className={"flex items-center gap-3"}>
+          <div className={"flex items-center gap-1"}>
             <GithubLink />
 
             <ThemeToggle />

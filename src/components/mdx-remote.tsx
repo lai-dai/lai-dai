@@ -5,10 +5,12 @@ import { type MDXComponents } from "mdx/types"
 import Image from "next/image"
 import Link from "next/link"
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote"
+import { type AnchorHTMLAttributes } from "react"
 import { BuyMeACoffee } from "~/components/buy-me-a-coffee"
 import { Callout } from "~/components/callout"
 import { ComponentPreview } from "~/components/component-preview"
 import { CopyButton } from "~/components/copy-button"
+import { Icons } from "~/components/icon"
 import { PhotoView, PhotoProvider } from "~/components/photo-view"
 import {
   Accordion,
@@ -84,7 +86,10 @@ const components: MDXComponents = {
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
-      className={cn("my-6 ml-6 list-disc", className)}
+      className={cn(
+        "my-6 ml-4 [&_li:before]:-ml-4 [&_li:before]:mr-3 [&_li:before]:content-['-']",
+        className,
+      )}
       {...props}
     />
   ),
@@ -102,7 +107,7 @@ const components: MDXComponents = {
   ),
   blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <blockquote
-      className={cn("mt-6 border-l-2 pl-6 italic", className)}
+      className={cn("mt-6 p-3 text-sm border rounded-lg", className)}
       {...props}
     />
   ),
@@ -173,7 +178,7 @@ const components: MDXComponents = {
       <>
         <pre
           className={cn(
-            "mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border bg-zinc-950 py-4 dark:bg-zinc-900",
+            "mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border py-4 bg-accent/30",
             className,
           )}
           {...props}
@@ -191,9 +196,47 @@ const components: MDXComponents = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        "relative rounded px-[0.3rem] py-[0.2rem] font-mono text-sm",
+        "relative rounded border bg-accent/80 px-1 py-[0.1rem] font-mono",
         className,
       )}
+      {...props}
+    />
+  ),
+  a: ({
+    className,
+    children,
+    ...props
+  }: React.DetailedHTMLProps<
+    AnchorHTMLAttributes<HTMLAnchorElement>,
+    HTMLAnchorElement
+  >) => {
+    const isBlank =
+      typeof props.href === "string" && props.href.startsWith("http")
+    return (
+      <Link
+        className={cn("font-medium text-blue-600", className)}
+        target={isBlank ? "_blank" : "_self"}
+        {...(props as React.ComponentProps<typeof Link>)}
+      >
+        {children}
+
+        {isBlank ? (
+          <span className={"inline-flex"}>
+            <Icons.geist />
+          </span>
+        ) : null}
+      </Link>
+    )
+  },
+  summary: ({
+    className,
+    ...props
+  }: React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLElement>,
+    HTMLElement
+  >) => (
+    <summary
+      className={cn("cursor-pointer font-medium", className)}
       {...props}
     />
   ),
@@ -214,12 +257,33 @@ const components: MDXComponents = {
       {...props}
     />
   ),
-  Link: ({ className, ...props }: React.ComponentProps<typeof Link>) => (
-    <Link
-      className={cn("font-medium underline underline-offset-4", className)}
-      {...props}
-    />
-  ),
+  Link: ({
+    className,
+    children,
+    ...props
+  }: React.ComponentProps<typeof Link>) => {
+    const isBlank =
+      typeof props.href === "string" && props.href.startsWith("http")
+    return (
+      <Link
+        target={
+          typeof props.href === "string" && props.href.startsWith("http")
+            ? "_blank"
+            : "_self"
+        }
+        className={cn("font-medium underline underline-offset-4", className)}
+        {...props}
+      >
+        {children}
+
+        {isBlank ? (
+          <span className={"inline-flex"}>
+            <Icons.geist />
+          </span>
+        ) : null}
+      </Link>
+    )
+  },
   Tabs: ({ className, ...props }: React.ComponentProps<typeof Tabs>) => (
     <Tabs
       className={cn("relative mt-6 w-full", className)}

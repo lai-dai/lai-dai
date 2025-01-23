@@ -173,6 +173,8 @@ try {
               success: <CircleCheck className={"size-4 text-success"} />,
               warning: <CircleAlert className={"size-4 text-warning"} />,
             }}
+            className={"pointer-events-auto"}
+            closeButton={true}
           />
         </ThemeProvider>
       </body>

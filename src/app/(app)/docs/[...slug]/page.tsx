@@ -89,6 +89,10 @@ export default async function PostPage({ params }: DocPageProps) {
       }
     >
       <div className={"mx-auto w-full min-w-0 max-w-3xl"}>
+        <h1 className={"mb-4 break-words text-4xl font-semibold"}>
+          {doc.metadata.title}
+        </h1>
+
         <Mdx mdxSource={mdxSource} />
       </div>
 

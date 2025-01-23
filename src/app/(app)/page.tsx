@@ -48,7 +48,11 @@ export default async function HomePage() {
           <div className={"container py-4"}>
             <h3 className={"text-lg"}>{"My Project"}</h3>
 
-            <Link href={"/grammar"}>{"Grammar"}</Link>
+            <div className={"flex flex-col gap-3"}>
+              <Link href={"/grammar"}>{"Grammar"}</Link>
+
+              <Link href={"/menu"}>{"Menu"}</Link>
+            </div>
           </div>
         </div>
       </div>

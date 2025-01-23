@@ -10,7 +10,7 @@ export default function PostPage() {
         {docs.map((doc, key) => (
           <Link
             className={"hover:underline"}
-            href={`/posts/${doc.slug}`}
+            href={`/docs/${doc.slug}`}
             key={key}
           >
             {doc.metadata.title}

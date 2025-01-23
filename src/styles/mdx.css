@@ -78,7 +78,3 @@
 .mdx .steps > h3 {
   @apply mb-4 mt-8 text-base font-semibold;
 }
-
-.mdx a {
-  @apply text-blue-500 underline;
-}
