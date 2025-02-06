@@ -10,11 +10,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
 				// mono: ["var(--font-geist-mono)", ...fontFamily.mono],
-        // sans: ["var(--font-roboto-flex)", ...fontFamily.sans],
-        sans: ["var(--font-plus-jakarta-sans)", ...fontFamily.sans],
-				mono: ["var(--font-roboto-mono)", ...fontFamily.mono],
+				mono: ["var(--font-jet-brains-mono)", ...fontFamily.mono],
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",

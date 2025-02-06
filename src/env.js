@@ -13,7 +13,7 @@ export const env = createEnv({
         : z.string().optional(),
     AUTH_TRUST_HOST: z.string().url(),
     NODE_ENV: z.enum(["development", "test", "production"]),
-    SUFFIX_DEFAULT_K: z.string(),
+    SUFFIX_DEFAULT_ACCESS_TOKEN: z.string(),
   },
 
   /**
@@ -35,7 +35,7 @@ export const env = createEnv({
     AUTH_SECRET: process.env.AUTH_SECRET,
     AUTH_TRUST_HOST: process.env.AUTH_TRUST_HOST,
     NODE_ENV: process.env.NODE_ENV,
-    SUFFIX_DEFAULT_K: process.env.SUFFIX_DEFAULT_K,
+    SUFFIX_DEFAULT_ACCESS_TOKEN: process.env.SUFFIX_DEFAULT_ACCESS_TOKEN,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
     NEXT_PUBLIC_WEBSITE_URL: process.env.NEXT_PUBLIC_WEBSITE_URL,
     NEXT_PUBLIC_API_ENDPOINT_URL: process.env.NEXT_PUBLIC_API_ENDPOINT_URL,

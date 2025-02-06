@@ -1,22 +1,20 @@
-import {
-  getCsrfToken,
-} from "next-auth/react"
+import { getCsrfToken } from "next-auth/react"
+import React from "react"
+import { type LoginUser } from "~/types/auth"
 
-import {
-  type LoginUser,
-} from "~/types/auth"
+export const updateSession = React.cache(
+  async (newSession: Partial<LoginUser>) => {
+    const csrfToken = await getCsrfToken()
 
-export const updateSession = async (newSession: Partial<LoginUser>) => {
-  return await fetch(
-    "/api/auth/session", {
+    return await fetch("/api/auth/session", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        csrfToken: await getCsrfToken(),
+        csrfToken,
         data: newSession,
       }),
-    }
-  )
-}
+    })
+  },
+)

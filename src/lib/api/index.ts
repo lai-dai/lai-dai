@@ -6,9 +6,9 @@ import { env } from "~/env"
 import type { paths } from "~/lib/api/strapi"
 import { md5 } from "~/lib/crypto"
 
-const suffixDefaultK: string | undefined = env.SUFFIX_DEFAULT_K
+const suffixDefaultK: string | undefined = env.SUFFIX_DEFAULT_ACCESS_TOKEN
 
-const getDefaultToken = (data?: string) => {
+const getDefaultAccessToken = (data?: string) => {
   const today = new Date().toISOString().split("T")[0]
 
   return md5(`${data ?? ""}${today}`)
@@ -21,7 +21,7 @@ const client = createClient<paths>({
   },
   querySerializer(params) {
     // default k
-    params.k = getDefaultToken(suffixDefaultK)
+    params.k = getDefaultAccessToken(suffixDefaultK)
 
     return qs.stringify(params, {
       encodeValuesOnly: true, // prettify URL
