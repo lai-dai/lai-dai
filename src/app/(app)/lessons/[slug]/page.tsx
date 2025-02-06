@@ -3,9 +3,19 @@ import React from "react"
 import { HtmlParser } from "~/components/html-parser"
 import { client } from "~/lib/api/index"
 
+export async function generateStaticParams() {
+  const response = await client.GET("/grammar-lesson/all-slugs")
+
+  if (response.error) {
+    return []
+  }
+
+  return response.data.data?.map(it => ({ slug: it.slug })) ?? []
+}
+
 interface SingleLessonPageProps {
   params: Promise<{
-    documentId: string
+    slug: string
   }>
 }
 
@@ -13,12 +23,12 @@ export default async function SingleLessonPage({
   params,
 }: SingleLessonPageProps) {
   try {
-    const { documentId } = await params
+    const { slug } = await params
     const response = await client.GET("/grammar-lessons/{id}", {
       params: {
         path: {
-          id: documentId,
-        },
+          id: slug,
+        } as never,
       },
     })
 

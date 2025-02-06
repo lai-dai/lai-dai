@@ -3,25 +3,27 @@ import { getSession } from "next-auth/react"
 import createClient, { type Middleware } from "openapi-fetch"
 import qs from "qs"
 import { env } from "~/env"
-import type { paths } from "~/lib/api/strapi"
+import { type Paths } from "~/lib/api/api-schema"
 import { md5 } from "~/lib/crypto"
 
-const suffixDefaultK: string | undefined = env.SUFFIX_DEFAULT_ACCESS_TOKEN
+const suffixDefaultAccessKey = env.SUFFIX_DEFAULT_ACCESS_KEY
 
-const getDefaultAccessToken = (data?: string) => {
+const getDefaultAccessKey = (data?: string) => {
   const today = new Date().toISOString().split("T")[0]
 
   return md5(`${data ?? ""}${today}`)
 }
 
-const client = createClient<paths>({
-  baseUrl: `${env.NEXT_PUBLIC_API_ENDPOINT_URL}/api`,
+const baseUrl = `${env.NEXT_PUBLIC_API_ENDPOINT_URL}/api`
+
+const client = createClient<Paths>({
+  baseUrl,
   headers: {
     Accept: "application/json",
   },
   querySerializer(params) {
-    // default k
-    params.k = getDefaultAccessToken(suffixDefaultK)
+    // default key
+    params.key = getDefaultAccessKey(suffixDefaultAccessKey)
 
     return qs.stringify(params, {
       encodeValuesOnly: true, // prettify URL
@@ -40,18 +42,21 @@ const UNPROTECTED_ROUTES = [
 
 const authMiddleware: Middleware = {
   async onRequest({ schemaPath, request }) {
-    if (UNPROTECTED_ROUTES.some(pathname => schemaPath.startsWith(pathname))) {
+    if (UNPROTECTED_ROUTES.some(p => schemaPath.startsWith(p))) {
       return undefined // don’t modify request for certain paths
     }
 
     // for all other paths, set Authorization header as expected
-    if (request.method !== 'GET') {
+    if (request.method !== "GET") {
       if (!sessionCache) {
         sessionCache = await getSession()
       }
 
       if (sessionCache?.user.token) {
-        request.headers.set("Authorization", `Bearer ${sessionCache.user.token}`)
+        request.headers.set(
+          "Authorization",
+          `Bearer ${sessionCache.user.token}`,
+        )
       }
     }
     return request

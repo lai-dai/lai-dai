@@ -26,7 +26,7 @@ export const publicApi = new CustomFetch({
 export const api = new CustomFetch({
   baseUrl: env.NEXT_PUBLIC_API_ENDPOINT_URL,
   headers: {
-    Authorization: `Bearer ${getDefaultToken(env.SUFFIX_DEFAULT_ACCESS_TOKEN)}`,
+    Authorization: `Bearer ${getDefaultToken(env.SUFFIX_DEFAULT_ACCESS_KEY)}`,
   },
 })
 

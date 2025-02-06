@@ -9,7 +9,7 @@ export default async function GrammarPage() {
     const response = await client.GET("/grammar-levels", {
       params: {
         query: {
-          fields: "title,slug,desc",
+          fields: ["title", "slug", "desc"] as never,
           sort: "order:asc",
         },
       },
@@ -33,7 +33,9 @@ export default async function GrammarPage() {
 
               <div className={"text-end"}>
                 <Button asChild={true}>
-                  <Link href={`/lessons?level_slug=${it.slug}`}>{"Bài học"}</Link>
+                  <Link href={`/lessons?level_slug=${it.slug}`}>
+                    {"Bài học"}
+                  </Link>
                 </Button>
               </div>
             </div>

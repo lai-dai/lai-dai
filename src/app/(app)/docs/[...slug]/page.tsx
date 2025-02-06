@@ -60,11 +60,6 @@ export function generateStaticParams() {
   const docs = getContents("docs")
   return docs.map(doc => ({ slug: doc.slug.split("/") }))
 }
-// export async function generateStaticParams() {
-//   return allDocs.map((doc) => ({
-//     slug: doc.slugAsParams.split("/"),
-//   }))
-// }
 
 export default async function PostPage({ params }: DocPageProps) {
   const { slug } = await params
