@@ -3,7 +3,7 @@ import { getSession } from "next-auth/react"
 import createClient, { type Middleware } from "openapi-fetch"
 import qs from "qs"
 import { env } from "~/env"
-import { type Paths } from "~/lib/api/api-schema"
+import { type AdminPaths, type ClientPaths } from "~/lib/api/api"
 import { md5 } from "~/lib/crypto"
 
 const suffixDefaultAccessKey = env.SUFFIX_DEFAULT_ACCESS_KEY
@@ -14,12 +14,13 @@ const getDefaultAccessKey = (data?: string) => {
   return md5(`${data ?? ""}${today}`)
 }
 
-const baseUrl = `${env.NEXT_PUBLIC_API_ENDPOINT_URL}/api`
+const baseUrl = env.NEXT_PUBLIC_API_ENDPOINT_URL
 
-const client = createClient<Paths>({
-  baseUrl,
+const client = createClient<ClientPaths>({
+  baseUrl: `${baseUrl}/api`,
   headers: {
     Accept: "application/json",
+    "Content-Type": "application/json",
   },
   querySerializer(params) {
     // default key
@@ -65,4 +66,25 @@ const authMiddleware: Middleware = {
 
 client.use(authMiddleware)
 
-export { client }
+const admin = createClient<AdminPaths>({
+  baseUrl,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  querySerializer(params) {
+    return qs.stringify(params, {
+      encodeValuesOnly: true, // prettify URL
+    })
+  },
+})
+
+const adminMiddleware: Middleware = {
+  async onRequest() {
+    return
+  },
+}
+
+admin.use(adminMiddleware)
+
+export { client, admin }

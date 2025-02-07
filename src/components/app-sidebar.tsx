@@ -3,7 +3,7 @@
 import { ChevronDown, Command, type LucideIcon } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Icons } from "./icon"
+import { Icons } from "./icons"
 import {
   Collapsible,
   CollapsibleContent,

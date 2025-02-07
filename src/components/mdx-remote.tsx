@@ -10,7 +10,7 @@ import { BuyMeACoffee } from "~/components/buy-me-a-coffee"
 import { Callout } from "~/components/callout"
 import { ComponentPreview } from "~/components/component-preview"
 import { CopyButton } from "~/components/copy-button"
-import { Icons } from "~/components/icon"
+import { Icons } from "~/components/icons"
 import { PhotoView, PhotoProvider } from "~/components/photo-view"
 import {
   Accordion,

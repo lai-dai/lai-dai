@@ -4,12 +4,11 @@ import { HtmlParser } from "~/components/html-parser"
 import { client } from "~/lib/api/index"
 
 export async function generateStaticParams() {
-  const response = await client.GET("/grammar-lesson/all-slugs")
+  const response = await client.GET("/grammar-lessons/all-slugs")
 
   if (response.error) {
     return []
   }
-
   return response.data.data?.map(it => ({ slug: it.slug })) ?? []
 }
 

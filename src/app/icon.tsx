@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og"
-import { Icons } from "~/components/icon"
+import { Icons } from "~/components/icons"
 
 export const runtime = "edge"
 

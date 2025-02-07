@@ -1,8 +1,8 @@
 import { type User, type DefaultSession, type NextAuthConfig } from "next-auth"
 import { type AdapterUser } from "next-auth/adapters"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { login } from "~/actions/auth"
-import { type LoginUser, type LoginInput } from "~/types/auth"
+import { admin } from "~/lib/api/index"
+import { type LoginUser, type AdminLoginFormData } from "~/types/auth"
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -31,13 +31,15 @@ export const authConfig = {
         password: {},
       },
       async authorize(credentials) {
-        const response = await login(credentials as LoginInput)
+        const response = await admin.POST("/admin/login", {
+          body: credentials as AdminLoginFormData,
+        })
 
-        if (response) {
+        if (response.data?.data) {
           return {
-            ...response.user,
-            token: response.jwt,
-          } as User
+            ...response.data?.data.user,
+            token: response.data?.data.token,
+          } as unknown as User
         }
 
         return null
@@ -62,5 +64,8 @@ export const authConfig = {
       }
       return session
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 } satisfies NextAuthConfig

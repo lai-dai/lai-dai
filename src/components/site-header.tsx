@@ -3,7 +3,7 @@
 import Link from "next/link"
 import React from "react"
 import { GithubLink } from "./github-link"
-import { Icons } from "./icon"
+import { Icons } from "./icons"
 import { ThemeToggle } from "./theme-toggle"
 import { Button } from "./ui/button"
 import { siteConfig } from "~/config/site"
