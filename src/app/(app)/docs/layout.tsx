@@ -16,10 +16,13 @@ export default function MdxLayout({ children }: { children: ReactNode }) {
         rel={"stylesheet"}
       />
 
-      <SidebarProvider data-wrapper={""}>
+      <SidebarProvider
+        className={"container-wrapper"}
+        data-wrapper={""}
+      >
         <div
           className={
-            "min-h-[calc(100vh-4rem)] flex-1 items-start md:grid md:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] md:gap-6 lg:gap-10"
+            "container min-h-[calc(100vh-4rem)] flex-1 items-start md:grid md:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] md:gap-6 lg:gap-10 !pl-0"
           }
         >
           <AppSidebar />

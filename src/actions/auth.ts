@@ -1,7 +1,7 @@
 "use server"
 
 import { admin } from "~/lib/api/index"
-import { signIn } from "~/server/auth"
+import { signIn, signOut } from "~/server/auth"
 
 import { type AdminLoginFormData, adminLoginSchema } from "~/types/auth"
 import { type ActionResponse } from "~/types/shared"
@@ -12,6 +12,10 @@ export const adminLogin = async (data: AdminLoginFormData) => {
   })
 
   return response
+}
+
+export async function submitLogout() {
+  await signOut()
 }
 
 export async function submitAdminLogin(

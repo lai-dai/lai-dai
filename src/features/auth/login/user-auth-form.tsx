@@ -2,36 +2,23 @@
 
 import { CheckCircle2 } from "lucide-react"
 import Form from "next/form"
-import { useRouter } from "next/navigation"
-import { useSession } from "next-auth/react"
 import * as React from "react"
 import { submitAdminLogin } from "~/actions/auth"
+import { PasswordInput } from "~/components/password-input"
 
 import { Alert, AlertDescription } from "~/components/ui/alert"
 import { Button } from "~/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { type AdminLoginFormData } from "~/types/auth"
 import { type ActionResponse } from "~/types/shared"
-
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const initialState: ActionResponse<AdminLoginFormData> = {
   success: false,
   message: "",
 }
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const { data: session } = useSession()
-  const router = useRouter()
-
+export function UserAuthForm() {
   const [state, action, isPending] = React.useActionState(
     submitAdminLogin,
     initialState,
@@ -39,26 +26,18 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   React.useEffect(() => {
     // khi đăng nhập thành công
-    if (session) {
-      router.push("/")
+    if (state.success) {
+      // router.push("/")
+      window.location.href = "/"
     }
-  }, [router, session])
+  }, [state.success])
 
   return (
-    <Card className={"mx-auto w-full max-w-lg"}>
-      <CardHeader>
-        <CardTitle>{"Address Information"}</CardTitle>
-
-        <CardDescription>
-          {"Please enter your shipping address details below."}
-        </CardDescription>
-      </CardHeader>
-
-      <CardContent>
-        <Form
-          action={action}
-          autoComplete={"on"}
-        >
+    <div className={"mx-auto w-full max-w-lg py-6"}>
+      <Form
+        action={action}
+        autoComplete={"on"}
+      >
           <div className={"space-y-6"}>
             <div className={"space-y-4"}>
               <div className={"space-y-2"}>
@@ -72,7 +51,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   maxLength={100}
                   minLength={5}
                   name={"email"}
-                  placeholder={"123 Main St"}
+                  placeholder={"max@gmail.com"}
                   required={true}
                 />
 
@@ -89,7 +68,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               <div className={"space-y-2"}>
                 <Label htmlFor={"password"}>{"Password"}</Label>
 
-                <Input
+                <PasswordInput
                   aria-describedby={"password-error"}
                   autoComplete={"password"}
                   className={state?.errors?.password ? "border-red-500" : ""}
@@ -97,7 +76,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   maxLength={100}
                   minLength={5}
                   name={"password"}
-                  placeholder={"123 Main St"}
+                  placeholder={""}
                   required={true}
                 />
 
@@ -125,11 +104,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               isLoading={isPending}
               type={"submit"}
             >
-              {isPending ? "Saving..." : "Save Address"}
+              {"Login"}
             </Button>
           </div>
         </Form>
-      </CardContent>
-    </Card>
+    </div>
   )
 }

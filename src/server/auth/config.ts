@@ -1,4 +1,9 @@
-import { type User, type DefaultSession, type NextAuthConfig } from "next-auth"
+import {
+  type User,
+  type DefaultSession,
+  type NextAuthConfig,
+  AuthError,
+} from "next-auth"
 import { type AdapterUser } from "next-auth/adapters"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { admin } from "~/lib/api/index"
@@ -35,14 +40,16 @@ export const authConfig = {
           body: credentials as AdminLoginFormData,
         })
 
-        if (response.data?.data) {
-          return {
-            ...response.data?.data.user,
-            token: response.data?.data.token,
-          } as unknown as User
+        if (response.error) {
+          throw new AuthError(
+            response.error?.error?.message ?? response.error?.error,
+          )
         }
 
-        return null
+        return {
+          ...response.data.data.user,
+          token: response.data.data.token,
+        } as unknown as User
       },
     }),
   ],

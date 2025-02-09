@@ -11,7 +11,8 @@ export const env = createEnv({
       process.env.NODE_ENV === "production"
         ? z.string()
         : z.string().optional(),
-    AUTH_TRUST_HOST: z.string().url(),
+    AUTH_TRUST_HOST: z.string().optional(),
+    AUTH_URL: z.string().url().optional(),
     NODE_ENV: z.enum(["development", "test", "production"]),
     SUFFIX_DEFAULT_ACCESS_KEY: z.string(),
   },
@@ -34,6 +35,7 @@ export const env = createEnv({
   runtimeEnv: {
     AUTH_SECRET: process.env.AUTH_SECRET,
     AUTH_TRUST_HOST: process.env.AUTH_TRUST_HOST,
+    AUTH_URL: process.env.AUTH_URL,
     NODE_ENV: process.env.NODE_ENV,
     SUFFIX_DEFAULT_ACCESS_KEY: process.env.SUFFIX_DEFAULT_ACCESS_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,

@@ -50,13 +50,14 @@ export default async function MenuLayout({
                 </GroupItems>
               )
             }
+
             return (
-              <ItemLink
+              <NavLink
                 key={`item-${menu.id}`}
                 url={menu.url}
               >
                 {menu.title}
-              </ItemLink>
+              </NavLink>
             )
           })}
         </NavigationMenuList>
@@ -83,13 +84,13 @@ const GroupItems = ({
       >
         <ul>
           {items?.map(menu => (
-            <ItemLink
+            <NavLink
               key={menu.id}
               target={menu.target}
               url={menu.url}
             >
               {menu.title}
-            </ItemLink>
+            </NavLink>
           ))}
         </ul>
       </NavigationMenuContent>
@@ -97,7 +98,7 @@ const GroupItems = ({
   )
 }
 
-const ItemLink = ({
+const NavLink = ({
   children,
   url,
   target,

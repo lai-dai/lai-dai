@@ -7,7 +7,7 @@ import { SessionProvider } from "next-auth/react"
 import { ThemeProvider } from "next-themes"
 import { Toaster } from "~/components/ui/sonner"
 import { META_THEME_COLORS, siteConfig } from "~/config/site"
-import { geistSans, jetBrains_Mono } from "~/lib/fonts"
+import { geistSans, iBM_Plex_Mono } from "~/lib/fonts"
 import { cn } from "~/lib/utils"
 
 export const metadata: Metadata = {
@@ -104,7 +104,7 @@ try {
           "font-sans antialiased",
           geistSans.variable,
           // geistMono.variable,
-          jetBrains_Mono.variable,
+          iBM_Plex_Mono.variable,
         )}
       >
         <ThemeProvider

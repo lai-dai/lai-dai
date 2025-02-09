@@ -22,7 +22,7 @@ export default async function HomePage() {
         </PageHeaderHeading>
 
         <PageHeaderDescription>
-          {"Mình thường chia sẻ nhưng thứ hay ho trên Internet 🐋."}
+          {"Những thứ hay-ho thì mình chia sẻ 🐋."}
         </PageHeaderDescription>
 
         <PageActions>
@@ -30,7 +30,7 @@ export default async function HomePage() {
             asChild={true}
             size={"sm"}
           >
-            <Link href={"/docs"}>{"Bắt đầu thôi"}</Link>
+            <Link href={"/docs"}>{"Get Started"}</Link>
           </Button>
 
           <Button
@@ -38,7 +38,7 @@ export default async function HomePage() {
             size={"sm"}
             variant={"ghost"}
           >
-            <Link href={"/blocks"}>{"My Components"}</Link>
+            <Link href={"/my-components"}>{"My Components"}</Link>
           </Button>
         </PageActions>
       </PageHeader>

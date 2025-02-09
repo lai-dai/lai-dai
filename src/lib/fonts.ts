@@ -1,4 +1,4 @@
-import { JetBrains_Mono } from 'next/font/google'
+import { IBM_Plex_Mono } from "next/font/google"
 import localFont from "next/font/local"
 
 // export const plus_jakarta_sans = Plus_Jakarta_Sans({
@@ -7,10 +7,17 @@ import localFont from "next/font/local"
 //   variable: "--font-plus-jakarta-sans"
 // })
 
-export const jetBrains_Mono = JetBrains_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: "--font-jet-brains-mono"
+// export const jetBrains_Mono = JetBrains_Mono({
+//   subsets: ['latin'],
+//   display: 'swap',
+//   variable: "--font-jet-brains-mono"
+// })
+
+export const iBM_Plex_Mono = IBM_Plex_Mono({
+  subsets: ["vietnamese"],
+  display: "swap",
+  variable: "--font-ibm-flex-mono",
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
 })
 
 export const geistSans = localFont({
