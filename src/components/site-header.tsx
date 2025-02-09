@@ -1,94 +1,29 @@
-"use client"
-
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { type Session } from "next-auth"
-import { useSession } from "next-auth/react"
-import { signOut } from "next-auth/react"
 import React from "react"
-import { GithubLink } from "./github-link"
 import { Icons } from "./icons"
 import { ThemeToggle } from "./theme-toggle"
 import { Button } from "./ui/button"
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "~/components/ui/navigation-menu"
+
+import { AppNavigation } from "~/components/app-navigation"
+import { ProfilePopover } from "~/components/profile-popover"
+import { Separator } from "~/components/ui/separator"
 import { siteConfig } from "~/config/site"
-import { cn } from "~/lib/utils"
+import { auth } from "~/server/auth"
 
-type MenuItem = {
-  id: number
-  title: string
-  url: string
-  target: string
-  children?: MenuItem[]
-}
-
-const menuList: MenuItem[] = [
-  {
-    id: 1,
-    title: 'Home',
-    url: '/',
-    target: '_self'
-  },
-  {
-    id: 8,
-    title: 'Blog',
-    url: '/blog',
-    target: '_self'
-  },
-  {
-    id: 9,
-    title: 'About',
-    url: '/about',
-    target: '_self'
-  }
-]
-
-export function SiteHeader({
-  session: sessionProp,
-}: {
-  session?: Session | null
-}) {
-  const router = useRouter()
-  const { data: session } = useSession()
-  const isAuth = sessionProp ?? !!session?.user
-
-  const [isSticky, setIsSticky] = React.useState(false)
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsSticky(true)
-      } else {
-        setIsSticky(false)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+export async function SiteHeader() {
+  const session = await auth()
+  const isAuth = !!session?.user
 
   return (
     <header
       className={
         "border-grid sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
       }
-      data-sticky={isSticky}
     >
       <div className={"container-wrapper"}>
         <div className={"container flex h-16"}>
-          <div className={"mr-4 flex items-center gap-2 lg:mr-6"}>
-            <Icons.logo className={"size-5"} />
+          <div className={"mr-5 flex items-center gap-2"}>
+            <Icons.logo className={"size-6"} />
 
             <Link
               className={"font-bold"}
@@ -98,114 +33,31 @@ export function SiteHeader({
             </Link>
           </div>
 
-          <div className={"flex-1 flex items-center"}>
-            <NavigationMenu className={"hidden md:flex"}>
-              <NavigationMenuList>
-                {menuList.map(menu => {
-                  if ("children" in menu) {
-                    return (
-                      <GroupItems
-                        items={menu.children}
-                        key={`group-${menu.id}`}
-                      >
-                        {menu.title}
-                      </GroupItems>
-                    )
-                  }
-
-                  return (
-                    <NavLink
-                      key={`item-${menu.id}`}
-                      url={menu.url}
-                    >
-                      {menu.title}
-                    </NavLink>
-                  )
-                })}
-              </NavigationMenuList>
-            </NavigationMenu>
+          <div className={"flex items-center"}>
+            <ThemeToggle />
           </div>
 
-          <div className={"flex items-center gap-1"}>
+          <div className={"flex flex-1 items-center justify-end gap-1"}>
+            <AppNavigation />
+
+            <Separator
+              className={"h-5"}
+              orientation={"vertical"}
+            />
+
             {isAuth ? (
-              <Button
-                onClick={() => signOut()}
-                type={"button"}
-              >
-                {"Logout"}
-              </Button>
+              <ProfilePopover />
             ) : (
               <Button
-                onClick={() => router.push("/login")}
+                asChild={true}
                 type={"button"}
               >
-                {"Login"}
+                <Link href={"/login"}>{"Login"}</Link>
               </Button>
             )}
-
-            <GithubLink />
-
-            <ThemeToggle />
           </div>
         </div>
       </div>
     </header>
-  )
-}
-
-const GroupItems = ({
-  children,
-  items,
-}: {
-  children?: React.ReactNode
-  items?: MenuItem[]
-}) => {
-  return (
-    <NavigationMenuItem>
-      <NavigationMenuTrigger>{children}</NavigationMenuTrigger>
-
-      <NavigationMenuContent
-        className={"absolute left-auto top-full !animate-none border"}
-      >
-        <ul>
-          {items?.map(menu => (
-            <NavLink
-              key={menu.id}
-              target={menu.target}
-              url={menu.url}
-            >
-              {menu.title}
-            </NavLink>
-          ))}
-        </ul>
-      </NavigationMenuContent>
-    </NavigationMenuItem>
-  )
-}
-
-const NavLink = ({
-  children,
-  url,
-  target,
-}: {
-  children?: React.ReactNode
-  url?: string
-  target?: React.HTMLAttributeAnchorTarget
-}) => {
-  return (
-    <NavigationMenuItem>
-      <Link
-        href={url ?? "#"}
-        legacyBehavior={true}
-        passHref={true}
-        target={target}
-      >
-        <NavigationMenuLink
-          className={cn(navigationMenuTriggerStyle(), "block w-full")}
-        >
-          {children}
-        </NavigationMenuLink>
-      </Link>
-    </NavigationMenuItem>
   )
 }

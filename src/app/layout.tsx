@@ -13,7 +13,7 @@ import { cn } from "~/lib/utils"
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s | ${siteConfig.template}`,
   },
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
@@ -112,7 +112,7 @@ try {
           defaultTheme={"dark"}
           disableTransitionOnChange={false}
           enableColorScheme={true}
-          enableSystem={false}
+          enableSystem={true}
         >
           <SessionProvider>
             <div vaul-drawer-wrapper={""}>

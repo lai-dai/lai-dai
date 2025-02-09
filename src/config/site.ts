@@ -2,6 +2,7 @@ import { env } from "~/env"
 
 export const siteConfig = {
   name: "LaiDai",
+  template: "Lai Cao Dai",
   url: env.NEXT_PUBLIC_WEBSITE_URL,
   ogImage: "https://ui.shadcn.com/og.jpg",
   description:

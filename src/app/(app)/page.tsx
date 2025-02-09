@@ -7,12 +7,18 @@ import {
 } from "~/components/page-header"
 import { Button } from "~/components/ui/button"
 
+export const metadata = {
+  title: "LaiDai",
+}
+
 export default async function HomePage() {
   return (
     <>
       <PageHeader>
         <PageHeaderHeading>
-          {"Hi, Mình là Lại Đài 👋"}
+          {"Hi! Mình là Lại Đài "}
+
+          <span className={"wave"}>{"👋"}</span>
 
           <br />
 
@@ -22,7 +28,7 @@ export default async function HomePage() {
         </PageHeaderHeading>
 
         <PageHeaderDescription>
-          {"Những thứ hay-ho thì mình chia sẻ 🐋."}
+          {"Mình làm bằng tình yêu ❤️ và lòng biết ơn 🙏"}
         </PageHeaderDescription>
 
         <PageActions>

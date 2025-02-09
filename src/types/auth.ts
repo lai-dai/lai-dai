@@ -19,6 +19,12 @@ export interface LoginUser {
   updatedAt: string
   publishedAt: string
   token: string
+
+  firstname: string
+  lastname: string
+  isActive: true
+  preferedLanguage: null
+  locale: null
 }
 
 export const adminLoginSchema = z.object({

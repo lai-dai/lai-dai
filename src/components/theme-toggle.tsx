@@ -1,37 +1,61 @@
 "use client"
 
-import { MoonIcon, SunIcon } from "lucide-react"
+import { Monitor, MoonStar, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import * as React from "react"
-import { TooltipContainer } from "~/components/tooltip-container"
+import { Label } from "~/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group"
 
-import { Button } from "~/components/ui/button"
+const ThemeOptions = [
+  {
+    label: "System",
+    value: "system",
+    icon: Monitor,
+  },
+  {
+    label: "Light",
+    value: "light",
+    icon: Sun,
+  },
+  {
+    label: "Dark",
+    value: "dark",
+    icon: MoonStar,
+  },
+]
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
 
-  return (
-    <TooltipContainer>
-      <Button
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        size={"icon"}
-        title={theme === "light" ? "Light" : "Dark"}
-        variant={"ghost"}
+  const themeList = ThemeOptions.map(it => (
+    <div
+      aria-label={`Toggle ${it.label}`}
+      key={it.value}
+    >
+      <RadioGroupItem
+        className={"peer sr-only"}
+        id={`r-${it.value}`}
+        value={it.value}
+      />
+
+      <Label
+        className={"inline-flex p-1.5 rounded-full peer-data-[state=checked]:bg-white peer-data-[state=checked]:border dark:peer-data-[state=checked]:bg-gray-700 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"}
+        htmlFor={`r-${it.value}`}
       >
-        <MoonIcon
-          className={
-            "rotate-90 scale-0 transition-transform duration-500 ease-in-out dark:rotate-0 dark:scale-100"
-          }
-        />
+        <it.icon />
+      </Label>
+    </div>
+  ))
 
-        <SunIcon
-          className={
-            "absolute rotate-0 scale-100 transition-transform duration-500 ease-in-out dark:-rotate-90 dark:scale-0"
-          }
-        />
-
-        <span className={"sr-only"}>{"Switch Theme"}</span>
-      </Button>
-    </TooltipContainer>
+  return (
+    <RadioGroup
+      className={
+        "relative z-0 inline-grid grid-cols-3 gap-0.5 rounded-full bg-gray-950/5 p-0.5 text-gray-950 dark:bg-white/10 dark:text-white"
+      }
+      onValueChange={setTheme}
+      value={theme}
+    >
+      {themeList}
+    </RadioGroup>
   )
 }
