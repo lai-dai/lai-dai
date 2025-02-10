@@ -13,7 +13,7 @@ import { cn } from "~/lib/utils"
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.template}`,
+    template: `%s · ${siteConfig.template}`,
   },
   metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,

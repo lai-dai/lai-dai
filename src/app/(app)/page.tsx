@@ -15,14 +15,14 @@ export default async function HomePage() {
   return (
     <>
       <PageHeader>
-        <PageHeaderHeading>
+        <PageHeaderHeading className={"font-medium"}>
           {"Hi! Mình là Lại Đài "}
 
-          <span className={"wave"}>{"👋"}</span>
+          <span className={"wave select-none"}>{"👋"}</span>
 
           <br />
 
-          <pre className={"whitespace-pre-line text-lg md:text-3xl"}>
+          <pre className={"whitespace-pre-line text-lg md:text-4xl tracking-normal"}>
             {"Front-end Developer / Content Creator"}
           </pre>
         </PageHeaderHeading>

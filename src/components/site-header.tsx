@@ -22,13 +22,13 @@ export async function SiteHeader() {
     >
       <div className={"container-wrapper"}>
         <div className={"container flex h-16"}>
-          <div className={"mr-5 flex items-center gap-2"}>
-            <Icons.logo className={"size-6"} />
-
+          <div className={"mr-5 flex items-center"}>
             <Link
-              className={"font-bold"}
+              className={"flex gap-2 font-bold"}
               href={"/"}
             >
+              <Icons.logo className={"size-6"} />
+
               {siteConfig.name}
             </Link>
           </div>
