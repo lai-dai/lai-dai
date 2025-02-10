@@ -44,8 +44,8 @@ const Menu: MenuItem[] = [
     url: "/",
     children: [
       {
-        title: "Home",
-        url: "/",
+        title: "Introduction",
+        url: "/docs",
       },
       {
         title: "Installation",
@@ -60,7 +60,7 @@ const Menu: MenuItem[] = [
 ]
 
 export function AppSidebar() {
-  const {isMobile} = useSidebar()
+  const { isMobile } = useSidebar()
   return (
     <Sidebar
       className={
@@ -124,12 +124,15 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
   }
 
   const handleActive = (url?: string) => {
-    if (url === "/") {
+    if (!url) {
+      return false
+    }
+
+    if (/^(?:\/|\/docs)$/.test(url)) {
       return pathname === url
     }
-    if (url) {
-      return pathname.startsWith(url)
-    }
+
+    return pathname.startsWith(url)
   }
 
   if (!props?.children?.length) {
@@ -175,7 +178,11 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
         </CollapsibleTrigger>
 
         {Array.isArray(props?.children) && (
-          <CollapsibleContent className={"data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down"}>
+          <CollapsibleContent
+            className={
+              "data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down"
+            }
+          >
             <SidebarMenuSub className={"mr-0 pr-0"}>
               {props?.children.map((child, idx) => (
                 <Tree

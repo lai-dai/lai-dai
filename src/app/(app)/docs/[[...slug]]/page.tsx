@@ -1,7 +1,7 @@
 import { type Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Mdx } from "~/components/mdx-remote"
-import { DashboardTableOfContents } from "~/components/toc"
+import { TableOfContents } from "~/components/toc"
 import { siteConfig } from "~/config/site"
 import { getContents } from "~/lib/content"
 import { mdxSerialize } from "~/lib/mdx-serialize"
@@ -14,16 +14,23 @@ interface DocPageProps {
   }>
 }
 
+export function generateStaticParams() {
+  const docs = getContents("docs")
+
+  return docs.map(doc => ({ slug: doc.slug.split("/") }))
+}
+
 export async function generateMetadata({
   params,
 }: DocPageProps): Promise<Metadata> {
   const { slug } = await params
+
   const doc = getContents("docs").find(
     project => project.slug.toLowerCase() === slug[0]?.toLowerCase(),
   )
 
   if (!doc) {
-    return {}
+    return notFound();
   }
 
   const { title, description } = doc.metadata
@@ -56,12 +63,7 @@ export async function generateMetadata({
   }
 }
 
-export function generateStaticParams() {
-  const docs = getContents("docs")
-  return docs.map(doc => ({ slug: doc.slug.split("/") }))
-}
-
-export default async function PostPage({ params }: DocPageProps) {
+export default async function DocPage({ params }: DocPageProps) {
   const { slug } = await params
 
   const doc = getContents("docs").find(
@@ -72,7 +74,7 @@ export default async function PostPage({ params }: DocPageProps) {
     notFound()
   }
 
-  const [mdxSource, toc] = await Promise.all([
+  const [docSource, tableOfContents] = await Promise.all([
     mdxSerialize(doc.content),
     getTableOfContents(doc.content),
   ])
@@ -88,13 +90,13 @@ export default async function PostPage({ params }: DocPageProps) {
           {doc.metadata.title}
         </h1>
 
-        <Mdx mdxSource={mdxSource} />
+        <Mdx mdxSource={docSource} />
       </div>
 
       <div className={"hidden text-sm xl:block"}>
         <div className={"sticky top-20 -mt-6 h-[calc(100vh-3.5rem)] pt-4"}>
           <div className={"no-scrollbar h-full overflow-auto pb-10"}>
-            <DashboardTableOfContents toc={toc} />
+            <TableOfContents toc={tableOfContents} />
           </div>
         </div>
       </div>

@@ -14,6 +14,15 @@ const config = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/docs",
+        destination: "/docs/index",
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default config
