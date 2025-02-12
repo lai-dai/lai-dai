@@ -22,7 +22,7 @@ export async function getDocPageBySlug(
 
     // eslint-disable-next-line @next/next/no-assign-module-variable
     const module: Record<string, unknown> = await import(
-      `../../../content/docs/${slug}.mdx`
+      `../../content/docs/${slug}.mdx`
     )
     if (!module.default) {
       return null
@@ -42,7 +42,7 @@ export async function getDocPageBySlug(
 export async function getDocPageSlugs() {
   const slugs = []
   for (const file of await fs.readdir(
-    path.join(__dirname, "../../../content/docs"),
+    path.join(__dirname, "../../content/docs"),
   )) {
     if (!file.endsWith(".mdx")) continue
     slugs.push(path.parse(file).name)

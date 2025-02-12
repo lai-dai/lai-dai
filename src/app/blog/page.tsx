@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import React from "react"
-import { getBlogPostBySlug, getBlogPostSlugs } from "~/app/(app)/blog/api"
+import { getBlogPostBySlug, getBlogPostSlugs } from "~/app/blog/api"
 import { nonNullable } from "~/utils/ables"
 import { formatDate } from "~/utils/formats"
 
@@ -24,23 +24,21 @@ export default async function MdxPage() {
     .filter(post => !post.meta.private)
 
   return (
-    <div className="mt-12 mb-46 grid grid-cols-1 lg:grid-cols-[24rem_2.5rem_minmax(0,1fr)]">
+    <div className="mb-46 mt-12 grid grid-cols-1 lg:grid-cols-[24rem_2.5rem_minmax(0,1fr)]">
       {posts.map(({ meta, slug }, index) => (
         <React.Fragment key={slug}>
           <div className="p col-span-3 grid grid-cols-subgrid divide-x divide-gray-950/5 dark:divide-white/10">
-            <div className="px-2 font-mono text-sm/6 font-medium tracking-widest text-gray-500 uppercase max-lg:hidden">
+            <div className="px-2 font-mono text-sm/6 font-medium uppercase tracking-widest text-gray-500 max-lg:hidden">
               {formatDate(meta.date)}
             </div>
             <div className="max-lg:hidden" />
             <div className="text-md px-2">
               <div className="max-w-(--container-2xl)">
-                <div className="mb-4 font-mono text-sm/6 font-medium tracking-widest text-gray-500 uppercase lg:hidden">
+                <div className="mb-4 font-mono text-sm/6 font-medium uppercase tracking-widest text-gray-500 lg:hidden">
                   {formatDate(meta.date)}
                 </div>
 
-                <Link
-                  href={`/blog/${slug}`}
-                  className="font-semibold">
+                <Link href={`/blog/${slug}`} className="font-semibold">
                   {meta.title}
                 </Link>
                 <div className="prose prose-blog mt-4 line-clamp-3 leading-7">

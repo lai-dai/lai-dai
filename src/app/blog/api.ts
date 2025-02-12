@@ -28,7 +28,7 @@ export async function getBlogPostBySlug(slug: string): Promise<{
     // Check if the file exists
     if (
       !(await fs
-        .stat(path.join(__dirname, `../../../content/blog/${slug}/index.mdx`))
+        .stat(path.join(__dirname, `../../content/blog/${slug}/index.mdx`))
         .catch(() => null))
     ) {
       return null
@@ -36,7 +36,7 @@ export async function getBlogPostBySlug(slug: string): Promise<{
 
     // eslint-disable-next-line @next/next/no-assign-module-variable
     const module: Record<string, unknown> = await import(
-      `../../../content/blog/${slug}/index.mdx`
+      `../../content/blog/${slug}/index.mdx`
     )
     if (!module.default) {
       return null
@@ -60,7 +60,7 @@ export async function getBlogPostSlugs(): Promise<string[]> {
   const posts: { slug: string; date: number }[] = []
 
   const folders = await fs.readdir(
-    path.join(__dirname, "../../../content/blog"),
+    path.join(__dirname, "../../content/blog"),
   )
 
   await Promise.allSettled(
