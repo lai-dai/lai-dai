@@ -80,7 +80,7 @@ export async function getBlogPostSlugs(): Promise<string[]> {
     }),
   )
 
-  posts.sort((a, b) => b.date - a.date)
+  // posts.sort((a, b) => b.date - a.date)
 
   return posts.map(post => post.slug)
 }
