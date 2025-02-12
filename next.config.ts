@@ -12,7 +12,7 @@ const config: NextConfig = {
   pageExtensions: ["mdx", "tsx"],
 
   outputFileTracingIncludes: {
-    "/**/*": ["./src/content/*.mdx"],
+    "/**/*": ["./src/content/**/*"],
   },
 
   experimental: {
@@ -38,7 +38,7 @@ const config: NextConfig = {
     ]
   },
 
-  transpilePackages: ['@tanstack/query-core'],
+  transpilePackages: ["@tanstack/query-core"],
 }
 
 const withMDX = createMDX({
