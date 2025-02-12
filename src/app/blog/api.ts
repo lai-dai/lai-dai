@@ -1,11 +1,5 @@
-"use server"
-
 import fs from "node:fs/promises"
 import path from "node:path"
-import { fileURLToPath } from "node:url"
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 type Meta = {
   title: string
@@ -28,7 +22,7 @@ export async function getBlogPostBySlug(slug: string): Promise<{
     // Check if the file exists
     if (
       !(await fs
-        .stat(path.join(__dirname, `../../content/blog/${slug}/index.mdx`))
+        .stat(path.join(process.cwd(), `./src/content/blog/${slug}/index.mdx`))
         .catch(() => null))
     ) {
       return null
@@ -36,7 +30,7 @@ export async function getBlogPostBySlug(slug: string): Promise<{
 
     // eslint-disable-next-line @next/next/no-assign-module-variable
     const module: Record<string, unknown> = await import(
-      `../../content/blog/${slug}/index.mdx`
+      `~/content/blog/${slug}/index.mdx`
     )
     if (!module.default) {
       return null
@@ -60,7 +54,7 @@ export async function getBlogPostSlugs(): Promise<string[]> {
   const posts: { slug: string; date: number }[] = []
 
   const folders = await fs.readdir(
-    path.join(__dirname, "../../content/blog"),
+    path.join(process.cwd(), "./src/content/blog"),
   )
 
   await Promise.allSettled(
