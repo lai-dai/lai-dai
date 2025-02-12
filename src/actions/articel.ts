@@ -1,11 +1,11 @@
 import React from "react"
-import { client } from "~/lib/api/index"
+import { api } from "~/lib/api"
 
 export const createArticle = React.cache(async () => {
-  const { data } = await client.POST("/articles", {
+  const { data } = await api.POST("/articles", {
     body: {
-      data: {}
-    }
+      data: {},
+    },
   })
 
   return data?.data

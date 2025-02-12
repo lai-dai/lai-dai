@@ -1,13 +1,13 @@
 "use server"
 
-import { admin } from "~/lib/api/index"
+import { apiServer } from "~/server/api"
 import { signIn, signOut } from "~/server/auth"
 
 import { type AdminLoginFormData, adminLoginSchema } from "~/types/auth"
 import { type ActionResponse } from "~/types/shared"
 
 export const adminLogin = async (data: AdminLoginFormData) => {
-  const response = await admin.POST("/admin/login", {
+  const response = await apiServer.POST("/admin/login", {
     body: data,
   })
 

@@ -1,5 +1,5 @@
 import React from "react"
-import { BackButton } from "~/components/back-button"
+import { PreviewPageButton } from "~/components/preview-page-button"
 import { SiteFooter } from "~/components/site-footer"
 
 export default function AuthLayout({
@@ -11,7 +11,7 @@ export default function AuthLayout({
     <div className={"flex h-screen max-h-screen flex-col overflow-auto"}>
       <div className={"border-grid border-b"}>
         <div className={"container-wrapper"}>
-          <BackButton />
+          <PreviewPageButton />
         </div>
       </div>
 

@@ -1,7 +1,8 @@
 "use client"
 
-import { signOut, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import React from "react"
+import { submitLogout } from "~/actions/auth"
 import { Button } from "~/components/ui/button"
 
 import {
@@ -13,13 +14,18 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
 
+function handleLogout() {
+  "use client"
+  submitLogout()
+}
+
 export function ProfilePopover() {
   const { data: session } = useSession()
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild={true}>
-        <Button variant={'ghost'}>{session?.user.lastname}</Button>
+        <Button variant={"ghost"}>{session?.user.lastname}</Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align={"end"}>
@@ -27,7 +33,7 @@ export function ProfilePopover() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={() => signOut()}>
+        <DropdownMenuItem onClick={() => handleLogout()}>
           {"Logout"}
         </DropdownMenuItem>
       </DropdownMenuContent>

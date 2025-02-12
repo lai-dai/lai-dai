@@ -1,13 +1,8 @@
-import {
-  type User,
-  type DefaultSession,
-  type NextAuthConfig,
-  AuthError,
-} from "next-auth"
-import { type AdapterUser } from "next-auth/adapters"
+import { User, type DefaultSession, type NextAuthConfig } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { admin } from "~/lib/api/index"
-import { type LoginUser, type AdminLoginFormData } from "~/types/auth"
+import { apiServer } from "~/server/api"
+import { AdminLoginFormData, LoginUser } from "~/types/auth"
+import { type AdapterUser } from "next-auth/adapters"
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -20,6 +15,7 @@ declare module "next-auth" {
     user: LoginUser
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface User extends LoginUser {}
 }
 
@@ -36,22 +32,29 @@ export const authConfig = {
         password: {},
       },
       async authorize(credentials) {
-        const response = await admin.POST("/admin/login", {
-          body: credentials as AdminLoginFormData,
+        const response = await apiServer.POST("/admin/login", {
+          body: credentials as unknown as AdminLoginFormData,
         })
 
         if (response.error) {
-          throw new AuthError(
-            response.error?.error?.message ?? response.error?.error,
-          )
+          throw new Error(response.error?.error?.message ?? "Lỗi")
         }
 
         return {
-          ...response.data.data.user,
-          token: response.data.data.token,
+          ...response.data?.data.user,
+          token: response.data?.data.token,
         } as unknown as User
       },
     }),
+    /**
+     * ...add more providers here.
+     *
+     * Most other providers require a bit more work than the Discord provider. For example, the
+     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
+     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
+     *
+     * @see https://next-auth.js.org/providers/github
+     */
   ],
   callbacks: {
     jwt: async ({ token, user, trigger, session }) => {
@@ -74,5 +77,6 @@ export const authConfig = {
   },
   pages: {
     signIn: "/login",
+    error: "/login",
   },
 } satisfies NextAuthConfig

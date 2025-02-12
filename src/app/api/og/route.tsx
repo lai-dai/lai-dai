@@ -1,20 +1,13 @@
-import { ImageResponse } from "next/og"
+import { ImageResponse } from "next/og";
 
-import "~/styles/globals.css" // FIXME: check if possible to import custom var(--) or utility classes
+import "~/styles/globals.css"; // FIXME: check if possible to import custom var(--) or utility classes
 
-import { siteConfig } from "~/config/site"
-
-export const runtime = "edge"
-
-const fontCal = fetch(
-  new URL("public/fonts/CalSans-SemiBold.ttf", import.meta.url),
-).then(res => res.arrayBuffer())
+import { siteConfig } from "~/config/site";
 
 export async function GET(request: Request) {
-  const fontCalData = await fontCal
-  const { searchParams } = new URL(request.url)
-  const title = searchParams.get("title")
-  const description = searchParams.get("description")
+  const { searchParams } = new URL(request.url);
+  const title = searchParams.get("title");
+  const description = searchParams.get("description");
   return new ImageResponse(
     (
       <div
@@ -53,10 +46,7 @@ export async function GET(request: Request) {
                 {title ?? siteConfig.name}
               </div>
 
-              <div
-                style={{ color: "rgb(127, 142, 163)" }}
-                tw={"flex text-4xl"}
-              >
+              <div style={{ color: "rgb(127, 142, 163)" }} tw={"flex text-4xl"}>
                 {description}
               </div>
             </div>
@@ -67,13 +57,6 @@ export async function GET(request: Request) {
     {
       width: 1200,
       height: 630,
-      fonts: [
-        {
-          name: "cal",
-          data: fontCalData,
-          weight: 600,
-        },
-      ],
     },
-  )
+  );
 }

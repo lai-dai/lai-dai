@@ -6,6 +6,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "~/components/ui/tooltip"
+import { delve } from "~/utils/delve"
 
 interface TooltipContainerProps {
   children: React.ReactElement
@@ -22,17 +23,14 @@ export function TooltipContainer({
   align,
   side,
 }: TooltipContainerProps) {
-  const text = title ?? children.props?.title ?? null
+  const text = title ?? delve(children.props as object, "title") ?? null
 
   return (
     <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger asChild={true}>{children}</TooltipTrigger>
 
-        <TooltipContent
-          align={align}
-          side={side}
-        >
+        <TooltipContent align={align} side={side}>
           {content ?? text}
         </TooltipContent>
       </Tooltip>

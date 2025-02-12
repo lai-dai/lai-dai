@@ -1,15 +1,10 @@
----
-title: Next MDX remote
-description: Install and configure Next.js.
----
-
 <Steps>
 
 ### Installation
 
 To scaffold an app using create-t3-app, run any of the following commands and answer the command prompt questions:
 
-```bash
+```js [showLineNumbers]
 npm create t3-app@latest
 ```
 
@@ -93,24 +88,18 @@ interface MdxProps {
 export function Mdx({ content, className }: MdxProps) {
   return (
     <div className={cn("mdx", className)}>
-      <MDXRemote
-        components={components}
-        options={options}
-        source={content} />
+      <MDXRemote components={components} options={options} source={content} />
     </div>
   )
 }
 
-
 export async function getStaticProps() {
   // MDX text - can be from a local file, database, anywhere
-  const source = 'Some **mdx** text, with a component <Test />'
+  const source = "Some **mdx** text, with a component <Test />"
   const mdxSource = await serialize(source)
   return { props: { source: mdxSource } }
 }
 ```
-
-
 
 ```bash
 npm i -D npm i next-mdx-remote next-themes

@@ -1,8 +1,8 @@
 import React from "react"
-import { client } from "~/lib/api/index"
+import { api } from "~/lib/api"
 
 export const getConfigs = React.cache(async () => {
-  const { data } = await client.GET("/config", {
+  const { data } = await api.GET("/config", {
     params: {
       query: {
         populate: {

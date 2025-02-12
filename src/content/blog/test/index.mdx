@@ -1,0 +1,52 @@
+export const meta = {
+  title:
+    "Headless UI v1.6, Tailwind UI team management, Tailwind Play improvements, and more",
+  description: `It's been a while since I've written about what we've been working on so I have a lot to share! Too much honestly — so put your swim suit on, sit back in your lounge chair, and prepare to soak up some vitamin CSS.`,
+  date: "2022-05-27T15:00:00.000Z",
+}
+
+It's been a while since I've written about what we've been working on so I have a lot to share! Too much honestly — my main motivator for even getting this update out is that we've got even more stuff coming next week, and I feel like I'm not allowed to share that stuff until I share all of the stuff we've already shipped.
+
+So put your swim suit on, sit back in your lounge chair, and prepare to soak up some vitamin CSS.
+
+---
+
+## Headless UI v1.6 is out
+
+A few weeks ago we released a new minor version of <Link href="https://headlessui.dev/">Headless UI</Link>, the unstyled UI library we built to make it possible to add React and Vue support to Tailwind UI.
+
+Check out <Link href="https://github.com/tailwindlabs/headlessui/releases/tag/%40headlessui%2Freact%40v1.6.0">the release notes</Link> for all of the details, but here are some of the highlights.
+
+### Multiselect support
+
+We've added a new `multiple` prop to both the `Combobox` and `Listbox` components so people can select more than one option.
+
+Just add the `multiple` prop and bind an array as your `value` and you are ready to go:
+
+```jsx {foo=bar}
+function MyCombobox({ items }) {
+  // [!code highlight:2]
+  const [selectedItems, setSelectedItems] = useState([])
+
+  return (
+    // [!code highlight:9]
+    <Combobox value={selectedItems} onChange={setSelectedItems} multiple>
+      {selectedItems.length > 0 && (
+        <ul>
+          {selectedItems.map(item => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
+      <Combobox.Input />
+      <Combobox.Options>
+        {items.map(item => (
+          <Combobox.Option key={item} value={item}>
+            {item}
+          </Combobox.Option>
+        ))}
+      </Combobox.Options>
+    </Combobox>
+  )
+}
+```

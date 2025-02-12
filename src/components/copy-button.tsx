@@ -1,25 +1,26 @@
 "use client"
 
 import { CheckIcon, ClipboardIcon } from "lucide-react"
-import * as React from "react"
+import React from "react"
 
-import { Button, type ButtonProps } from "~/components/ui/button"
+import { Button } from "~/components/ui/button"
 import { cn } from "~/lib/utils"
 
-interface CopyButtonProps extends ButtonProps {
-  value: string
-}
-
 export async function copyToClipboardWithMeta(value: string) {
-  await navigator.clipboard.writeText(value)
+  try {
+    await navigator.clipboard.writeText(value)
+  } catch (error) {
+    console.error("🚀 error", error)
+  }
 }
 
 export function CopyButton({
   value,
   className,
-  variant = "ghost",
   ...props
-}: CopyButtonProps) {
+}: React.ComponentProps<typeof Button> & {
+  value: string
+}) {
   const [hasCopied, setHasCopied] = React.useState(false)
 
   React.useEffect(() => {
@@ -39,9 +40,8 @@ export function CopyButton({
         setHasCopied(true)
       }}
       size={"icon"}
-      variant={variant}
-      {...props}
-    >
+      variant={"ghost"}
+      {...props}>
       {hasCopied ? <CheckIcon /> : <ClipboardIcon />}
 
       <span className={"sr-only"}>{"Copy"}</span>

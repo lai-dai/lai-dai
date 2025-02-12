@@ -2,15 +2,19 @@ import fs from "fs"
 import { u } from "unist-builder"
 import { visit } from "unist-util-visit"
 
-import { Index } from "~/__demo__"
+import { Index } from "../__examples__"
 import { type UnistNode, type UnistTree } from "~/types/unist"
+
+function getNodeAttributeByName(node: UnistNode, name: string) {
+  return node.attributes?.find(attribute => attribute.name === name)
+}
 
 export function rehypeComponent() {
   return async (tree: UnistTree) => {
     visit(tree, (node: UnistNode) => {
       // src prop overrides both name and fileName.
       if (node.name === "ComponentPreview") {
-        const name = getNodeAttributeByName(node, "name")?.value as string
+        const name = getNodeAttributeByName(node, "name")?.value
 
         if (!name) {
           return null
@@ -52,8 +56,4 @@ export function rehypeComponent() {
       }
     })
   }
-}
-
-function getNodeAttributeByName(node: UnistNode, name: string) {
-  return node.attributes?.find(attribute => attribute.name === name)
 }

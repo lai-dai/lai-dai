@@ -31,6 +31,12 @@ const menuList: MenuItem[] = [
   },
   {
     id: 8,
+    title: "Docs",
+    url: "/docs",
+    target: "_self",
+  },
+  {
+    id: 10,
     title: "Blog",
     url: "/blog",
     target: "_self",
@@ -50,20 +56,14 @@ export function AppNavigation() {
         {menuList.map(menu => {
           if ("children" in menu) {
             return (
-              <GroupItems
-                items={menu.children}
-                key={`group-${menu.id}`}
-              >
+              <GroupItems items={menu.children} key={`group-${menu.id}`}>
                 {menu.title}
               </GroupItems>
             )
           }
 
           return (
-            <NavLink
-              key={`item-${menu.id}`}
-              url={menu.url}
-            >
+            <NavLink key={`item-${menu.id}`} url={menu.url}>
               {menu.title}
             </NavLink>
           )
@@ -85,15 +85,10 @@ const GroupItems = ({
       <NavigationMenuTrigger>{children}</NavigationMenuTrigger>
 
       <NavigationMenuContent
-        className={"absolute left-auto top-full !animate-none border"}
-      >
+        className={"absolute top-full left-auto !animate-none border"}>
         <ul>
           {items?.map(menu => (
-            <NavLink
-              key={menu.id}
-              target={menu.target}
-              url={menu.url}
-            >
+            <NavLink key={menu.id} target={menu.target} url={menu.url}>
               {menu.title}
             </NavLink>
           ))}
@@ -120,14 +115,12 @@ const NavLink = ({
         href={url ?? "#"}
         legacyBehavior={true}
         passHref={true}
-        target={target}
-      >
+        target={target}>
         <NavigationMenuLink
           active={
             pathname === "/" ? url === pathname : url?.startsWith(pathname)
           }
-          className={cn(navigationMenuTriggerStyle(), "block w-full")}
-        >
+          className={cn(navigationMenuTriggerStyle(), "block w-full")}>
           {children}
         </NavigationMenuLink>
       </Link>

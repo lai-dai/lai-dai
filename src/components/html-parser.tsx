@@ -18,6 +18,7 @@ const options = {
     }
 
     const { className, ...props } = attributesToProps(domNode.attribs)
+
     props.children = domToReact(
       domNode.children as DOMNode[],
       options,
@@ -93,23 +94,14 @@ const options = {
         )
       case "ul":
         return (
-          <ul
-            {...props}
-            className={cn("my-6 ml-6 list-disc", className)}
-          />
+          <ul {...props} className={cn("my-6 ml-6 list-disc", className)} />
         )
       case "ol":
         return (
-          <ol
-            {...props}
-            className={cn("my-6 ml-6 list-decimal", className)}
-          />
+          <ol {...props} className={cn("my-6 ml-6 list-decimal", className)} />
         )
       case "li":
-        return <li
-          {...props}
-          className={cn("mt-2", className)}
-        />
+        return <li {...props} className={cn("mt-2", className)} />
       case "blockquote":
         return (
           <blockquote
@@ -133,10 +125,7 @@ const options = {
           </PhotoView>
         )
       case "hr":
-        return <hr
-          {...props}
-          className={cn("my-4 md:my-8", className)}
-        />
+        return <hr {...props} className={cn("my-4 md:my-8", className)} />
       case "table":
         return (
           <div className={"my-6 w-full overflow-y-auto"}>
@@ -223,11 +212,7 @@ export const HtmlParser = React.forwardRef<HTMLDivElement, HtmlParserProps>(
     const reactComponent = parse(html ?? "", options)
 
     return (
-      <div
-        aria-label={"html-react-parser"}
-        ref={ref}
-        {...props}
-      >
+      <div aria-label={"html-react-parser"} ref={ref} {...props}>
         {reactComponent}
       </div>
     )

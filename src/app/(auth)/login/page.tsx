@@ -3,7 +3,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 
 import { Icons } from "~/components/icons"
-import { UserAuthForm } from "~/features/auth/login/user-auth-form"
+import { UserAuthForm } from "~/components/auth/login/user-auth-form"
 import { auth } from "~/server/auth"
 
 export const metadata: Metadata = {

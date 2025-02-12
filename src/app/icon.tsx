@@ -1,8 +1,6 @@
 import { ImageResponse } from "next/og"
 import { Icons } from "~/components/icons"
 
-export const runtime = "edge"
-
 export const size = {
   width: 28,
   height: 28,

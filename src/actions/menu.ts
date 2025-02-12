@@ -1,8 +1,8 @@
 import React from "react"
-import { client } from "~/lib/api/index"
+import { api } from "~/lib/api"
 
 export const getMenu = React.cache(async (id: string) => {
-  const { data } = await client.GET("/menus/{id}", {
+  const { data } = await api.GET("/menus/{id}", {
     params: {
       path: {
         id: id,
