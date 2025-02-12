@@ -5,7 +5,7 @@ export const Index = {
     name: "button-demo",
     files: [
       {
-        path: "src/components/examples/button-demo.tsx",
+        path: "./src/examples/button-demo.tsx",
         type: "registry:example",
       },
     ],

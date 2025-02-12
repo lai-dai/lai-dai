@@ -34,7 +34,7 @@ export default async function LoginPage() {
                 {"Welcome back"}
               </h1>
 
-              <p className={"text-sm text-muted-foreground"}>
+              <p className={"text-muted-foreground text-sm"}>
                 {"Enter your email to sign in to your account"}
               </p>
             </div>
@@ -53,11 +53,10 @@ export default async function LoginPage() {
       <div className={"border-grid border-b"}>
         <div className={"container-wrapper"}>
           <div className={"container py-6"}>
-            <p className={"px-8 text-center text-sm text-muted-foreground"}>
+            <p className={"text-muted-foreground px-8 text-center text-sm"}>
               <Link
                 className={"hover:text-brand underline underline-offset-4"}
-                href={"/register"}
-              >
+                href={"/register"}>
                 {"Don't have an account? Sign Up"}
               </Link>
             </p>

@@ -1,6 +1,7 @@
 import fs from "fs"
 import { u } from "unist-builder"
 import { visit } from "unist-util-visit"
+import path from "node:path"
 
 import { Index } from "../__examples__"
 import { type UnistNode, type UnistTree } from "~/types/unist"
@@ -15,7 +16,6 @@ export function rehypeComponent() {
       // src prop overrides both name and fileName.
       if (node.name === "ComponentPreview") {
         const name = getNodeAttributeByName(node, "name")?.value
-
         if (!name) {
           return null
         }
@@ -25,7 +25,11 @@ export function rehypeComponent() {
           const filePath = component.files[0]?.path
 
           // Read the source file.
-          const source = fs.readFileSync(filePath, "utf8")
+          const source = fs.readFileSync(
+            path.join(process.cwd(), filePath),
+            // filePath,
+            "utf8",
+          )
 
           // Add code as children so that rehype can take over at build time.
           node.children?.push(
@@ -51,7 +55,7 @@ export function rehypeComponent() {
             }),
           )
         } catch (error) {
-          console.error(error)
+          console.error("59", (error as Error).message)
         }
       }
     })
