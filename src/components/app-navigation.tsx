@@ -85,7 +85,7 @@ const GroupItems = ({
       <NavigationMenuTrigger>{children}</NavigationMenuTrigger>
 
       <NavigationMenuContent
-        className={"absolute top-full left-auto !animate-none border"}>
+        className={"absolute left-auto top-full !animate-none border"}>
         <ul>
           {items?.map(menu => (
             <NavLink key={menu.id} target={menu.target} url={menu.url}>
@@ -113,6 +113,7 @@ const NavLink = ({
     <NavigationMenuItem>
       <Link
         href={url ?? "#"}
+        prefetch
         legacyBehavior={true}
         passHref={true}
         target={target}>

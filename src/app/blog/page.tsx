@@ -21,7 +21,7 @@ export default async function MdxPage() {
   const slugs = await getBlogPostSlugs()
   const posts = (await Promise.all(slugs.map(getBlogPostBySlug)))
     .filter(nonNullable)
-    .filter(post => !post.meta.private)
+    .filter(post => !post?.meta?.private)
 
   return (
     <div className="mb-46 mt-12 grid grid-cols-1 lg:grid-cols-[24rem_2.5rem_minmax(0,1fr)]">
