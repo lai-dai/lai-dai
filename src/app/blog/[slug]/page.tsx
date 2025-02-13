@@ -4,6 +4,8 @@ import { getBlogPostBySlug, getBlogPostSlugs } from "../api"
 import { Metadata } from "next"
 import { formatDate } from "~/utils/formats"
 
+export const dynamic = "force-static"
+
 type Props = {
   params: Promise<{
     slug: string

@@ -8,6 +8,8 @@ import {
 } from "../api"
 import { Metadata } from "next/types"
 
+export const dynamic = "force-static"
+
 type Props = {
   params: Promise<{
     slug: string
