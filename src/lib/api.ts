@@ -7,7 +7,9 @@ import { type ClientPaths } from "~/types/api"
 import { getDefaultAccessKey } from "~/utils/token"
 
 const baseUrl = env.NEXT_PUBLIC_API_ENDPOINT_URL
-let suffixDefaultAccessKey: string | undefined
+// trường hợp server side
+let suffixDefaultAccessKey: string | undefined =
+  process.env.SUFFIX_DEFAULT_ACCESS_KEY
 
 export function setSuffixDefaultAccessKey(str?: string) {
   suffixDefaultAccessKey = str

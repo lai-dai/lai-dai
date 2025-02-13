@@ -6,6 +6,8 @@ import { SiteFooter } from "~/components/site-footer"
 import { SiteHeader } from "~/components/site-header"
 import { Button } from "~/components/ui/button"
 
+export const dynamic = "force-static"
+
 export const metadata: Metadata = {
   title: "LaiDai",
 }

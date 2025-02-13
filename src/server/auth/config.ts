@@ -1,6 +1,6 @@
 import { User, type DefaultSession, type NextAuthConfig } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { apiServer } from "~/server/api"
+import { api } from "~/lib/api"
 import { AdminLoginFormData, LoginUser } from "~/types/auth"
 import { type AdapterUser } from "next-auth/adapters"
 
@@ -32,7 +32,7 @@ export const authConfig = {
         password: {},
       },
       async authorize(credentials) {
-        const response = await apiServer.POST("/admin/login", {
+        const response = await api.POST("/admin/login", {
           body: credentials as unknown as AdminLoginFormData,
         })
 

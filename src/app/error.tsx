@@ -14,6 +14,7 @@ export default function Error({ error }: { error: Error }) {
         <p>{"Something went wrong"}</p>
 
         <p>{"Sorry, an error occurred while processing your request."}</p>
+
         <pre>{error.message}</pre>
       </code>
     </pre>

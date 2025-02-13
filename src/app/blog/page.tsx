@@ -5,6 +5,8 @@ import { getBlogPostBySlug, getBlogPostSlugs } from "~/app/blog/api"
 import { nonNullable } from "~/utils/ables"
 import { formatDate } from "~/utils/formats"
 
+export const dynamic = "force-static"
+
 export const metadata: Metadata = {
   title: "Blog",
   description: "All the latest Tailwind CSS news, straight from the team.",

@@ -2,22 +2,15 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-import { rehypeComponent } from "~/lib/rehype-component"
-import "./src/env.js"
+import { rehypeComponent } from "./src/lib/rehype-component"
 import type { NextConfig } from "next"
 import createMDX from "@next/mdx"
+
+import "./src/env.js"
 
 /** @type {import("next").NextConfig} */
 const config: NextConfig = {
   pageExtensions: ["mdx", "tsx"],
-
-  // outputFileTracingIncludes: {
-  //   "/**/*": ["./src/content/**/*"],
-  // },
-
-  experimental: {
-    mdxRs: true,
-  },
 
   images: {
     remotePatterns: [
@@ -37,12 +30,10 @@ const config: NextConfig = {
       },
     ]
   },
-
-  transpilePackages: ["@tanstack/query-core"],
 }
 
 const withMDX = createMDX({
-  extension: /\.(md|mdx)$/,
+  extension: /\.mdx?$/,
 
   options: {
     remarkPlugins: [],

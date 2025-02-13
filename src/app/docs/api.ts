@@ -18,7 +18,7 @@ export async function getDocPageBySlug(
 
     // eslint-disable-next-line @next/next/no-assign-module-variable
     const module: Record<string, unknown> = await import(
-      `../../content/docs/${slug}.mdx`
+      `~/content/docs/${slug}.mdx`
     )
     if (!module.default) {
       return null

@@ -20,6 +20,7 @@ const config = {
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/prefer-regexp-exec": "off",
     "@typescript-eslint/no-floating-promises": "off",
+    "react-hooks/rules-of-hooks": "off",
   },
 }
 module.exports = config

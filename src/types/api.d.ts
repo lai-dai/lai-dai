@@ -18,9 +18,24 @@ export interface ClientPaths extends paths {
     patch?: never
     trace?: never
   }
-}
 
-export interface AdminPaths {
+  "/articles/all-slugs": {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get: operations["get/articles"]
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+
   "/admin/login": {
     parameters: {
       query?: never
@@ -39,7 +54,7 @@ export interface AdminPaths {
   }
 }
 
-interface AdminComponents {
+interface Components {
   schemas: {
     AdminLoginRequest: AdminLoginFormData
     AdminLoginResponse: {
@@ -75,7 +90,7 @@ interface AdminOperations {
     }
     requestBody: {
       content: {
-        "application/json": AdminComponents["schemas"]["AdminLoginRequest"]
+        "application/json": Components["schemas"]["AdminLoginRequest"]
       }
     }
     responses: {
@@ -85,7 +100,7 @@ interface AdminOperations {
           [name: string]: unknown
         }
         content: {
-          "application/json": AdminComponents["schemas"]["AdminLoginResponse"]
+          "application/json": Components["schemas"]["AdminLoginResponse"]
         }
       }
       /** @description Bad Request */

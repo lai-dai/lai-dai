@@ -274,11 +274,11 @@
   }
 
   .heart {
-    animation: pulse 9s ease 7.5s infinite;
+    animation: heartPulse 9s ease 7.5s infinite;
     will-change: transform;
   }
 
-  @keyframes pulse {
+  @keyframes heartPulse {
     0% {
       transform: scale(1);
     }

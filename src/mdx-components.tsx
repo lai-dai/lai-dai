@@ -1,5 +1,4 @@
 import React from "react"
-import { CodeBlock } from "~/components/code-block"
 import { CopyButton } from "~/components/copy-button"
 import { PhotoView } from "~/components/photo-view"
 import { cn } from "~/lib/utils"
@@ -19,6 +18,7 @@ import {
   AccordionTrigger,
 } from "~/components/ui/accordion"
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert"
+import { highlightCode } from "~/lib/highlight-code"
 
 function getTextContent(node: React.ReactNode): string {
   if (typeof node === "string" || typeof node === "number") {
@@ -114,7 +114,7 @@ const components = {
   ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
     <ul
       className={cn(
-        "my-6 ml-4 [&_li:before]:mr-3 [&_li:before]:-ml-4 [&_li:before]:content-['-']",
+        "my-6 ml-4 [&_li:before]:-ml-4 [&_li:before]:mr-3 [&_li:before]:content-['-']",
         className,
       )}
       {...props}
@@ -183,7 +183,7 @@ const components = {
     />
   ),
 
-  pre(props: React.ComponentProps<"pre">) {
+  async pre(props: React.ComponentProps<"pre">) {
     const child = React.Children.only(props.children) as React.ReactElement
     if (!child) return null
 
@@ -204,16 +204,19 @@ const components = {
     //   code = lines.splice(1).join("\n")
     // }
 
+    const nodes = highlightCode({
+      code,
+      lang,
+    })
+
     return (
       <div className="relative">
-        <CodeBlock
-          className="mt-6 max-h-[650px] overflow-x-auto rounded-xl bg-zinc-950 dark:bg-zinc-900"
-          lang={lang}
-          code={code}
-        />
+        <div className="mt-6 max-h-[650px] overflow-auto overflow-x-auto rounded-xl bg-zinc-950 *:!bg-transparent *:p-5 dark:bg-zinc-900 [&_.line:empty]:hidden [&_.line]:inline-block">
+          {nodes}
+        </div>
 
         {code && (
-          <CopyButton className={"absolute top-4 right-4"} value={code} />
+          <CopyButton className={"absolute right-4 top-4"} value={code} />
         )}
       </div>
     )
@@ -293,7 +296,7 @@ const components = {
   }: React.ComponentProps<typeof TabsTrigger>) => (
     <TabsTrigger
       className={cn(
-        "text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none",
+        "relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none",
         className,
       )}
       {...props}

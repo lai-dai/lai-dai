@@ -1,8 +1,9 @@
----
-title: Data Fetching and Caching
-nav_title: Data Fetching and Caching
-description: Learn best practices for fetching data on the server or client in Next.js.
----
+export const meta = {
+  title: "Data Fetching and Caching",
+  nav_title: "Data Fetching and Caching",
+  description:
+    "Learn best practices for fetching data on the server or client in Next.js.",
+}
 
 <details>
   <summary>Examples</summary>
@@ -19,11 +20,11 @@ Here's a minimal example of data fetching in Next.js:
 
 ```tsx filename="app/page.tsx" switcher
 export default async function Page() {
-  const data = await fetch('https://api.vercel.app/blog')
+  const data = await fetch("https://api.vercel.app/blog")
   const posts = await data.json()
   return (
     <ul>
-      {posts.map((post) => (
+      {posts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -33,11 +34,11 @@ export default async function Page() {
 
 ```jsx filename="app/page.js" switcher
 export default async function Page() {
-  const data = await fetch('https://api.vercel.app/blog')
+  const data = await fetch("https://api.vercel.app/blog")
   const posts = await data.json()
   return (
     <ul>
-      {posts.map((post) => (
+      {posts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -61,11 +62,11 @@ This component will fetch and display a list of blog posts. The response from `f
 
 ```tsx filename="app/page.tsx" switcher
 export default async function Page() {
-  const data = await fetch('https://api.vercel.app/blog')
+  const data = await fetch("https://api.vercel.app/blog")
   const posts = await data.json()
   return (
     <ul>
-      {posts.map((post) => (
+      {posts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -75,11 +76,11 @@ export default async function Page() {
 
 ```jsx filename="app/page.js" switcher
 export default async function Page() {
-  const data = await fetch('https://api.vercel.app/blog')
+  const data = await fetch("https://api.vercel.app/blog")
   const posts = await data.json()
   return (
     <ul>
-      {posts.map((post) => (
+      {posts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -92,7 +93,7 @@ If you are not using any [Dynamic APIs](/docs/app/building-your-application/rend
 To prevent the page from prerendering, you can add the following to your file:
 
 ```js
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 ```
 
 However, you will commonly use functions like `cookies`, `headers`, or reading the incoming `searchParams` from the page props, which will automatically make the page render dynamically. In this case, you do _not_ need to explicitly use `force-dynamic`.
@@ -102,13 +103,13 @@ However, you will commonly use functions like `cookies`, `headers`, or reading t
 This component will fetch and display a list of blog posts. The response from the database is not cached by default but could be with [additional configuration](#caching-data-with-an-orm-or-database).
 
 ```tsx filename="app/page.tsx" switcher
-import { db, posts } from '@/lib/db'
+import { db, posts } from "@/lib/db"
 
 export default async function Page() {
   const allPosts = await db.select().from(posts)
   return (
     <ul>
-      {allPosts.map((post) => (
+      {allPosts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -117,13 +118,13 @@ export default async function Page() {
 ```
 
 ```jsx filename="app/page.js" switcher
-import { db, posts } from '@/lib/db'
+import { db, posts } from "@/lib/db"
 
 export default async function Page() {
   const allPosts = await db.select().from(posts)
   return (
     <ul>
-      {allPosts.map((post) => (
+      {allPosts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -136,7 +137,7 @@ If you are not using any [Dynamic APIs](/docs/app/building-your-application/rend
 To prevent the page from prerendering, you can add the following to your file:
 
 ```js
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 ```
 
 However, you will commonly use functions like `cookies`, `headers`, or reading the incoming `searchParams` from the page props, which will automatically make the page render dynamically. In this case, you do _not_ need to explicitly use `force-dynamic`.
@@ -148,16 +149,16 @@ We recommend first attempting to fetch data on the server-side.
 However, there are still cases where client-side data fetching makes sense. In these scenarios, you can manually call `fetch` in a `useEffect` (not recommended), or lean on popular React libraries in the community (such as [SWR](https://swr.vercel.app/) or [React Query](https://tanstack.com/query/latest)) for client fetching.
 
 ```tsx filename="app/page.tsx" switcher
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react"
 
 export function Posts() {
   const [posts, setPosts] = useState(null)
 
   useEffect(() => {
     async function fetchPosts() {
-      const res = await fetch('https://api.vercel.app/blog')
+      const res = await fetch("https://api.vercel.app/blog")
       const data = await res.json()
       setPosts(data)
     }
@@ -168,7 +169,7 @@ export function Posts() {
 
   return (
     <ul>
-      {posts.map((post) => (
+      {posts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -177,16 +178,16 @@ export function Posts() {
 ```
 
 ```jsx filename="app/page.js" switcher
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react"
 
 export function Posts() {
   const [posts, setPosts] = useState(null)
 
   useEffect(() => {
     async function fetchPosts() {
-      const res = await fetch('https://api.vercel.app/blog')
+      const res = await fetch("https://api.vercel.app/blog")
       const data = await res.json()
       setPosts(data)
     }
@@ -197,7 +198,7 @@ export function Posts() {
 
   return (
     <ul>
-      {posts.map((post) => (
+      {posts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -210,15 +211,15 @@ export function Posts() {
 You can use the `unstable_cache` API to cache the response to allow pages to be prerendered when running `next build`.
 
 ```tsx filename="app/page.tsx" switcher
-import { unstable_cache } from 'next/cache'
-import { db, posts } from '@/lib/db'
+import { unstable_cache } from "next/cache"
+import { db, posts } from "@/lib/db"
 
 const getPosts = unstable_cache(
   async () => {
     return await db.select().from(posts)
   },
-  ['posts'],
-  { revalidate: 3600, tags: ['posts'] }
+  ["posts"],
+  { revalidate: 3600, tags: ["posts"] },
 )
 
 export default async function Page() {
@@ -226,7 +227,7 @@ export default async function Page() {
 
   return (
     <ul>
-      {allPosts.map((post) => (
+      {allPosts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -235,15 +236,15 @@ export default async function Page() {
 ```
 
 ```jsx filename="app/page.js" switcher
-import { unstable_cache } from 'next/cache'
-import { db, posts } from '@/lib/db'
+import { unstable_cache } from "next/cache"
+import { db, posts } from "@/lib/db"
 
 const getPosts = unstable_cache(
   async () => {
     return await db.select().from(posts)
   },
-  ['posts'],
-  { revalidate: 3600, tags: ['posts'] }
+  ["posts"],
+  { revalidate: 3600, tags: ["posts"] },
 )
 
 export default async function Page() {
@@ -251,7 +252,7 @@ export default async function Page() {
 
   return (
     <ul>
-      {allPosts.map((post) => (
+      {allPosts.map(post => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -272,7 +273,7 @@ If you are using `fetch`, requests can be [memoized](/docs/app/building-your-app
 > - In previous versions of Next.js, using `fetch` would have a default `cache` value of `force-cache`. This changed in version 15, to a default of `cache: no-store`.
 
 ```tsx filename="app/blog/[id]/page.tsx" switcher
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation"
 
 interface Post {
   id: string
@@ -282,7 +283,7 @@ interface Post {
 
 async function getPost(id: string) {
   const res = await fetch(`https://api.vercel.app/blog/${id}`, {
-    cache: 'force-cache',
+    cache: "force-cache",
   })
   const post: Post = await res.json()
   if (!post) notFound()
@@ -290,9 +291,9 @@ async function getPost(id: string) {
 }
 
 export async function generateStaticParams() {
-  const posts = await fetch('https://api.vercel.app/blog', {
-    cache: 'force-cache',
-  }).then((res) => res.json())
+  const posts = await fetch("https://api.vercel.app/blog", {
+    cache: "force-cache",
+  }).then(res => res.json())
 
   return posts.map((post: Post) => ({
     id: String(post.id),
@@ -330,7 +331,7 @@ export default async function Page({
 ```
 
 ```jsx filename="app/blog/[id]/page.js" switcher
-import { notFound } from 'next/navigation'
+import { notFound } from "next/navigation"
 
 async function getPost(id) {
   const res = await fetch(`https://api.vercel.app/blog/${id}`)
@@ -340,11 +341,11 @@ async function getPost(id) {
 }
 
 export async function generateStaticParams() {
-  const posts = await fetch('https://api.vercel.app/blog').then((res) =>
-    res.json()
+  const posts = await fetch("https://api.vercel.app/blog").then(res =>
+    res.json(),
   )
 
-  return posts.map((post) => ({
+  return posts.map(post => ({
     id: String(post.id),
   }))
 }
@@ -374,11 +375,11 @@ export default async function Page({ params }) {
 If you are _not_ using `fetch`, and instead using an ORM or database directly, you can wrap your data fetch with the React `cache` function. This will de-duplicate and only make one query.
 
 ```jsx
-import { cache } from 'react'
-import { db, posts, eq } from '@/lib/db' // Example with Drizzle ORM
-import { notFound } from 'next/navigation'
+import { cache } from "react"
+import { db, posts, eq } from "@/lib/db" // Example with Drizzle ORM
+import { notFound } from "next/navigation"
 
-export const getPost = cache(async (id) => {
+export const getPost = cache(async id => {
   const post = await db.query.posts.findFirst({
     where: eq(posts.id, parseInt(id)),
   })
@@ -442,7 +443,7 @@ async function Playlists({ artistID }: { artistID: string }) {
 
   return (
     <ul>
-      {playlists.map((playlist) => (
+      {playlists.map(playlist => (
         <li key={playlist.id}>{playlist.name}</li>
       ))}
     </ul>
@@ -474,7 +475,7 @@ async function Playlists({ artistID }) {
 
   return (
     <ul>
-      {playlists.map((playlist) => (
+      {playlists.map(playlist => (
         <li key={playlist.id}>{playlist.name}</li>
       ))}
     </ul>
@@ -497,7 +498,7 @@ To fetch data in parallel, you can eagerly initiate requests by defining them ou
 In the example below, the `getArtist` and `getAlbums` functions are defined outside the `Page` component and initiated inside the component using `Promise.all`:
 
 ```tsx filename="app/artist/[username]/page.tsx" switcher
-import Albums from './albums'
+import Albums from "./albums"
 
 async function getArtist(username: string) {
   const res = await fetch(`https://api.example.com/artist/${username}`)
@@ -531,7 +532,7 @@ export default async function Page({
 ```
 
 ```jsx filename="app/artist/[username]/page.js" switcher
-import Albums from './albums'
+import Albums from "./albums"
 
 async function getArtist(username) {
   const res = await fetch(`https://api.example.com/artist/${username}`)
@@ -569,7 +570,7 @@ Another way to prevent waterfalls is to use the _preload_ pattern by creating an
 Note that `preload` function doesn't block `checkIsAvailable()` from running.
 
 ```tsx filename="components/Item.tsx" switcher
-import { getItem } from '@/utils/get-item'
+import { getItem } from "@/utils/get-item"
 
 export const preload = (id: string) => {
   // void evaluates the given expression and returns undefined
@@ -583,9 +584,9 @@ export default async function Item({ id }: { id: string }) {
 ```
 
 ```jsx filename="components/Item.js" switcher
-import { getItem } from '@/utils/get-item'
+import { getItem } from "@/utils/get-item"
 
-export const preload = (id) => {
+export const preload = id => {
   // void evaluates the given expression and returns undefined
   // https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void
   void getItem(id)
@@ -597,7 +598,7 @@ export default async function Item({ id }) {
 ```
 
 ```tsx filename="app/item/[id]/page.tsx" switcher
-import Item, { preload, checkIsAvailable } from '@/components/Item'
+import Item, { preload, checkIsAvailable } from "@/components/Item"
 
 export default async function Page({
   params,
@@ -615,7 +616,7 @@ export default async function Page({
 ```
 
 ```jsx filename="app/item/[id]/page.js" switcher
-import Item, { preload, checkIsAvailable } from '@/components/Item'
+import Item, { preload, checkIsAvailable } from "@/components/Item"
 
 export default async function Page({ params }) {
   const { id } = await params
@@ -635,8 +636,8 @@ export default async function Page({ params }) {
 You can combine the `cache` function, the `preload` pattern, and the `server-only` package to create a data fetching utility that can be used throughout your app.
 
 ```ts filename="utils/get-item.ts" switcher
-import { cache } from 'react'
-import 'server-only'
+import { cache } from "react"
+import "server-only"
 
 export const preload = (id: string) => {
   void getItem(id)
@@ -648,14 +649,14 @@ export const getItem = cache(async (id: string) => {
 ```
 
 ```js filename="utils/get-item.js" switcher
-import { cache } from 'react'
-import 'server-only'
+import { cache } from "react"
+import "server-only"
 
-export const preload = (id) => {
+export const preload = id => {
   void getItem(id)
 }
 
-export const getItem = cache(async (id) => {
+export const getItem = cache(async id => {
   // ...
 })
 ```
@@ -685,51 +686,51 @@ module.exports = {
 Then pass the object or value you want to taint to the `experimental_taintObjectReference` or `experimental_taintUniqueValue` functions:
 
 ```ts filename="app/utils.ts" switcher
-import { queryDataFromDB } from './api'
+import { queryDataFromDB } from "./api"
 import {
   experimental_taintObjectReference,
   experimental_taintUniqueValue,
-} from 'react'
+} from "react"
 
 export async function getUserData() {
   const data = await queryDataFromDB()
   experimental_taintObjectReference(
-    'Do not pass the whole user object to the client',
-    data
+    "Do not pass the whole user object to the client",
+    data,
   )
   experimental_taintUniqueValue(
     "Do not pass the user's address to the client",
     data,
-    data.address
+    data.address,
   )
   return data
 }
 ```
 
 ```js filename="app/utils.js" switcher
-import { queryDataFromDB } from './api'
+import { queryDataFromDB } from "./api"
 import {
   experimental_taintObjectReference,
   experimental_taintUniqueValue,
-} from 'react'
+} from "react"
 
 export async function getUserData() {
   const data = await queryDataFromDB()
   experimental_taintObjectReference(
-    'Do not pass the whole user object to the client',
-    data
+    "Do not pass the whole user object to the client",
+    data,
   )
   experimental_taintUniqueValue(
     "Do not pass the user's address to the client",
     data,
-    data.address
+    data.address,
   )
   return data
 }
 ```
 
 ```tsx filename="app/page.tsx" switcher
-import { getUserData } from './data'
+import { getUserData } from "./data"
 
 export async function Page() {
   const userData = getUserData()
@@ -743,7 +744,7 @@ export async function Page() {
 ```
 
 ```jsx filename="app/page.js" switcher
-import { getUserData } from './data'
+import { getUserData } from "./data"
 
 export async function Page() {
   const userData = await getUserData()

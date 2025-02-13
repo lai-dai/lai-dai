@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { geistSans, iBM_Plex_Mono } from "~/lib/fonts";
-import "~/styles/globals.css";
-import { ThemeProvider } from "next-themes";
-import Script from "next/script";
-import { META_THEME_COLORS } from "~/config/site";
-import { Toaster } from "~/components/ui/sonner";
-import { CircleAlert, CircleCheck, CircleX, Info, Loader } from "lucide-react";
-import { AppInitializer } from "~/components/app-initializer";
-import { env } from "~/env";
-import AppProviders from "~/components/app-providers";
-import { auth } from "~/server/auth";
+import type { Metadata } from "next"
+import { geistSans, iBM_Plex_Mono } from "~/lib/fonts"
+import "~/styles/globals.css"
+import { ThemeProvider } from "~/components/theme-provider"
+import Script from "next/script"
+import { META_THEME_COLORS } from "~/config/site"
+import { Toaster } from "~/components/ui/sonner"
+import { CircleAlert, CircleCheck, CircleX, Info, Loader } from "lucide-react"
+import { AppInitializer } from "~/components/app-initializer"
+import { env } from "~/env"
+import AppProviders from "~/components/app-providers"
+import { auth } from "~/server/auth"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://laidai.xyz"),
@@ -26,21 +26,20 @@ export const metadata: Metadata = {
     },
   ],
   creator: "daire",
-};
+}
 
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  const session = await auth();
+  const session = await auth()
 
   return (
     <html
       lang="vi"
       className={`${geistSans.variable} ${iBM_Plex_Mono.variable} antialiased`}
-      suppressHydrationWarning
-    >
+      suppressHydrationWarning>
       <Script id={"theme"}>
         {`
 try {
@@ -57,22 +56,21 @@ try {
 
       <body>
         <ThemeProvider
-          attribute={"class"}
+          storageKey="theme"
           defaultTheme={"dark"}
+          enableSystem
+          enableColorScheme
           disableTransitionOnChange={false}
-          enableColorScheme={true}
-          enableSystem={true}
-        >
+          attribute="class"
+          themes={["light", "dark", "system"]}>
           <AppInitializer
-            suffixDefaultAccessKey={env.SUFFIX_DEFAULT_ACCESS_KEY}
-          >
+            suffixDefaultAccessKey={env.SUFFIX_DEFAULT_ACCESS_KEY}>
             <AppProviders session={session}>
               <div vaul-drawer-wrapper={""}>
                 <div
                   className={
-                    "bg-background relative flex min-h-screen flex-col isolate"
-                  }
-                >
+                    "relative isolate flex min-h-screen flex-col bg-background"
+                  }>
                   {children}
                 </div>
               </div>
@@ -93,5 +91,5 @@ try {
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

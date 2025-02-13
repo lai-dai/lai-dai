@@ -1,7 +1,6 @@
 import Link from "next/link"
 import React from "react"
 import { Icons } from "~/components/icons"
-import { ThemeToggle } from "~/components/theme-toggle"
 import { Button } from "./ui/button"
 
 import { AppNavigation } from "~/components/app-navigation"
@@ -9,6 +8,7 @@ import { ProfilePopover } from "~/components/profile-popover"
 import { siteConfig } from "~/config/site"
 import { auth } from "~/server/auth"
 import { cn } from "~/lib/utils"
+import { ThemeToggle } from "~/components/theme-toggle"
 
 export async function SiteHeader({
   className,
@@ -19,7 +19,7 @@ export async function SiteHeader({
   return (
     <header
       className={cn(
-        "bg-background/95 supports-[backdrop-filter]:bg-background/60 backdrop-blur",
+        "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
         className,
       )}>
       <div className={"flex h-14 items-center gap-8 px-4"}>

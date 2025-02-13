@@ -1,27 +1,31 @@
-"use server"
+"use client"
 
 import React from "react"
 import { highlightCode } from "~/lib/highlight-code"
-import { cn } from "~/lib/utils"
+import { Skeleton } from "~/components/ui/skeleton"
 
 export async function CodeBlock({
   lang,
   code,
-  className,
+  initialCode,
 }: {
   lang: string
   code: string
-  className?: string
+  initialCode?: JSX.Element
 }) {
-  const html = await highlightCode({ code, lang })
+  const [nodes, setNodes] = React.useState(initialCode)
+  const [error, setError] = React.useState()
 
-  return (
-    <div
-      className={cn(
-        "overflow-auto *:!bg-transparent *:p-5 [&_.line]:inline-block [&_.line:empty]:hidden",
-        className,
-      )}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  )
+  React.useLayoutEffect(() => {
+    highlightCode({
+      code,
+      lang,
+    })
+      .then(setNodes)
+      .catch(setError)
+  }, [code, lang])
+
+  return error
+    ? (error as Error).message
+    : (nodes ?? <Skeleton className="h-8" />)
 }

@@ -1,10 +1,10 @@
 import fs from "fs"
 import { u } from "unist-builder"
 import { visit } from "unist-util-visit"
-import path from "node:path"
 
 import { Index } from "../__examples__"
 import { type UnistNode, type UnistTree } from "~/types/unist"
+import path from "node:path"
 
 function getNodeAttributeByName(node: UnistNode, name: string) {
   return node.attributes?.find(attribute => attribute.name === name)
@@ -16,18 +16,18 @@ export function rehypeComponent() {
       // src prop overrides both name and fileName.
       if (node.name === "ComponentPreview") {
         const name = getNodeAttributeByName(node, "name")?.value
+
         if (!name) {
           return null
         }
 
         try {
           const component = Index[name as keyof typeof Index]
-          const filePath = component.files[0]?.path
+          const filePath = component.path
 
           // Read the source file.
           const source = fs.readFileSync(
             path.join(process.cwd(), filePath),
-            // filePath,
             "utf8",
           )
 
@@ -55,7 +55,7 @@ export function rehypeComponent() {
             }),
           )
         } catch (error) {
-          console.error("59", (error as Error).message)
+          console.error("58", (error as Error).message)
         }
       }
     })
