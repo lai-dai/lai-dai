@@ -40,6 +40,7 @@ const UNPROTECTED_ROUTES = [
   "/auth/local/register",
   "/auth/forgot-password",
   "/auth/reset-password",
+  "/admin/login",
 ]
 
 const authMiddleware: Middleware = {
@@ -67,4 +68,22 @@ const authMiddleware: Middleware = {
 
 api.use(authMiddleware)
 
-export { api }
+const adminApi = createClient<ClientPaths>({
+  baseUrl,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  querySerializer(params) {
+    // default key
+    if (suffixDefaultAccessKey) {
+      params.key = getDefaultAccessKey(suffixDefaultAccessKey)
+    }
+
+    return qs.stringify(params, {
+      encodeValuesOnly: true, // prettify URL
+    })
+  },
+})
+
+export { api, adminApi }
