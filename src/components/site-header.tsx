@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import React from "react"
 import { Icons } from "~/components/icons"
@@ -6,15 +8,18 @@ import { Button } from "./ui/button"
 import { AppNavigation } from "~/components/app-navigation"
 import { ProfilePopover } from "~/components/profile-popover"
 import { siteConfig } from "~/config/site"
-import { auth } from "~/server/auth"
 import { cn } from "~/lib/utils"
 import { ThemeToggle } from "~/components/theme-toggle"
+import { getUserSession } from "~/hooks/use-session"
+import { useLazyRef } from "~/hooks/use-lazy-ref"
+import { useSession } from "next-auth/react"
 
-export async function SiteHeader({
-  className,
-}: React.ComponentProps<"header">) {
-  const session = await auth()
-  const isAuth = !!session?.user
+export function SiteHeader({ className }: React.ComponentProps<"header">) {
+  const userRef = useLazyRef(getUserSession)
+  const isAuth = !!userRef.current
+
+  const { data } = useSession()
+  console.log("🚀 data", data)
 
   return (
     <header

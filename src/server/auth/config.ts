@@ -1,6 +1,15 @@
-import { User, type DefaultSession, type NextAuthConfig } from "next-auth"
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+import {
+  User,
+  type DefaultSession,
+  type NextAuthConfig,
+  CredentialsSignin,
+} from "next-auth"
+import "next-auth/jwt"
+
 import CredentialsProvider from "next-auth/providers/credentials"
-import { api } from "~/lib/api"
+import { adminApi } from "~/lib/api"
 import { AdminLoginFormData, LoginUser } from "~/types/auth"
 import { type AdapterUser } from "next-auth/adapters"
 
@@ -18,6 +27,11 @@ declare module "next-auth" {
   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface User extends LoginUser {}
 }
+declare module "next-auth/jwt" {
+  interface JWT {
+    accessToken?: string
+  }
+}
 
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
@@ -27,17 +41,14 @@ declare module "next-auth" {
 export const authConfig = {
   providers: [
     CredentialsProvider({
-      credentials: {
-        identifier: {},
-        password: {},
-      },
+      credentials: {},
       async authorize(credentials) {
-        const response = await api.POST("/admin/login", {
-          body: credentials as unknown as AdminLoginFormData,
+        const response = await adminApi.POST("/admin/login", {
+          body: credentials as AdminLoginFormData,
         })
 
         if (response.error) {
-          throw new Error(response.error?.error?.message ?? "Lỗi")
+          throw new CredentialsSignin(response.error?.error?.message ?? "Lỗi")
         }
 
         return {

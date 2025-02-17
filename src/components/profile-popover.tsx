@@ -1,8 +1,7 @@
 "use client"
 
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import React from "react"
-import { submitLogout } from "~/actions/auth"
 import { Button } from "~/components/ui/button"
 
 import {
@@ -13,11 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
-
-function handleLogout() {
-  "use client"
-  submitLogout()
-}
 
 export function ProfilePopover() {
   const { data: session } = useSession()
@@ -33,7 +27,7 @@ export function ProfilePopover() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={() => handleLogout()}>
+        <DropdownMenuItem onClick={() => signOut()}>
           {"Logout"}
         </DropdownMenuItem>
       </DropdownMenuContent>

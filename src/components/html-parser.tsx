@@ -6,7 +6,6 @@ import parse, {
 } from "html-react-parser"
 import Image from "next/image"
 import React from "react"
-import { CopyButton } from "~/components/copy-button"
 import { PhotoView } from "~/components/photo-view"
 import { cn } from "~/lib/utils"
 import { absoluteUrl } from "~/utils/url"
@@ -166,24 +165,14 @@ const options = {
           />
         )
       case "pre":
-        const { __rawString__, ...preProps } = props
         return (
-          <>
-            <pre
-              {...preProps}
-              className={cn(
-                "mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border bg-zinc-950 py-4 dark:bg-zinc-900",
-                className,
-              )}
-            />
-
-            {__rawString__ && (
-              <CopyButton
-                className={cn("absolute right-4 top-4")}
-                value={__rawString__ as string}
-              />
+          <pre
+            {...props}
+            className={cn(
+              "mb-4 mt-6 max-h-[650px] overflow-x-auto rounded-lg border bg-zinc-950 py-4 dark:bg-zinc-900",
+              className,
             )}
-          </>
+          />
         )
       case "code":
         return (
@@ -209,11 +198,11 @@ export const HtmlParser = React.forwardRef<HTMLDivElement, HtmlParserProps>(
       return null
     }
 
-    const reactComponent = parse(html ?? "", options)
+    const nodes = parse(html ?? "", options)
 
     return (
       <div aria-label={"html-react-parser"} ref={ref} {...props}>
-        {reactComponent}
+        {nodes}
       </div>
     )
   },
