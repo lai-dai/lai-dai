@@ -8,6 +8,7 @@ export default {
     "./src/components/**/*.{ts,tsx,mdx}",
     "./src/app/**/*.{ts,tsx,mdx}",
     "./src/mdx-components.tsx",
+    "./src/lib/highlight-code.ts",
   ],
   theme: {
     extend: {

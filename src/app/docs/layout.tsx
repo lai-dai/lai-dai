@@ -7,10 +7,8 @@ export default function BlogLayout({
   children: React.ReactNode
 }>) {
   return (
-    <PhotoProvider>
-      <main className={"container mx-auto flex flex-1 flex-col"}>
-        {children}
-      </main>
-    </PhotoProvider>
+    <main className={"mx-auto min-h-svh max-w-7xl border-dashed xl:border-x"}>
+      <PhotoProvider>{children}</PhotoProvider>
+    </main>
   )
 }

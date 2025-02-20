@@ -15,6 +15,7 @@ const highlighter = createHighlighter({
     "css",
     "html",
 
+    "javascript",
     "js",
     "jsx",
 

@@ -14,42 +14,15 @@ import {
 } from "~/components/ui/navigation-menu"
 import { cn } from "~/lib/utils"
 
-type MenuItem = {
+export interface MenuEntry {
+  children?: MenuEntry[]
   id: number
+  target: string
   title: string
   url: string
-  target: string
-  children?: MenuItem[]
 }
 
-const menuList: MenuItem[] = [
-  {
-    id: 1,
-    title: "Home",
-    url: "/",
-    target: "_self",
-  },
-  {
-    id: 8,
-    title: "Docs",
-    url: "/docs",
-    target: "_self",
-  },
-  {
-    id: 10,
-    title: "Blog",
-    url: "/blog",
-    target: "_self",
-  },
-  {
-    id: 9,
-    title: "About",
-    url: "/about",
-    target: "_self",
-  },
-]
-
-export function AppNavigation() {
+export function AppNavigation({ menuList }: { menuList: MenuEntry[] }) {
   return (
     <NavigationMenu className={"hidden md:flex"}>
       <NavigationMenuList>
@@ -78,7 +51,7 @@ const GroupItems = ({
   items,
 }: {
   children?: React.ReactNode
-  items?: MenuItem[]
+  items?: MenuEntry[]
 }) => {
   return (
     <NavigationMenuItem>
@@ -111,20 +84,14 @@ const NavLink = ({
 
   return (
     <NavigationMenuItem>
-      <Link
-        href={url ?? "#"}
-        prefetch
-        legacyBehavior={true}
-        passHref={true}
-        target={target}>
-        <NavigationMenuLink
-          active={
-            pathname === "/" ? url === pathname : url?.startsWith(pathname)
-          }
-          className={cn(navigationMenuTriggerStyle(), "block w-full")}>
+      <NavigationMenuLink
+        asChild
+        active={pathname === "/" ? url === pathname : url?.startsWith(pathname)}
+        className={cn(navigationMenuTriggerStyle(), "block w-full")}>
+        <Link href={url ?? "#"} prefetch target={target}>
           {children}
-        </NavigationMenuLink>
-      </Link>
+        </Link>
+      </NavigationMenuLink>
     </NavigationMenuItem>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown, Command, type LucideIcon } from "lucide-react"
+import { ChevronDown, type LucideIcon } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Icons } from "./icons"
@@ -27,63 +27,38 @@ import {
   SidebarHeader,
 } from "~/components/ui/sidebar"
 import { siteConfig } from "~/config/site"
+import React from "react"
 
-interface MenuItem {
-  children?: MenuItem[]
+export interface MenuEntry {
+  children?: MenuEntry[]
   icon?: LucideIcon
+  label?: string
+  separator?: boolean
   title?: string
   url?: string
-  separator?: boolean
-  label?: string
 }
 
-const Menu: MenuItem[] = [
-  {
-    title: "Next MDX Remote",
-    icon: Command,
-    url: "/",
-    children: [
-      {
-        title: "Introduction",
-        url: "/docs",
-      },
-      {
-        title: "Installation",
-        url: "/docs/installation",
-      },
-      {
-        title: "Rehype-pretty-code",
-        url: "/docs/rehype-pretty-code",
-      },
-    ],
-  },
-]
-
-export function AppSidebar() {
+export function AppSidebar({ menuList }: { menuList: MenuEntry[] }) {
   const { isMobile } = useSidebar()
+
   return (
     <Sidebar
       className={
-        "fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-full shrink-0 border-r border-border/40 bg-background dark:border-border md:sticky md:block"
+        "fixed z-30 hidden max-h-svh w-full shrink-0 overflow-auto border-r border-dashed border-border/40 bg-background dark:border-border md:sticky md:block"
       }
-      collapsible={isMobile ? "offcanvas" : "none"}
-    >
+      collapsible={isMobile ? "offcanvas" : "none"}>
       <SidebarHeader className={"h-16 justify-center px-4 md:hidden"}>
         <div className={"flex items-center gap-2"}>
           <Link
             className={"flex items-center gap-2 font-bold"}
             href={"https://ui.shadcn.com/"}
-            referrerPolicy={"no-referrer"}
-          >
+            referrerPolicy={"no-referrer"}>
             <Icons.logo className={"h-6 w-6"} />
 
             {"Shadcn"}
           </Link>
 
-          <Link
-            className={"text-sm text-muted-foreground"}
-            href={"/"}
-          >
+          <Link className={"text-sm text-muted-foreground"} href={"/"}>
             {siteConfig.name}
           </Link>
         </div>
@@ -94,11 +69,8 @@ export function AppSidebar() {
           <SidebarGroup>
             <SidebarGroupContent>
               <SidebarMenu>
-                {Menu.map((it, idx) => (
-                  <Tree
-                    key={idx}
-                    {...it}
-                  />
+                {menuList.map((it, idx) => (
+                  <Tree key={idx} {...it} />
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
@@ -111,7 +83,7 @@ export function AppSidebar() {
   )
 }
 
-function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
+function Tree({ isSubMenu, ...props }: MenuEntry & { isSubMenu?: boolean }) {
   const pathname = usePathname()
   const { setOpenMobile } = useSidebar()
 
@@ -123,29 +95,32 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
     return <SidebarGroupLabel>{props.label}</SidebarGroupLabel>
   }
 
-  const handleActive = (url?: string) => {
-    if (!url) {
-      return false
-    }
+  const handleActive = React.useCallback(
+    (url?: string) => {
+      if (!url) {
+        return false
+      }
 
-    if (/^(?:\/|\/docs)$/.test(url)) {
-      return pathname === url
-    }
+      if (/^(?:\/|\/docs)$/.test(url)) {
+        return pathname === url
+      }
 
-    return pathname.startsWith(url)
-  }
+      return pathname.startsWith(url)
+    },
+    [pathname],
+  )
 
   if (!props?.children?.length) {
     const Comp = isSubMenu ? SidebarMenuSubButton : SidebarMenuButton
     const activeDD = handleActive(props.url)
+
     return (
       <Comp
         asChild={true}
         isActive={activeDD}
         onClick={() => setOpenMobile(false)}
         title={props.title}
-        tooltip={props.title}
-      >
+        tooltip={props.title}>
         <Link href={props.url ?? "#"}>
           {!isSubMenu && (props.icon ? <props.icon /> : null)}
 
@@ -163,8 +138,7 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
         className={
           "group/collapsible [&[data-state=open]>button>svg:last-child]:rotate-90"
         }
-        defaultOpen={true}
-      >
+        defaultOpen={true}>
         <CollapsibleTrigger asChild={true}>
           <SidebarMenuButton title={props?.title}>
             {!isSubMenu && (props?.icon ? <props.icon /> : null)}
@@ -181,15 +155,10 @@ function Tree({ isSubMenu, ...props }: MenuItem & { isSubMenu?: boolean }) {
           <CollapsibleContent
             className={
               "data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down"
-            }
-          >
+            }>
             <SidebarMenuSub className={"mr-0 pr-0"}>
               {props?.children.map((child, idx) => (
-                <Tree
-                  isSubMenu={true}
-                  key={idx}
-                  {...child}
-                />
+                <Tree isSubMenu={true} key={idx} {...child} />
               ))}
             </SidebarMenuSub>
           </CollapsibleContent>

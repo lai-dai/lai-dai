@@ -3,7 +3,7 @@ import Link from "next/link"
 import { redirect } from "next/navigation"
 
 import { Icons } from "~/components/icons"
-import { UserAuthForm } from "~/components/auth/login/user-auth-form"
+import { UserAuthLoginForm } from "~/components/auth/login/user-auth-login-form"
 import { auth } from "~/server/auth"
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default async function LoginPage() {
                 {"Welcome back"}
               </h1>
 
-              <p className={"text-muted-foreground text-sm"}>
+              <p className={"text-sm text-muted-foreground"}>
                 {"Enter your email to sign in to your account"}
               </p>
             </div>
@@ -45,7 +45,7 @@ export default async function LoginPage() {
       <div className={"border-grid border-b"}>
         <div className={"container-wrapper"}>
           <div className={"container sm:w-[350px]"}>
-            <UserAuthForm />
+            <UserAuthLoginForm />
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default async function LoginPage() {
       <div className={"border-grid border-b"}>
         <div className={"container-wrapper"}>
           <div className={"container py-6"}>
-            <p className={"text-muted-foreground px-8 text-center text-sm"}>
+            <p className={"px-8 text-center text-sm text-muted-foreground"}>
               <Link
                 className={"hover:text-brand underline underline-offset-4"}
                 href={"/register"}>

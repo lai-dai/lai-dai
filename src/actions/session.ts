@@ -18,3 +18,7 @@ export const updateSession = React.cache(
     })
   },
 )
+
+export const getSession = React.cache(async () => {
+  return await fetch("/api/auth/session")
+})

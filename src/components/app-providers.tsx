@@ -4,7 +4,7 @@ import React from "react"
 import { SessionProvider } from "next-auth/react"
 import { Session } from "next-auth"
 
-export default function AppProviders({
+export function AppProviders({
   children,
   session,
 }: Readonly<{

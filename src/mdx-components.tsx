@@ -204,7 +204,7 @@ const components = {
     //   code = lines.splice(1).join("\n")
     // }
 
-    const nodes = highlightCode({
+    const nodes = await highlightCode({
       code,
       lang,
     })
