@@ -132,70 +132,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/grammar-lessons": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/grammar-lessons"];
-        put?: never;
-        post: operations["post/grammar-lessons"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/grammar-lessons/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/grammar-lessons/{id}"];
-        put: operations["put/grammar-lessons/{id}"];
-        post?: never;
-        delete: operations["delete/grammar-lessons/{id}"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/grammar-levels": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/grammar-levels"];
-        put?: never;
-        post: operations["post/grammar-levels"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/grammar-levels/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["get/grammar-levels/{id}"];
-        put: operations["put/grammar-levels/{id}"];
-        post?: never;
-        delete: operations["delete/grammar-levels/{id}"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/irregular-verbs": {
         parameters: {
             query?: never;
@@ -3321,675 +3257,6 @@ export interface components {
             data?: components["schemas"]["Global"];
             meta?: Record<string, never>;
         };
-        GrammarLessonRequest: {
-            data: {
-                title?: string;
-                slug?: string;
-                desc?: string;
-                order?: number;
-                /** @example string or id */
-                level?: number | string;
-                content?: string;
-                locale?: string;
-                localizations?: (number | string)[];
-            };
-        };
-        GrammarLessonListResponse: {
-            data?: components["schemas"]["GrammarLesson"][];
-            meta?: {
-                pagination?: {
-                    page?: number;
-                    pageSize?: number;
-                    pageCount?: number;
-                    total?: number;
-                };
-            };
-        };
-        GrammarLesson: {
-            id?: number;
-            documentId?: string;
-            title?: string;
-            slug?: string;
-            desc?: string;
-            order?: number;
-            level?: {
-                id?: number;
-                documentId?: string;
-                title?: string;
-                slug?: string;
-                desc?: string;
-                image_path?: string;
-                image?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    alternativeText?: string;
-                    caption?: string;
-                    width?: number;
-                    height?: number;
-                    formats?: unknown;
-                    hash?: string;
-                    ext?: string;
-                    mime?: string;
-                    /** Format: float */
-                    size?: number;
-                    url?: string;
-                    previewUrl?: string;
-                    provider?: string;
-                    provider_metadata?: unknown;
-                    related?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    folder?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        pathId?: number;
-                        parent?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        children?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        files?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            alternativeText?: string;
-                            caption?: string;
-                            width?: number;
-                            height?: number;
-                            formats?: unknown;
-                            hash?: string;
-                            ext?: string;
-                            mime?: string;
-                            /** Format: float */
-                            size?: number;
-                            url?: string;
-                            previewUrl?: string;
-                            provider?: string;
-                            provider_metadata?: unknown;
-                            related?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            folder?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            folderPath?: string;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                                firstname?: string;
-                                lastname?: string;
-                                username?: string;
-                                /** Format: email */
-                                email?: string;
-                                resetPasswordToken?: string;
-                                registrationToken?: string;
-                                isActive?: boolean;
-                                roles?: {
-                                    id?: number;
-                                    documentId?: string;
-                                    name?: string;
-                                    code?: string;
-                                    description?: string;
-                                    users?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                    permissions?: {
-                                        id?: number;
-                                        documentId?: string;
-                                        action?: string;
-                                        actionParameters?: unknown;
-                                        subject?: string;
-                                        properties?: unknown;
-                                        conditions?: unknown;
-                                        role?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        };
-                                        /** Format: date-time */
-                                        createdAt?: string;
-                                        /** Format: date-time */
-                                        updatedAt?: string;
-                                        /** Format: date-time */
-                                        publishedAt?: string;
-                                        createdBy?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        };
-                                        updatedBy?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        };
-                                        locale?: string;
-                                        localizations?: {
-                                            id?: number;
-                                            documentId?: string;
-                                        }[];
-                                    }[];
-                                    /** Format: date-time */
-                                    createdAt?: string;
-                                    /** Format: date-time */
-                                    updatedAt?: string;
-                                    /** Format: date-time */
-                                    publishedAt?: string;
-                                    createdBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    updatedBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    locale?: string;
-                                    localizations?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                }[];
-                                blocked?: boolean;
-                                preferedLanguage?: string;
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        }[];
-                        path?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    };
-                    folderPath?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                order?: number;
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            };
-            content?: string;
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string;
-            /** Format: date-time */
-            publishedAt?: string;
-            createdBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            updatedBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            locale?: string;
-            localizations?: {
-                id?: number;
-                documentId?: string;
-                title?: string;
-                slug?: string;
-                desc?: string;
-                order?: number;
-                level?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                content?: string;
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            }[];
-        };
-        GrammarLessonResponse: {
-            data?: components["schemas"]["GrammarLesson"];
-            meta?: Record<string, never>;
-        };
-        GrammarLevelRequest: {
-            data: {
-                title?: string;
-                slug?: string;
-                desc?: string;
-                image_path?: string;
-                /** @example string or id */
-                image?: number | string;
-                order?: number;
-                locale?: string;
-                localizations?: (number | string)[];
-            };
-        };
-        GrammarLevelListResponse: {
-            data?: components["schemas"]["GrammarLevel"][];
-            meta?: {
-                pagination?: {
-                    page?: number;
-                    pageSize?: number;
-                    pageCount?: number;
-                    total?: number;
-                };
-            };
-        };
-        GrammarLevel: {
-            id?: number;
-            documentId?: string;
-            title?: string;
-            slug?: string;
-            desc?: string;
-            image_path?: string;
-            image?: {
-                id?: number;
-                documentId?: string;
-                name?: string;
-                alternativeText?: string;
-                caption?: string;
-                width?: number;
-                height?: number;
-                formats?: unknown;
-                hash?: string;
-                ext?: string;
-                mime?: string;
-                /** Format: float */
-                size?: number;
-                url?: string;
-                previewUrl?: string;
-                provider?: string;
-                provider_metadata?: unknown;
-                related?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-                folder?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    pathId?: number;
-                    parent?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    children?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    files?: {
-                        id?: number;
-                        documentId?: string;
-                        name?: string;
-                        alternativeText?: string;
-                        caption?: string;
-                        width?: number;
-                        height?: number;
-                        formats?: unknown;
-                        hash?: string;
-                        ext?: string;
-                        mime?: string;
-                        /** Format: float */
-                        size?: number;
-                        url?: string;
-                        previewUrl?: string;
-                        provider?: string;
-                        provider_metadata?: unknown;
-                        related?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        folder?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        folderPath?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                            firstname?: string;
-                            lastname?: string;
-                            username?: string;
-                            /** Format: email */
-                            email?: string;
-                            resetPasswordToken?: string;
-                            registrationToken?: string;
-                            isActive?: boolean;
-                            roles?: {
-                                id?: number;
-                                documentId?: string;
-                                name?: string;
-                                code?: string;
-                                description?: string;
-                                users?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                                permissions?: {
-                                    id?: number;
-                                    documentId?: string;
-                                    action?: string;
-                                    actionParameters?: unknown;
-                                    subject?: string;
-                                    properties?: unknown;
-                                    conditions?: unknown;
-                                    role?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    /** Format: date-time */
-                                    createdAt?: string;
-                                    /** Format: date-time */
-                                    updatedAt?: string;
-                                    /** Format: date-time */
-                                    publishedAt?: string;
-                                    createdBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    updatedBy?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    };
-                                    locale?: string;
-                                    localizations?: {
-                                        id?: number;
-                                        documentId?: string;
-                                    }[];
-                                }[];
-                                /** Format: date-time */
-                                createdAt?: string;
-                                /** Format: date-time */
-                                updatedAt?: string;
-                                /** Format: date-time */
-                                publishedAt?: string;
-                                createdBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                updatedBy?: {
-                                    id?: number;
-                                    documentId?: string;
-                                };
-                                locale?: string;
-                                localizations?: {
-                                    id?: number;
-                                    documentId?: string;
-                                }[];
-                            }[];
-                            blocked?: boolean;
-                            preferedLanguage?: string;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                    }[];
-                    path?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                folderPath?: string;
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            };
-            order?: number;
-            /** Format: date-time */
-            createdAt?: string;
-            /** Format: date-time */
-            updatedAt?: string;
-            /** Format: date-time */
-            publishedAt?: string;
-            createdBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            updatedBy?: {
-                id?: number;
-                documentId?: string;
-            };
-            locale?: string;
-            localizations?: {
-                id?: number;
-                documentId?: string;
-                title?: string;
-                slug?: string;
-                desc?: string;
-                image_path?: string;
-                image?: {
-                    id?: number;
-                    documentId?: string;
-                    name?: string;
-                    alternativeText?: string;
-                    caption?: string;
-                    width?: number;
-                    height?: number;
-                    formats?: unknown;
-                    hash?: string;
-                    ext?: string;
-                    mime?: string;
-                    /** Format: float */
-                    size?: number;
-                    url?: string;
-                    previewUrl?: string;
-                    provider?: string;
-                    provider_metadata?: unknown;
-                    related?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    folder?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    folderPath?: string;
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                order?: number;
-                /** Format: date-time */
-                createdAt?: string;
-                /** Format: date-time */
-                updatedAt?: string;
-                /** Format: date-time */
-                publishedAt?: string;
-                createdBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                updatedBy?: {
-                    id?: number;
-                    documentId?: string;
-                };
-                locale?: string;
-                localizations?: {
-                    id?: number;
-                    documentId?: string;
-                }[];
-            }[];
-        };
-        GrammarLevelResponse: {
-            data?: components["schemas"]["GrammarLevel"];
-            meta?: Record<string, never>;
-        };
         IrregularVerbRequest: {
             data: {
                 verb?: string;
@@ -5257,7 +4524,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -5328,7 +4595,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -5552,7 +4819,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -5619,7 +4886,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -5690,7 +4957,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -6136,7 +5403,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -6203,7 +5470,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -6274,7 +5541,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -6558,730 +5825,6 @@ export interface operations {
             };
         };
     };
-    "get/grammar-lessons": {
-        parameters: {
-            query?: {
-                /** @description Sort by attributes ascending (asc) or descending (desc) */
-                sort?: string;
-                /** @description Return page/pageSize (default: true) */
-                "pagination[withCount]"?: boolean;
-                /** @description Page number (default: 0) */
-                "pagination[page]"?: number;
-                /** @description Page size (default: 25) */
-                "pagination[pageSize]"?: number;
-                /** @description Offset value (default: 0) */
-                "pagination[start]"?: number;
-                /** @description Number of entities to return (default: 25) */
-                "pagination[limit]"?: number;
-                /** @description Fields to return (ex: title,author) */
-                fields?: string;
-                /** @description Relations to return */
-                populate?: string;
-                /** @description Filters to apply */
-                filters?: {
-                    [key: string]: unknown;
-                };
-                /** @description Locale to apply */
-                locale?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GrammarLessonListResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "post/grammar-lessons": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["GrammarLessonRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GrammarLessonResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/grammar-lessons/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GrammarLessonResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "put/grammar-lessons/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["GrammarLessonRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GrammarLessonResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "delete/grammar-lessons/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": number;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/grammar-levels": {
-        parameters: {
-            query?: {
-                /** @description Sort by attributes ascending (asc) or descending (desc) */
-                sort?: string;
-                /** @description Return page/pageSize (default: true) */
-                "pagination[withCount]"?: boolean;
-                /** @description Page number (default: 0) */
-                "pagination[page]"?: number;
-                /** @description Page size (default: 25) */
-                "pagination[pageSize]"?: number;
-                /** @description Offset value (default: 0) */
-                "pagination[start]"?: number;
-                /** @description Number of entities to return (default: 25) */
-                "pagination[limit]"?: number;
-                /** @description Fields to return (ex: title,author) */
-                fields?: string;
-                /** @description Relations to return */
-                populate?: string;
-                /** @description Filters to apply */
-                filters?: {
-                    [key: string]: unknown;
-                };
-                /** @description Locale to apply */
-                locale?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GrammarLevelListResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "post/grammar-levels": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["GrammarLevelRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GrammarLevelResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "get/grammar-levels/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GrammarLevelResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "put/grammar-levels/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["GrammarLevelRequest"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GrammarLevelResponse"];
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
-    "delete/grammar-levels/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": number;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-            /** @description Internal Server Error */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Error"];
-                };
-            };
-        };
-    };
     "get/irregular-verbs": {
         parameters: {
             query?: {
@@ -7444,7 +5987,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -7511,7 +6054,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -7582,7 +6125,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -7806,7 +6349,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -7873,7 +6416,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -7944,7 +6487,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -8168,7 +6711,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -8235,7 +6778,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -8306,7 +6849,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -8530,7 +7073,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -8597,7 +7140,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -8668,7 +7211,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -8892,7 +7435,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -8959,7 +7502,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };
@@ -9030,7 +7573,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                id: number;
+                id: string;
             };
             cookie?: never;
         };

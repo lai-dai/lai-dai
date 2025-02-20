@@ -1,6 +1,6 @@
 "use client"
 
-import { signOut, useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 import React from "react"
 import { Button } from "~/components/ui/button"
 
@@ -12,18 +12,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
+import { useLazyRef } from "~/hooks/use-lazy-ref"
+import { getUserSession } from "~/hooks/use-session"
 
 export function ProfilePopover() {
-  const { data: session } = useSession()
+  const userRef = useLazyRef(getUserSession)
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild={true}>
-        <Button variant={"ghost"}>{session?.user.lastname}</Button>
+        <Button variant={"ghost"}>{userRef.current?.lastname}</Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align={"end"}>
-        <DropdownMenuLabel>{`${session?.user.firstname} ${session?.user.lastname}`}</DropdownMenuLabel>
+        <DropdownMenuLabel>{`${userRef.current?.firstname} ${userRef.current?.lastname}`}</DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 

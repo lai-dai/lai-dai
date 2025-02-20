@@ -8,7 +8,7 @@ import { useSessionStore } from "~/hooks/use-session"
 import { setSuffixDefaultAccessKey } from "~/lib/api"
 
 interface AppInitializerProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   suffixDefaultAccessKey: string
   session?: Session | null
 }

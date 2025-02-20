@@ -3,14 +3,30 @@ import path from "node:path"
 import React from "react"
 import { generateTableOfContentsFromMarkdown } from "~/utils/table-of-contents"
 
-export async function getDocPageBySlug(
-  slug: string,
-): Promise<null | { Component: React.FC; title: string; description: string }> {
+type Meta = {
+  title: string
+  sub_title: string
+  description?: string
+  private?: boolean
+  order: number
+  level: number
+  level_title: string
+}
+
+type Grammar = {
+  meta: Meta
+  slug: string
+  Component: React.FC
+}
+
+const basePath = "./src/content/english/grammar"
+
+export async function getGrammarBySlug(slug: string): Promise<Grammar | null> {
   try {
     // Check if the file exists
     if (
       !(await fs
-        .stat(path.join(process.cwd(), "./src/content/docs", `${slug}.mdx`))
+        .stat(path.join(process.cwd(), basePath, `${slug}.mdx`))
         .catch(() => false))
     ) {
       return null
@@ -18,16 +34,17 @@ export async function getDocPageBySlug(
 
     // eslint-disable-next-line @next/next/no-assign-module-variable
     const module: Record<string, unknown> = await import(
-      `~/content/docs/${slug}.mdx`
+      `${basePath}/${slug}.mdx`
     )
+
     if (!module.default) {
       return null
     }
 
     return {
       Component: module.default as React.FC,
-      title: module.title as string,
-      description: module.description as string,
+      meta: module.meta as Meta,
+      slug,
     }
   } catch (e) {
     console.error(e)
@@ -35,11 +52,9 @@ export async function getDocPageBySlug(
   }
 }
 
-export async function getDocPageSlugs() {
+export async function getGrammarSlugs() {
   const slugs = []
-  for (const file of await fs.readdir(
-    path.join(process.cwd(), "./src/content/docs"),
-  )) {
+  for (const file of await fs.readdir(path.join(process.cwd(), basePath))) {
     if (!file.endsWith(".mdx")) continue
     slugs.push(path.parse(file).name)
   }
@@ -50,14 +65,14 @@ export async function generateTableOfContents(slug: string) {
   // Check if the file exists
   if (
     !(await fs
-      .stat(path.join(process.cwd(), "./src/content/docs", `${slug}.mdx`))
+      .stat(path.join(process.cwd(), basePath, `${slug}.mdx`))
       .catch(() => false))
   ) {
     return []
   }
 
   const markdown = await fs.readFile(
-    path.join(process.cwd(), "./src/content/docs", `${slug}.mdx`),
+    path.join(process.cwd(), basePath, `${slug}.mdx`),
     "utf8",
   )
 

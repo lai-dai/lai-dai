@@ -1,11 +1,15 @@
 import type { Metadata } from "next"
 import { geistSans, iBM_Plex_Mono } from "~/lib/fonts"
 import "~/styles/globals.css"
-import { ThemeProvider } from "~/components/theme-provider"
+import { ThemeProvider } from "next-themes"
 import Script from "next/script"
 import { META_THEME_COLORS } from "~/config/site"
 import { Toaster } from "~/components/ui/sonner"
 import { CircleAlert, CircleCheck, CircleX, Info, Loader } from "lucide-react"
+import { SelectionTextPopover } from "~/components/selection-text-popover"
+import { GridContainer } from "~/components/grid-container"
+import { SiteFooter } from "~/components/site-footer"
+import { SiteHeader } from "~/components/site-header"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://laidai.xyz"),
@@ -24,6 +28,18 @@ export const metadata: Metadata = {
   creator: "daire",
 }
 
+const themeScript = String.raw`
+try {
+  if (
+    localStorage.theme === 'dark'
+    || ((!('theme' in localStorage) || localStorage.theme === 'system')
+      && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
+  }
+} catch (_) {}
+`
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,35 +50,36 @@ export default function RootLayout({
       lang="vi"
       className={`${geistSans.variable} ${iBM_Plex_Mono.variable} antialiased`}
       suppressHydrationWarning>
-      <Script id={"theme"}>
-        {`
-try {
-  if (
-    localStorage.theme === 'dark'
-    || ((!('theme' in localStorage) || localStorage.theme === 'system')
-      && window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
-  }
-} catch (_) {}
-        `}
-      </Script>
+      <head>
+        <Script
+          id={"theme"}
+          src={`data:text/javascript;base64,${btoa(themeScript)}`}
+        />
+      </head>
 
       <body>
         <ThemeProvider
-          storageKey="theme"
           defaultTheme={"dark"}
           enableSystem
           enableColorScheme
           disableTransitionOnChange={false}
-          attribute="class"
-          themes={["light", "dark", "system"]}>
+          attribute="class">
           <div vaul-drawer-wrapper={""}>
             <div
               className={
                 "relative isolate flex min-h-screen flex-col bg-background"
               }>
-              {children}
+              <div className="max-w-screen overflow-x-hidden pt-14">
+                <GridContainer className="fixed inset-x-0 top-0 z-50 bg-background">
+                  <SiteHeader className="mx-auto h-14 max-w-7xl border-dashed xl:border-x" />
+                </GridContainer>
+
+                {children}
+
+                <GridContainer>
+                  <SiteFooter className="mx-auto max-w-7xl border-dashed xl:border-x" />
+                </GridContainer>
+              </div>
             </div>
           </div>
 
@@ -77,6 +94,8 @@ try {
             className={"pointer-events-auto"}
             closeButton={true}
           />
+
+          <SelectionTextPopover />
         </ThemeProvider>
       </body>
     </html>

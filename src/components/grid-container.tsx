@@ -1,6 +1,6 @@
 import { cn } from "~/lib/utils"
 
-export default function GridContainer({
+export function GridContainer({
   children,
   className,
   direction = "full",
@@ -29,12 +29,12 @@ export default function GridContainer({
   return (
     <div
       className={cn(
-        className,
         "relative",
         "before:absolute before:top-0 before:w-[200vw] before:border-t before:border-dashed before:border-gray-950/5 dark:before:border-white/10",
         topDirection,
         "after:absolute after:bottom-0 after:w-[200vw] after:border-t after:border-dashed after:border-gray-950/5 dark:after:border-white/10",
         bottomDirection,
+        className,
       )}>
       {children}
     </div>
