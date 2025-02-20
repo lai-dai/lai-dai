@@ -9,13 +9,7 @@ import {
   NavListLink,
 } from "./nav-list"
 import { useLazyRef } from "~/hooks/use-lazy-ref"
-
-export type TOCEntry = {
-  level: number
-  text: string
-  slug: string
-  children: TOCEntry[]
-}
+import { TOCEntry } from "~/utils/table-of-contents"
 
 export default function TableOfContents({
   tableOfContents,
