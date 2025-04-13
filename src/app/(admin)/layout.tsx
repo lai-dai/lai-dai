@@ -33,7 +33,7 @@ export default async function AppLayout({
 
   return (
     <div className={"border-grid flex flex-1 flex-col"} data-wrapper={""}>
-      <div className="fixed inset-x-0 top-0 z-10 border-b border-dashed bg-background">
+      <div className="fixed inset-x-0 top-0 z-10 border-b border-dashed">
         <SiteHeader className="mx-auto max-w-7xl border-dashed xl:border-x" />
       </div>
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown, type LucideIcon } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Icons } from "./icons"
@@ -28,17 +28,14 @@ import {
 } from "~/components/ui/sidebar"
 import { siteConfig } from "~/config/site"
 import React from "react"
+import { SidebarNavItem } from "~/types/nav"
 
-export interface MenuEntry {
-  children?: MenuEntry[]
-  icon?: LucideIcon
-  label?: string
-  separator?: boolean
-  title?: string
-  url?: string
+interface AppSidebarProps {
+  navItems: SidebarNavItem[]
+  defaultOpen?: boolean
 }
 
-export function AppSidebar({ menuList }: { menuList: MenuEntry[] }) {
+export function AppSidebar({ navItems, defaultOpen }: AppSidebarProps) {
   const { isMobile } = useSidebar()
 
   return (
@@ -69,8 +66,8 @@ export function AppSidebar({ menuList }: { menuList: MenuEntry[] }) {
           <SidebarGroup>
             <SidebarGroupContent>
               <SidebarMenu>
-                {menuList.map((it, idx) => (
-                  <Tree key={idx} {...it} />
+                {navItems.map((it, idx) => (
+                  <Tree key={idx} defaultOpen={defaultOpen} {...it} />
                 ))}
               </SidebarMenu>
             </SidebarGroupContent>
@@ -83,7 +80,11 @@ export function AppSidebar({ menuList }: { menuList: MenuEntry[] }) {
   )
 }
 
-function Tree({ isSubMenu, ...props }: MenuEntry & { isSubMenu?: boolean }) {
+function Tree({
+  isSubMenu,
+  defaultOpen,
+  ...props
+}: SidebarNavItem & { isSubMenu?: boolean; defaultOpen?: boolean }) {
   const pathname = usePathname()
   const { setOpenMobile } = useSidebar()
 
@@ -110,9 +111,9 @@ function Tree({ isSubMenu, ...props }: MenuEntry & { isSubMenu?: boolean }) {
     [pathname],
   )
 
-  if (!props?.children?.length) {
+  if (!props?.items?.length) {
     const Comp = isSubMenu ? SidebarMenuSubButton : SidebarMenuButton
-    const activeDD = handleActive(props.url)
+    const activeDD = handleActive(props.href)
 
     return (
       <Comp
@@ -121,7 +122,7 @@ function Tree({ isSubMenu, ...props }: MenuEntry & { isSubMenu?: boolean }) {
         onClick={() => setOpenMobile(false)}
         title={props.title}
         tooltip={props.title}>
-        <Link href={props.url ?? "#"}>
+        <Link href={props.href ?? "#"}>
           {!isSubMenu && (props.icon ? <props.icon /> : null)}
 
           <span className={"grow truncate leading-5"}>{props.title}</span>
@@ -138,7 +139,7 @@ function Tree({ isSubMenu, ...props }: MenuEntry & { isSubMenu?: boolean }) {
         className={
           "group/collapsible [&[data-state=open]>button>svg:last-child]:rotate-90"
         }
-        defaultOpen={true}>
+        defaultOpen={defaultOpen}>
         <CollapsibleTrigger asChild={true}>
           <SidebarMenuButton title={props?.title}>
             {!isSubMenu && (props?.icon ? <props.icon /> : null)}
@@ -151,13 +152,13 @@ function Tree({ isSubMenu, ...props }: MenuEntry & { isSubMenu?: boolean }) {
           </SidebarMenuButton>
         </CollapsibleTrigger>
 
-        {Array.isArray(props?.children) && (
+        {Array.isArray(props?.items) && (
           <CollapsibleContent
             className={
               "data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down"
             }>
             <SidebarMenuSub className={"mr-0 pr-0"}>
-              {props?.children.map((child, idx) => (
+              {props?.items.map((child, idx) => (
                 <Tree isSubMenu={true} key={idx} {...child} />
               ))}
             </SidebarMenuSub>

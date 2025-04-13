@@ -2,40 +2,14 @@ import Link from "next/link"
 import React from "react"
 import { Icons } from "~/components/icons"
 
-import { AppNavigation, MenuEntry } from "~/components/app-navigation"
+import { AppNavigation } from "~/components/app-navigation"
 import { siteConfig } from "~/config/site"
 import { cn } from "~/lib/utils"
+import { docsConfig } from "~/config/docs"
 // import { Button } from "./ui/button"
 // import { ProfilePopover } from "~/components/profile-popover"
 // import { getUserSession } from "~/hooks/use-session"
 // import { useLazyRef } from "~/hooks/use-lazy-ref"
-
-const menuList: MenuEntry[] = [
-  {
-    id: 1,
-    title: "Home",
-    url: "/",
-    target: "_self",
-  },
-  {
-    id: 8,
-    title: "Docs",
-    url: "/docs",
-    target: "_self",
-  },
-  {
-    id: 10,
-    title: "Blog",
-    url: "/blog",
-    target: "_self",
-  },
-  {
-    id: 9,
-    title: "About",
-    url: "/about",
-    target: "_self",
-  },
-]
 
 export function SiteHeader({ className }: React.ComponentProps<"header">) {
   // const userRef = useLazyRef(getUserSession)
@@ -57,7 +31,7 @@ export function SiteHeader({ className }: React.ComponentProps<"header">) {
         </div>
 
         <div className={"flex flex-1 items-center justify-end gap-1"}>
-          <AppNavigation menuList={menuList} />
+          <AppNavigation navItems={docsConfig.mainNav} />
 
           {/* {isAuth ? (
             <ProfilePopover />

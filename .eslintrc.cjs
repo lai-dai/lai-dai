@@ -25,6 +25,11 @@ const config = {
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
+    "import/no-anonymous-default-export": "off",
+    "@typescript-eslint/no-require-imports": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "@typescript-eslint/no-for-in-array": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
   },
 }
 module.exports = config

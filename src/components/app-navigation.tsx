@@ -13,32 +13,29 @@ import {
   navigationMenuTriggerStyle,
 } from "~/components/ui/navigation-menu"
 import { cn } from "~/lib/utils"
+import { NavItemWithChildren } from "~/types/nav"
 
-export interface MenuEntry {
-  children?: MenuEntry[]
-  id: number
-  target: string
-  title: string
-  url: string
-}
-
-export function AppNavigation({ menuList }: { menuList: MenuEntry[] }) {
+export function AppNavigation({
+  navItems,
+}: {
+  navItems: NavItemWithChildren[]
+}) {
   return (
     <NavigationMenu className={"hidden md:flex"}>
       <NavigationMenuList>
-        {menuList.map(menu => {
-          if ("children" in menu) {
+        {navItems.map(menu => {
+          if (!menu?.items?.length) {
             return (
-              <GroupItems items={menu.children} key={`group-${menu.id}`}>
+              <NavLink key={`item-${menu.title}`} href={menu.href}>
                 {menu.title}
-              </GroupItems>
+              </NavLink>
             )
           }
 
           return (
-            <NavLink key={`item-${menu.id}`} url={menu.url}>
+            <GroupItems items={menu.items} key={`group-${menu.title}`}>
               {menu.title}
-            </NavLink>
+            </GroupItems>
           )
         })}
       </NavigationMenuList>
@@ -51,7 +48,7 @@ const GroupItems = ({
   items,
 }: {
   children?: React.ReactNode
-  items?: MenuEntry[]
+  items?: NavItemWithChildren[]
 }) => {
   return (
     <NavigationMenuItem>
@@ -61,7 +58,7 @@ const GroupItems = ({
         className={"absolute left-auto top-full !animate-none border"}>
         <ul>
           {items?.map(menu => (
-            <NavLink key={menu.id} target={menu.target} url={menu.url}>
+            <NavLink key={menu.title} href={menu.href}>
               {menu.title}
             </NavLink>
           ))}
@@ -73,11 +70,11 @@ const GroupItems = ({
 
 const NavLink = ({
   children,
-  url,
+  href,
   target,
 }: {
   children?: React.ReactNode
-  url?: string
+  href?: string
   target?: React.HTMLAttributeAnchorTarget
 }) => {
   const pathname = usePathname()
@@ -86,9 +83,11 @@ const NavLink = ({
     <NavigationMenuItem>
       <NavigationMenuLink
         asChild
-        active={pathname === "/" ? url === pathname : url?.startsWith(pathname)}
+        active={
+          pathname === "/" ? href === pathname : href?.startsWith(pathname)
+        }
         className={cn(navigationMenuTriggerStyle(), "block w-full")}>
-        <Link href={url ?? "#"} prefetch target={target}>
+        <Link href={href ?? "#"} prefetch target={target}>
           {children}
         </Link>
       </NavigationMenuLink>
