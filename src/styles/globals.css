@@ -189,7 +189,7 @@
   }
 
   .step:before {
-    @apply border-background bg-muted absolute inline-flex h-9 w-9 items-center justify-center rounded-full border-4 text-center -indent-px font-mono text-base font-medium;
+    @apply absolute inline-flex h-9 w-9 items-center justify-center rounded-full border-4 border-background bg-muted text-center -indent-px font-mono text-base font-medium;
     @apply ml-[-50px] mt-[-4px];
     content: counter(step);
   }
@@ -226,7 +226,7 @@
   }
 
   .container-wrapper {
-    @apply border-border/30 dark:border-border mx-auto w-full min-[1800px]:max-w-[1536px] min-[1800px]:border-x;
+    @apply mx-auto w-full border-border/30 dark:border-border min-[1800px]:max-w-[1536px] min-[1800px]:border-x;
   }
 
   .container {
@@ -314,12 +314,4 @@
     text-align: right;
     color: rgba(115, 138, 148, 0.4);
   } */
-}
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }

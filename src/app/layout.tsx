@@ -55,6 +55,12 @@ export default function RootLayout({
           id={"theme"}
           src={`data:text/javascript;base64,${btoa(themeScript)}`}
         />
+
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7832791004118548"
+          crossOrigin="anonymous"
+        />
       </head>
 
       <body>

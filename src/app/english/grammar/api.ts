@@ -19,7 +19,7 @@ type Grammar = {
   Component: React.FC
 }
 
-const basePath = "./src/content/english/grammar"
+const basePath = "src/content/english/grammar"
 
 export async function getGrammarBySlug(slug: string): Promise<Grammar | null> {
   try {
@@ -34,7 +34,7 @@ export async function getGrammarBySlug(slug: string): Promise<Grammar | null> {
 
     // eslint-disable-next-line @next/next/no-assign-module-variable
     const module: Record<string, unknown> = await import(
-      `${basePath}/${slug}.mdx`
+      `~/content/english/grammar/${slug}.mdx`
     )
 
     if (!module.default) {
